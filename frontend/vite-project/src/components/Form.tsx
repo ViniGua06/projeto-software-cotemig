@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 
 import url from "../assets/urlBackend";
 
+import "../styles/form.css"
+
 interface IForm {
   opt: "logar" | "cadastrar" | "contato";
 }
@@ -64,7 +66,8 @@ const Form = (opt: IForm) => {
         <input type="text" onChange={(e) => setNome(e.target.value)} />
         <label>Mensagem</label>
         <textarea onChange={(e) => setMensagem(e.target.value)}></textarea>
-        <button onClick={(e) => sendEmail(e)}>Enviar</button>
+        <br></br>
+        <button id="btnContato" onClick={(e) => sendEmail(e)}>Enviar</button>
       </form>
     </>
   );

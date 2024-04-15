@@ -19,7 +19,7 @@ a {
 }
 
 header {
-  max-width: 100%;
+  min-width: 97%;
   height: 70px;
   background-color: whitesmoke;
   display: flex;

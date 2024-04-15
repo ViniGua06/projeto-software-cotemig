@@ -10,14 +10,14 @@ const Header = () => {
     <>
       <header>
         <Link to="/" id="achei">
-          Achei!
+          E-Church
         </Link>
         <ul>
           <li>
-            <Link to="/missing">Desaparecidos</Link>
+            <Link to="/missing">Igrejas Afiliadas</Link>
           </li>
           <li>
-            <Link to="/sign">Cadastrar Desaparecidos</Link>
+            <Link to="/sign">Cadastrar sua Igreja</Link>
           </li>
           <li>
             <Link to="/contact">Nos contate</Link>

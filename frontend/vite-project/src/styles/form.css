@@ -1,0 +1,38 @@
+#divcntt{
+    display: flex;
+    justify-content: center;
+    padding-inline: 20rem;
+    flex-direction: column;
+
+}
+#formContato{
+    display: flex;
+    flex-direction: column;
+}
+
+input{
+    border: solid 2px black;
+    height: 3rem;
+    font-size: 20px;
+    border-radius: 5px;
+}
+
+textarea{
+    border: solid 2px black;
+    height: 15rem;
+    border-radius: 5px;
+    font-size: 18px;
+}
+
+#btnContato{
+    border: solid 2px black;
+    border-radius: 5px;
+    height: 3rem;
+    text-align: center;
+    margin-inline: 33rem;
+    font-size: larger;
+}
+
+#imgContato{
+    margin-inline: 32rem;
+}
