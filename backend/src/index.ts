@@ -1,5 +1,7 @@
 import { AppDataSource } from "./database/data-source";
 
+require("dotenv").config();
+
 import Express from "express";
 import Cors from "cors";
 
@@ -8,7 +10,7 @@ import userRouter from "./routes/user.routes";
 import bodyParser from "body-parser";
 
 const app = Express();
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 2000;
 
 app.use(Cors());
 app.use(bodyParser.json());
