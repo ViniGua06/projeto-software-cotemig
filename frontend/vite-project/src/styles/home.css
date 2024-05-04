@@ -9,7 +9,7 @@
 }
 
 body {
-  background-color: rgba(51, 153, 102, 1);
+  background: linear-gradient(to left, #339262, #b9ffdd);
 }
 
 a {
