@@ -7,6 +7,7 @@ import JsonWebToken from "../services/jwt.service";
 import { IEmail } from "../models/email.model";
 
 import sendEmailService from "../services/sendEmail.service";
+import { resolve } from "path";
 
 const repository = new UserRepository();
 const jwtService = new JsonWebToken();
@@ -79,6 +80,14 @@ class UserController {
     } catch (error) {
       console.log(error);
       res.status(200).json({ message: "Algum erro ocorreu!", error: error });
+    }
+  };
+
+  forgotPassword = (req: Request, res: Response) => {
+    try {
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: error });
     }
   };
 }

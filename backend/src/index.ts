@@ -21,7 +21,7 @@ app.use(userRouter);
 AppDataSource.initialize()
   .then(() =>
     app.listen(PORT, () => {
-      console.log("Conectado");
+      console.log("Conectado - http://localhost:" + PORT);
     })
   )
   .catch((error) => console.log(error));

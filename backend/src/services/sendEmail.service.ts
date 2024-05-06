@@ -14,7 +14,7 @@ class sendEmailService {
 
       const mailOptions = {
         from: "22200460@aluno.cotemig.com.br",
-        to: "viniguarnierisouza@gmail.com",
+        to: email.email || "viniguarnierisouza@gmail.com",
         subject: email.subject,
         text: email.text,
       };

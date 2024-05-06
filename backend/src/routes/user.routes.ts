@@ -11,5 +11,6 @@ userRouter.get("/user/:id", userController.getUserById);
 userRouter.post("/user", userController.createUser);
 userRouter.post("/sendEmail", userController.sendEmail);
 userRouter.patch("/user/:id", verifyToken, userController.updateUser);
+userRouter.post("/forgotPassword");
 
 export default userRouter;
