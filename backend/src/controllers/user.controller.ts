@@ -43,7 +43,7 @@ class UserController {
         return res.status(500).json({ message: "Falha ao criar o usuário." });
       }
 
-      const token = jwtService.createToken(userInserted);
+      const token = jwtService.createToken(userInserted.toString());
 
       return res
         .status(201)
@@ -72,6 +72,8 @@ class UserController {
     try {
       const props: IEmail = req.body;
 
+      console.log(props);
+
       if (!(await email.handle(props))) {
         return res.status(200).json({ message: "Email enviado" });
       }
@@ -85,11 +87,32 @@ class UserController {
 
   forgotPassword = (req: Request, res: Response) => {
     try {
+      const emailF: IEmail = req.body;
+
+      const token = jwtService.createToken(emailF.email);
+
+      console.log(token);
+
+      email.handle({
+        subject: "Recuperação de conta",
+        text:
+          `Clique nesse link para recuperar senha: ${frontUrl}/forgotPassword/${token}` +
+          token,
+      });
+
+      res.status(200).json({ message: "OLAs", token: token });
     } catch (error) {
       console.log(error);
       res.status(500).json({ error: error });
     }
   };
+
+  testToken = (req: Request, res: Response) => {
+    const { teste } = req.body;
+    res.status(200).json({ message: "Autorizado" });
+  };
 }
+
+const frontUrl = "http://localhost:5173";
 
 export default UserController;

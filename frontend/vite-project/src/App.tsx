@@ -6,6 +6,7 @@ import Home from "./pages/Home";
 import Missing from "./pages/Missing";
 import Contact from "./pages/Contact";
 import Sign from "./pages/Sign";
+import ForgotPassword from "./pages/ForgotPassword";
 
 function App() {
   return (
@@ -16,7 +17,10 @@ function App() {
           <Route path="/missing" element={<Missing />}></Route>
           <Route path="/contact" element={<Contact />}></Route>
           <Route path="/sign" element={<Sign />}></Route>
-          <Route></Route>
+          <Route
+            path="forgotPassword/:token"
+            element={<ForgotPassword />}
+          ></Route>
         </Routes>
       </BrowserRouter>
     </>

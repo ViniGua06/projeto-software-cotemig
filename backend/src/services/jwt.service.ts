@@ -1,9 +1,9 @@
 import JWT from "jsonwebtoken";
 
 class JsonWebToken {
-  createToken = (props: number | string) => {
+  createToken = (payload: string) => {
     try {
-      const token = JWT.sign({ props: props }, "Senha_segura", {
+      const token = JWT.sign({ payload }, "Senha_segura", {
         expiresIn: "3h",
       });
 

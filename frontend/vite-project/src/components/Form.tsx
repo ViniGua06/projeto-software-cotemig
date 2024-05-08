@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import url from "../assets/urlBackend";
 
-import "../styles/form.css"
+import "../styles/form.css";
 
 interface IForm {
   opt: "logar" | "cadastrar" | "contato";
@@ -15,9 +15,9 @@ const Form = (opt: IForm) => {
 
   const sendEmail = async (e: any) => {
     try {
-      e.preventdefault();
+      e.preventDefault();
 
-      const response = await fetch(`${url}/user/sendEmail`, {
+      const response = await fetch(`${url}/sendEmail`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -29,6 +29,8 @@ const Form = (opt: IForm) => {
       });
 
       const data = await response.json();
+
+      alert(data.message);
     } catch (error) {
       console.log(error);
     }
@@ -67,7 +69,9 @@ const Form = (opt: IForm) => {
         <label>Mensagem</label>
         <textarea onChange={(e) => setMensagem(e.target.value)}></textarea>
         <br></br>
-        <button id="btnContato" onClick={(e) => sendEmail(e)}>Enviar</button>
+        <button id="btnContato" onClick={sendEmail}>
+          Enviar
+        </button>
       </form>
     </>
   );

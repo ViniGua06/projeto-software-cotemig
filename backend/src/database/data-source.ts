@@ -14,7 +14,7 @@ export const AppDataSource = new DataSource({
   database: "qcezcnow",
   synchronize: false,
   logging: false,
-  entities: [],
+  entities: [User],
   migrations: [CreateUsersTable1712227061026, CreateChurchsTable1714391354631],
   subscribers: [],
 });
