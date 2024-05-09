@@ -20,7 +20,6 @@
 
 #formContato label {
   font-size: larger;
-  color: white;
 }
 
 #formContato textarea {
@@ -51,19 +50,6 @@
   justify-content: center;
 }
 
-@media (max-width: 1200px) {
-  #imgContato {
-    width: 90%;
-    height: 80%;
-  }
-}
-
-@media (max-width: 1110px) {
-  #imgContato {
-    width: 80%;
-    height: 70%;
-  }
-}
 #btnContato {
   color: #006666;
   width: fit-content;
