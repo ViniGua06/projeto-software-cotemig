@@ -23,9 +23,12 @@ class UserRepository {
 
   getUserByEmailAndPassword = async (email: string, senha: string) => {
     try {
-      const hashedPassword = Crypt.createHash("sha256")
-        .update(senha)
-        .digest("hex");
+      let hashedPassword;
+      if (senha) {
+        hashedPassword = Crypt.createHash("sha256").update(senha).digest("hex");
+      } else {
+        console.error("Senha não fornecida");
+      }
 
       const user = await database.findOne({
         where: {
@@ -33,6 +36,8 @@ class UserRepository {
           password: hashedPassword,
         },
       });
+
+      console.log(user);
 
       return user;
     } catch (error) {
@@ -44,7 +49,7 @@ class UserRepository {
   insertUser = async (user: User): Promise<number | null> => {
     try {
       const hashedPassword = Crypt.createHash("sha256")
-        .update(user.email)
+        .update(user.password)
         .digest("hex");
 
       console.log(hashedPassword);

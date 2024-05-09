@@ -7,7 +7,6 @@ import JsonWebToken from "../services/jwt.service";
 import { IEmail } from "../models/email.model";
 
 import sendEmailService from "../services/sendEmail.service";
-import { resolve } from "path";
 
 const repository = new UserRepository();
 const jwtService = new JsonWebToken();
@@ -20,7 +19,9 @@ class UserController {
 
       const user = await repository.getUserById(parseInt(id));
 
-      res.status(200).json({ user: user });
+      const token = jwtService.createToken(id);
+
+      res.status(200).json({ user: user, token: token });
     } catch (error) {
       console.log(error);
       res.status(500).json({ message: "Algum erro ocorreu!", error: error });
@@ -45,9 +46,11 @@ class UserController {
 
       const token = jwtService.createToken(userInserted.toString());
 
-      return res
-        .status(201)
-        .json({ message: `Usuário ${userInserted} criado!`, token: token });
+      return res.status(201).json({
+        message: `Usuário cadastrado!`,
+        token: token,
+        userId: userInserted,
+      });
     } catch (error) {
       console.log(error);
       res.status(500).json({ message: "Algum erro ocorreu!", error: error });
@@ -140,7 +143,9 @@ class UserController {
 
       const token = jwtService.createToken(user.id);
 
-      return res.status(200).json({ message: "Logado!", token: token });
+      return res
+        .status(200)
+        .json({ message: "Logado!", token: token, userId: user.id });
     } catch (error) {
       console.log(error);
       res.status(500).json({ error: error });

@@ -13,6 +13,7 @@ const ForgotPassword = () => {
       method: "POST",
       headers: {
         "x-acess-token": token as string,
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         teste: "teste",

@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
+import { changeUser, logout } from "../redux/user/slice";
+
 import url from "../assets/urlBackend";
 
 import "../styles/form.css";
+import { useDispatch } from "react-redux";
 
 interface IForm {
   opt: "logar" | "cadastrar" | "contato" | "inputEmail";
@@ -11,6 +14,8 @@ interface IForm {
 
 const Form = (opt: IForm) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   // Form Contato
   const [nome, setNome] = useState("");
   const [assunto, setAssunto] = useState("");
@@ -29,7 +34,7 @@ const Form = (opt: IForm) => {
         },
         body: JSON.stringify({
           to: "viniguarnierisouza@gmail.com",
-          subject: nome + " " + assunto,
+          subject: nome + " - " + assunto,
           text: mensagem,
         }),
       });
@@ -73,6 +78,12 @@ const Form = (opt: IForm) => {
       const data = await response.json();
 
       alert(data.message);
+
+      if (response.status == 201) {
+        dispatch(changeUser({ id: data.userId, token: data.token }));
+
+        navigate("/user");
+      }
     } catch (error) {
       console.log(error);
     }
@@ -104,6 +115,44 @@ const Form = (opt: IForm) => {
     navigate("/recover/sent");
   };
 
+  ///////////////
+
+  // Login ////////
+
+  const [emailLogin, setEmailLogin] = useState("");
+  const [senhaLogin, setSenhaLogin] = useState("");
+
+  const login = async (e: any) => {
+    try {
+      e.preventDefault();
+
+      const response = await fetch(`${url}/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: emailLogin,
+          senha: senhaLogin,
+        }),
+      });
+
+      const data = await response.json();
+
+      alert(data.message);
+
+      if (response.status == 200) {
+        dispatch(changeUser({ id: data.userId, token: data.token }));
+
+        navigate("/user");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  ///////////////////////////
+
   const back = () => {
     navigate("/signIn");
   };
@@ -111,12 +160,22 @@ const Form = (opt: IForm) => {
   if (opt.opt === "logar") {
     return (
       <>
-        <form id="formLogin">
+        <form id="formLogin" onSubmit={login}>
           <h1>Login</h1>
           <label>Email</label>
-          <input type="email" required />
+          <input
+            type="email"
+            value={emailLogin}
+            onChange={(e) => setEmailLogin(e.target.value)}
+            required
+          />
           <label>Senha</label>
-          <input type="password" required />
+          <input
+            type="password"
+            value={senhaLogin}
+            onChange={(e) => setSenhaLogin(e.target.value)}
+            required
+          />
           <Link to="/recover">
             <i>Esqueci a senha</i>
           </Link>
