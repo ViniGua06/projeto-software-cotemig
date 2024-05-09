@@ -103,7 +103,7 @@ class UserController {
         text: `Clique nesse link para recuperar senha: ${frontUrl}/forgotPassword/${token}/${email}`,
       });
 
-      res.status(200).json({ message: "OLAs", token: token });
+      res.status(200).json({ message: "Email Enviado!", token: token });
     } catch (error) {
       console.log(error);
       res.status(500).json({ error: error });
@@ -122,6 +122,25 @@ class UserController {
       await repository.updatePassword(senha, email);
 
       res.status(200).json({ message: `A senha ${senha} foi updatada!` });
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: error });
+    }
+  };
+
+  loginUser = async (req: Request, res: Response) => {
+    try {
+      const { email, senha } = req.body;
+
+      const user = await repository.getUserByEmailAndPassword(email, senha);
+
+      if (!user) {
+        return res.status(400).json({ message: "Credenciais erradas!" });
+      }
+
+      const token = jwtService.createToken(user.id);
+
+      return res.status(200).json({ message: "Logado!", token: token });
     } catch (error) {
       console.log(error);
       res.status(500).json({ error: error });

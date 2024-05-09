@@ -21,6 +21,26 @@ class UserRepository {
     }
   };
 
+  getUserByEmailAndPassword = async (email: string, senha: string) => {
+    try {
+      const hashedPassword = Crypt.createHash("sha256")
+        .update(senha)
+        .digest("hex");
+
+      const user = await database.findOne({
+        where: {
+          email: email,
+          password: hashedPassword,
+        },
+      });
+
+      return user;
+    } catch (error) {
+      console.log(error);
+      return null;
+    }
+  };
+
   insertUser = async (user: User): Promise<number | null> => {
     try {
       const hashedPassword = Crypt.createHash("sha256")
