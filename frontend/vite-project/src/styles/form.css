@@ -20,6 +20,7 @@
 
 #formContato label {
   font-size: larger;
+  color: white;
 }
 
 #formContato textarea {
