@@ -71,7 +71,26 @@
   align-items: center;
   padding: 8rem;
 }
-
+@media  (max-width:500px) {
+  #imgContato{
+    height:40%;
+    width:40%;
+    position:sticky;
+  }
+  .form-container{
+    flex-direction: column;
+  }
+  .form-container div {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0rem;
+  }
+  #formContato{
+    margin-left: 25%;
+  }
+}
 /* -------------------------------------------------- */
 
 /*  Form Login  */

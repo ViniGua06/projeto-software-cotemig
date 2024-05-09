@@ -10,7 +10,7 @@ const Contact = () => {
   return (
     <>
       <Header></Header>
-
+      
       <div className="form-container">
         <div>
           <img src={EmailPic} id="imgContato" />
