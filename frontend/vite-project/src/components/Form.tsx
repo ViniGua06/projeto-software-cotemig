@@ -80,6 +80,30 @@ const Form = (opt: IForm) => {
 
   ///////////////////////////
 
+  // Form Email //////////////
+
+  const [emailRecover, setEmailRecover] = useState("");
+
+  const enviarEmail = async (e: any) => {
+    e.preventDefault();
+
+    const response = await fetch(`${url}/forgotPassword`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: emailRecover,
+      }),
+    });
+
+    const data = await response.json();
+
+    alert(data.message);
+
+    navigate("/recover/sent");
+  };
+
   const back = () => {
     navigate("/signIn");
   };
@@ -141,10 +165,15 @@ const Form = (opt: IForm) => {
   } else if (opt.opt === "inputEmail") {
     return (
       <>
-        <form className="formEmail">
+        <form className="formEmail" onSubmit={enviarEmail}>
           <h1>Recuperar Senha</h1>
           <h2>Digite o email que cadastrou sua conta para recuperar a senha</h2>
-          <input type="email" required />
+          <input
+            type="email"
+            value={emailRecover}
+            onChange={(e) => setEmailRecover(e.target.value)}
+            required
+          />
           <input type="submit" value="Enviar" />
           <button onClick={back}>Voltar</button>
         </form>

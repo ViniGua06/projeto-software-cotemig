@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import "../styles/form.css";
 import url from "../assets/urlBackend";
 
 const UpdatePasswordForm = ({ email }: { email: string }) => {
+  const navigate = useNavigate();
+
   const [senha1, setSenha1] = useState("");
   const [senha2, setSenha2] = useState("");
 
@@ -27,6 +30,8 @@ const UpdatePasswordForm = ({ email }: { email: string }) => {
       const data = await response.json();
 
       alert(data.message);
+
+      navigate("/signIn");
     } catch (error) {
       console.log(error);
     }
