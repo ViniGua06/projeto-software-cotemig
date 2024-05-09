@@ -1,12 +1,15 @@
 import React from "react";
 import Header from "../components/Header";
 
-const Missing = () => {
+import Form from "../components/Form";
+
+const SignIn = () => {
   return (
     <>
       <Header />
+      <Form opt="logar"></Form>
     </>
   );
 };
 
-export default Missing;
+export default SignIn;

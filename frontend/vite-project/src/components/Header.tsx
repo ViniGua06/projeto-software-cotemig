@@ -14,13 +14,16 @@ const Header = () => {
         </Link>
         <ul>
           <li>
-            <Link to="/missing">Igrejas Afiliadas</Link>
+            <Link to="/churches">Igrejas Afiliadas</Link>
           </li>
           <li>
             <Link to="/sign">Cadastrar sua Igreja</Link>
           </li>
           <li>
             <Link to="/contact">Nos contate</Link>
+          </li>
+          <li>
+            <Link to="/signIn">Entrar</Link>
           </li>
         </ul>
         <MenuHamb id="hamb" id_element="two"></MenuHamb>

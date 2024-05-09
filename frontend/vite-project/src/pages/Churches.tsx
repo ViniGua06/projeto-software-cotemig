@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "../components/Header";
 
-const Sign = () => {
+const Churches = () => {
   return (
     <>
       <Header />
@@ -9,4 +9,4 @@ const Sign = () => {
   );
 };
 
-export default Sign;
+export default Churches;

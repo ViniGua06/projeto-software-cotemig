@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import { useParams, useSearchParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 import url from "../assets/urlBackend";
 
@@ -12,14 +12,12 @@ const ForgotPassword = () => {
     const response = await fetch(`${url}/testToken`, {
       method: "POST",
       headers: {
-        "x-acess-token": token?.trim() as string,
+        "x-acess-token": token as string,
       },
       body: JSON.stringify({
         teste: "teste",
       }),
     });
-
-    console.log(token);
 
     if (response.status == 200) {
       setPermitido(true);

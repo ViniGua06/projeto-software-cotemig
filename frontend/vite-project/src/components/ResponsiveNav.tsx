@@ -5,10 +5,9 @@ const ResponsiveNav = () => {
     <>
       <div id="two">
         <ul>
-          <li>Desaparecido</li>
-          <li>Cadastrar Desaparecidos</li>
+          <li>Igrejas Afiliadas</li>
+          <li>Cadastrar sua Igreja</li>
           <li>Contate-nos</li>
-          <li>Quem somos</li>
         </ul>
       </div>
     </>
