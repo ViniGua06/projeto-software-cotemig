@@ -2,8 +2,11 @@ import nodemailer from "nodemailer";
 import { IEmail } from "../models/email.model";
 
 class sendEmailService {
-  handle = async (email: IEmail): Promise<boolean | null> => {
+  handle = (email: IEmail): Promise<boolean | null> => {
     try {
+      const emailReceiving = "22200460@aluno.cotemisfsetg.com.br";
+
+      console.log(email);
       const trasnporter = nodemailer.createTransport({
         service: "gmail",
         auth: {
@@ -14,7 +17,7 @@ class sendEmailService {
 
       const mailOptions = {
         from: "22200460@aluno.cotemig.com.br",
-        to: email.email || "viniguarnierisouza@gmail.com",
+        to: email.to,
         subject: email.subject,
         text: email.text,
       };

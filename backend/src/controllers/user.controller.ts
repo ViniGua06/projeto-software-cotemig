@@ -11,7 +11,7 @@ import { resolve } from "path";
 
 const repository = new UserRepository();
 const jwtService = new JsonWebToken();
-const email = new sendEmailService();
+const emailService = new sendEmailService();
 
 class UserController {
   getUserById = async (req: Request, res: Response) => {
@@ -74,7 +74,7 @@ class UserController {
 
       console.log(props);
 
-      if (!(await email.handle(props))) {
+      if (!(await emailService.handle(props))) {
         return res.status(200).json({ message: "Email enviado" });
       }
 
@@ -85,19 +85,22 @@ class UserController {
     }
   };
 
-  forgotPassword = (req: Request, res: Response) => {
+  forgotPassword = async (req: Request, res: Response) => {
     try {
-      const emailF: IEmail = req.body;
+      const { email } = req.body;
 
-      const token = jwtService.createToken(emailF.email);
+      const user = await repository.checkIfEmailIsValid(email);
 
-      console.log(token);
+      if (!user) {
+        return res.status(400).json({ message: "Email não cadastrado!" });
+      }
 
-      email.handle({
-        subject: "Recuperação de conta",
-        text:
-          `Clique nesse link para recuperar senha: ${frontUrl}/forgotPassword/${token}` +
-          token,
+      const token = jwtService.createToken(email);
+
+      const emil = await emailService.handle({
+        to: email,
+        subject: "Recuperação de conta E-Church",
+        text: `Clique nesse link para recuperar senha: ${frontUrl}/forgotPassword/${token}`,
       });
 
       res.status(200).json({ message: "OLAs", token: token });
