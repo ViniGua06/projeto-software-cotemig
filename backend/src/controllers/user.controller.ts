@@ -100,7 +100,7 @@ class UserController {
       const emil = await emailService.handle({
         to: email,
         subject: "Recuperação de conta E-Church",
-        text: `Clique nesse link para recuperar senha: ${frontUrl}/forgotPassword/${token}`,
+        text: `Clique nesse link para recuperar senha: ${frontUrl}/forgotPassword/${token}/${email}`,
       });
 
       res.status(200).json({ message: "OLAs", token: token });
@@ -113,6 +113,19 @@ class UserController {
   testToken = (req: Request, res: Response) => {
     const { teste } = req.body;
     res.status(200).json({ message: "Autorizado" });
+  };
+
+  updatePassword = async (req: Request, res: Response) => {
+    try {
+      const { email, senha } = req.body;
+
+      await repository.updatePassword(senha, email);
+
+      res.status(200).json({ message: `A senha ${senha} foi updatada!` });
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: error });
+    }
   };
 }
 

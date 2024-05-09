@@ -48,7 +48,37 @@ const Form = (opt: IForm) => {
 
   ///////////////////////////
 
-  // Form Email
+  // Form Cadastro //
+
+  const [nomeCad, setNomeCad] = useState("");
+  const [emailCad, setEmailCad] = useState("");
+  const [senhaCad, setSenhaCad] = useState("");
+
+  const cadastro = async (e: any) => {
+    try {
+      e.preventDefault();
+
+      const response = await fetch(`${url}/user`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: nomeCad,
+          email: emailCad,
+          password: senhaCad,
+        }),
+      });
+
+      const data = await response.json();
+
+      alert(data.message);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  ///////////////////////////
 
   const back = () => {
     navigate("/signIn");
@@ -78,14 +108,29 @@ const Form = (opt: IForm) => {
   } else if (opt.opt === "cadastrar") {
     return (
       <>
-        <form id="formCadastro">
+        <form id="formCadastro" onSubmit={cadastro}>
           <h1>Cadastro</h1>
           <label>Nome</label>
-          <input type="text" required />
+          <input
+            type="text"
+            value={nomeCad}
+            onChange={(e) => setNomeCad(e.target.value)}
+            required
+          />
           <label>Email</label>
-          <input type="email" required />
+          <input
+            type="email"
+            required
+            value={emailCad}
+            onChange={(e) => setEmailCad(e.target.value)}
+          />
           <label>Senha</label>
-          <input type="password" required />
+          <input
+            type="password"
+            value={senhaCad}
+            onChange={(e) => setSenhaCad(e.target.value)}
+            required
+          />
           <input type="submit"></input>
           <Link to="/signIn">
             <i>Já tenho uma conta</i>

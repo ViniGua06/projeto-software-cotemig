@@ -86,6 +86,26 @@ class UserRepository {
       return null;
     }
   };
+
+  updatePassword = async (senha: string, email: string) => {
+    try {
+      const hashedPassword = Crypt.createHash("sha256")
+        .update(senha)
+        .digest("hex");
+
+      const user = await database.update(
+        { email: email },
+        {
+          password: hashedPassword,
+        }
+      );
+
+      return user;
+    } catch (error) {
+      console.log(error);
+      return null;
+    }
+  };
 }
 
 export default UserRepository;

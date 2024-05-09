@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-
 import { useParams } from "react-router-dom";
 
 import url from "../assets/urlBackend";
+import UpdatePasswordForm from "../components/UpdatePasswordForm";
 
 const ForgotPassword = () => {
-  const { token } = useParams();
+  const { token, email } = useParams();
   const [permitido, setPermitido] = useState<boolean | null>(null);
 
   const verifyToken = async () => {
@@ -32,9 +32,9 @@ const ForgotPassword = () => {
 
   return (
     <>
-      {!permitido ? (
+      {permitido ? (
         <>
-          <ForgotPassword />
+          <UpdatePasswordForm email={email ? email : "uidbc"} />
         </>
       ) : (
         <>Permissao negada</>

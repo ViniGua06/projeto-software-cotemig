@@ -13,5 +13,6 @@ userRouter.post("/sendEmail", userController.sendEmail);
 userRouter.patch("/user/:id", verifyToken, userController.updateUser);
 userRouter.patch("/forgotPassword", userController.forgotPassword);
 userRouter.post("/testToken", verifyToken, userController.testToken);
+userRouter.put("/password", userController.updatePassword);
 
 export default userRouter;
