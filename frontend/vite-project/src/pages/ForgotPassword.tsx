@@ -30,7 +30,17 @@ const ForgotPassword = () => {
     verifyToken();
   }, []);
 
-  return <>{permitido ? <>OLA {token}</> : <>Permissao negada</>}</>;
+  return (
+    <>
+      {!permitido ? (
+        <>
+          <ForgotPassword />
+        </>
+      ) : (
+        <>Permissao negada</>
+      )}
+    </>
+  );
 };
 
 export default ForgotPassword;
