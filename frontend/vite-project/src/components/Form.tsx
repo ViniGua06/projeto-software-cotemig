@@ -33,7 +33,7 @@ const Form = (opt: IForm) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          to: "echurch.mailsender@gmail.com",
+          to: "viniguarnierisouza@gmail.com",
           subject: nome + " - " + assunto,
           text: mensagem,
         }),
