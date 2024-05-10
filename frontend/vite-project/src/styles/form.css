@@ -71,13 +71,13 @@
   align-items: center;
   padding: 8rem;
 }
-@media  (max-width:500px) {
-  #imgContato{
-    height:40%;
-    width:40%;
-    position:sticky;
+@media (max-width: 500px) {
+  #imgContato {
+    height: 40%;
+    width: 40%;
+    position: sticky;
   }
-  .form-container{
+  .form-container {
     flex-direction: column;
   }
   .form-container div {
@@ -87,7 +87,7 @@
     align-items: center;
     padding: 0rem;
   }
-  #formContato{
+  #formContato {
     margin-left: 25%;
   }
 }
@@ -261,4 +261,65 @@
 
 #formCadastro input[type="submit"]:hover {
   background-color: chocolate;
+}
+
+/* ------------------------------------------- */
+
+/* Form Senhas */
+
+#formSenhas {
+  display: flex;
+  flex-direction: column;
+  margin-inline: 9rem;
+  height: fit-content;
+  align-items: center;
+  justify-content: space-around;
+  gap: 1.2rem;
+  margin-top: 1rem;
+  padding-inline: 12rem;
+  margin-bottom: 2rem;
+}
+
+#formSenhas input[type="password"] {
+  background-color: transparent;
+  border-top: none;
+  border-inline: none;
+  outline: none;
+  padding-inline: 0.5rem;
+  width: 100%;
+  height: 40px;
+  padding-top: 1rem;
+  font-size: larger;
+}
+
+#formSenhas h1 {
+  color: #006666;
+  font-weight: 500;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+#formSenhas label {
+  color: #006666;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+}
+
+#formSenhas input[type="submit"] {
+  background-color: #006666;
+  color: white;
+  border: none;
+  padding: 0.7rem;
+  border-radius: 1rem;
+  cursor: pointer;
+}
+
+#formSenhas input[type="submit"]:hover {
+  background-color: chocolate;
+}
+
+#formSenhas h3 {
+  color: red;
 }

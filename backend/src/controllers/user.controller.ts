@@ -7,7 +7,6 @@ import JsonWebToken from "../services/jwt.service";
 import { IEmail } from "../models/email.model";
 
 import sendEmailService from "../services/sendEmail.service";
-import { resolve } from "path";
 
 const repository = new UserRepository();
 const jwtService = new JsonWebToken();
@@ -20,7 +19,9 @@ class UserController {
 
       const user = await repository.getUserById(parseInt(id));
 
-      res.status(200).json({ user: user });
+      const token = jwtService.createToken(id);
+
+      res.status(200).json({ user: user, token: token });
     } catch (error) {
       console.log(error);
       res.status(500).json({ message: "Algum erro ocorreu!", error: error });
@@ -45,9 +46,11 @@ class UserController {
 
       const token = jwtService.createToken(userInserted.toString());
 
-      return res
-        .status(201)
-        .json({ message: `Usuário ${userInserted} criado!`, token: token });
+      return res.status(201).json({
+        message: `Usuário cadastrado!`,
+        token: token,
+        userId: userInserted,
+      });
     } catch (error) {
       console.log(error);
       res.status(500).json({ message: "Algum erro ocorreu!", error: error });
@@ -100,10 +103,10 @@ class UserController {
       const emil = await emailService.handle({
         to: email,
         subject: "Recuperação de conta E-Church",
-        text: `Clique nesse link para recuperar senha: ${frontUrl}/forgotPassword/${token}`,
+        text: `Clique nesse link para recuperar senha: ${frontUrl}/forgotPassword/${token}/${email}`,
       });
 
-      res.status(200).json({ message: "OLAs", token: token });
+      res.status(200).json({ message: "Email Enviado!", token: token });
     } catch (error) {
       console.log(error);
       res.status(500).json({ error: error });
@@ -113,6 +116,40 @@ class UserController {
   testToken = (req: Request, res: Response) => {
     const { teste } = req.body;
     res.status(200).json({ message: "Autorizado" });
+  };
+
+  updatePassword = async (req: Request, res: Response) => {
+    try {
+      const { email, senha } = req.body;
+
+      await repository.updatePassword(senha, email);
+
+      res.status(200).json({ message: `A senha ${senha} foi updatada!` });
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: error });
+    }
+  };
+
+  loginUser = async (req: Request, res: Response) => {
+    try {
+      const { email, senha } = req.body;
+
+      const user = await repository.getUserByEmailAndPassword(email, senha);
+
+      if (!user) {
+        return res.status(400).json({ message: "Credenciais erradas!" });
+      }
+
+      const token = jwtService.createToken(user.id);
+
+      return res
+        .status(200)
+        .json({ message: "Logado!", token: token, userId: user.id });
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: error });
+    }
   };
 }
 

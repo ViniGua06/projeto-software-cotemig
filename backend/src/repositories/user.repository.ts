@@ -21,10 +21,35 @@ class UserRepository {
     }
   };
 
+  getUserByEmailAndPassword = async (email: string, senha: string) => {
+    try {
+      let hashedPassword;
+      if (senha) {
+        hashedPassword = Crypt.createHash("sha256").update(senha).digest("hex");
+      } else {
+        console.error("Senha não fornecida");
+      }
+
+      const user = await database.findOne({
+        where: {
+          email: email,
+          password: hashedPassword,
+        },
+      });
+
+      console.log(user);
+
+      return user;
+    } catch (error) {
+      console.log(error);
+      return null;
+    }
+  };
+
   insertUser = async (user: User): Promise<number | null> => {
     try {
       const hashedPassword = Crypt.createHash("sha256")
-        .update(user.email)
+        .update(user.password)
         .digest("hex");
 
       console.log(hashedPassword);
@@ -81,6 +106,26 @@ class UserRepository {
       });
 
       return true;
+    } catch (error) {
+      console.log(error);
+      return null;
+    }
+  };
+
+  updatePassword = async (senha: string, email: string) => {
+    try {
+      const hashedPassword = Crypt.createHash("sha256")
+        .update(senha)
+        .digest("hex");
+
+      const user = await database.update(
+        { email: email },
+        {
+          password: hashedPassword,
+        }
+      );
+
+      return user;
     } catch (error) {
       console.log(error);
       return null;

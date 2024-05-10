@@ -10,6 +10,7 @@ import Churches from "./pages/Churches";
 import InputEmail from "./pages/InputEmail";
 import EmailSent from "./pages/EmailSent";
 import SignUp from "./pages/SignUp";
+import UserPage from "./pages/UserPage";
 
 function App() {
   return (
@@ -24,9 +25,10 @@ function App() {
           <Route path="/recover/sent" element={<EmailSent />}></Route>
           <Route path="/signUp" element={<SignUp />}></Route>
           <Route
-            path="forgotPassword/:token"
+            path="/forgotPassword/:token/:email"
             element={<ForgotPassword />}
           ></Route>
+          <Route path="/user" element={<UserPage />}></Route>
         </Routes>
       </BrowserRouter>
     </>

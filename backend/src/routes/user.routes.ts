@@ -9,10 +9,11 @@ import verifyToken from "../middlewares/tokenVerifyier.middleware";
 
 userRouter.get("/user/:id", userController.getUserById);
 userRouter.post("/user", userController.createUser);
+userRouter.post("/login", userController.loginUser);
 userRouter.post("/sendEmail", userController.sendEmail);
 userRouter.patch("/user/:id", verifyToken, userController.updateUser);
 userRouter.patch("/forgotPassword", userController.forgotPassword);
 userRouter.post("/testToken", verifyToken, userController.testToken);
-userRouter.put("/updatePassword/:email");
+userRouter.put("/password", userController.updatePassword);
 
 export default userRouter;

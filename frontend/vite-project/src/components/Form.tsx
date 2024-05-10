@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
+import { changeUser, logout } from "../redux/user/slice";
+
 import url from "../assets/urlBackend";
 
 import "../styles/form.css";
+import { useDispatch } from "react-redux";
 
 interface IForm {
   opt: "logar" | "cadastrar" | "contato" | "inputEmail";
@@ -11,6 +14,8 @@ interface IForm {
 
 const Form = (opt: IForm) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   // Form Contato
   const [nome, setNome] = useState("");
   const [assunto, setAssunto] = useState("");
@@ -29,7 +34,7 @@ const Form = (opt: IForm) => {
         },
         body: JSON.stringify({
           to: "viniguarnierisouza@gmail.com",
-          subject: nome + " " + assunto,
+          subject: nome + " - " + assunto,
           text: mensagem,
         }),
       });
@@ -48,7 +53,105 @@ const Form = (opt: IForm) => {
 
   ///////////////////////////
 
-  // Form Email
+  // Form Cadastro //
+
+  const [nomeCad, setNomeCad] = useState("");
+  const [emailCad, setEmailCad] = useState("");
+  const [senhaCad, setSenhaCad] = useState("");
+
+  const cadastro = async (e: any) => {
+    try {
+      e.preventDefault();
+
+      const response = await fetch(`${url}/user`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: nomeCad,
+          email: emailCad,
+          password: senhaCad,
+        }),
+      });
+
+      const data = await response.json();
+
+      alert(data.message);
+
+      if (response.status == 201) {
+        dispatch(changeUser({ id: data.userId, token: data.token }));
+
+        navigate("/user");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  ///////////////////////////
+
+  // Form Email //////////////
+
+  const [emailRecover, setEmailRecover] = useState("");
+
+  const enviarEmail = async (e: any) => {
+    e.preventDefault();
+
+    const response = await fetch(`${url}/forgotPassword`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: emailRecover,
+      }),
+    });
+
+    const data = await response.json();
+
+    alert(data.message);
+
+    navigate("/recover/sent");
+  };
+
+  ///////////////
+
+  // Login ////////
+
+  const [emailLogin, setEmailLogin] = useState("");
+  const [senhaLogin, setSenhaLogin] = useState("");
+
+  const login = async (e: any) => {
+    try {
+      e.preventDefault();
+
+      const response = await fetch(`${url}/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: emailLogin,
+          senha: senhaLogin,
+        }),
+      });
+
+      const data = await response.json();
+
+      alert(data.message);
+
+      if (response.status == 200) {
+        dispatch(changeUser({ id: data.userId, token: data.token }));
+
+        navigate("/user");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  ///////////////////////////
 
   const back = () => {
     navigate("/signIn");
@@ -57,12 +160,22 @@ const Form = (opt: IForm) => {
   if (opt.opt === "logar") {
     return (
       <>
-        <form id="formLogin">
+        <form id="formLogin" onSubmit={login}>
           <h1>Login</h1>
           <label>Email</label>
-          <input type="email" required />
+          <input
+            type="email"
+            value={emailLogin}
+            onChange={(e) => setEmailLogin(e.target.value)}
+            required
+          />
           <label>Senha</label>
-          <input type="password" required />
+          <input
+            type="password"
+            value={senhaLogin}
+            onChange={(e) => setSenhaLogin(e.target.value)}
+            required
+          />
           <Link to="/recover">
             <i>Esqueci a senha</i>
           </Link>
@@ -78,14 +191,29 @@ const Form = (opt: IForm) => {
   } else if (opt.opt === "cadastrar") {
     return (
       <>
-        <form id="formCadastro">
+        <form id="formCadastro" onSubmit={cadastro}>
           <h1>Cadastro</h1>
           <label>Nome</label>
-          <input type="text" required />
+          <input
+            type="text"
+            value={nomeCad}
+            onChange={(e) => setNomeCad(e.target.value)}
+            required
+          />
           <label>Email</label>
-          <input type="email" required />
+          <input
+            type="email"
+            required
+            value={emailCad}
+            onChange={(e) => setEmailCad(e.target.value)}
+          />
           <label>Senha</label>
-          <input type="password" required />
+          <input
+            type="password"
+            value={senhaCad}
+            onChange={(e) => setSenhaCad(e.target.value)}
+            required
+          />
           <input type="submit"></input>
           <Link to="/signIn">
             <i>Já tenho uma conta</i>
@@ -96,10 +224,15 @@ const Form = (opt: IForm) => {
   } else if (opt.opt === "inputEmail") {
     return (
       <>
-        <form className="formEmail">
+        <form className="formEmail" onSubmit={enviarEmail}>
           <h1>Recuperar Senha</h1>
           <h2>Digite o email que cadastrou sua conta para recuperar a senha</h2>
-          <input type="email" required />
+          <input
+            type="email"
+            value={emailRecover}
+            onChange={(e) => setEmailRecover(e.target.value)}
+            required
+          />
           <input type="submit" value="Enviar" />
           <button onClick={back}>Voltar</button>
         </form>
