@@ -10,13 +10,13 @@ class sendEmailService {
       const trasnporter = nodemailer.createTransport({
         service: "gmail",
         auth: {
-          user: "22200460@aluno.cotemig.com.br",
+          user: process.env.GMAIL_ACCOUNT,
           pass: process.env.GMAIL_PASSWORD,
         },
       });
 
       const mailOptions = {
-        from: "22200460@aluno.cotemig.com.br",
+        from: "echurch.mailsender@gmail.com",
         to: email.to,
         subject: email.subject,
         text: email.text,
