@@ -26,10 +26,10 @@ header {
   align-items: center;
   justify-content: space-between;
   margin: 1rem;
+  margin-bottom: 0;
   padding-inline: 3rem;
   position: sticky;
   top: 0;
-  margin-bottom: 2rem;
 }
 
 ul {
@@ -91,6 +91,18 @@ header > ul > li {
 #two > ul > li:hover {
   background-color: rgba(51, 153, 102, 1);
   color: white;
+}
+
+header * {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.userPhoto > img {
+  border-radius: 50%;
+  height: 70%;
+  cursor: pointer;
 }
 
 /* Responsividade */
