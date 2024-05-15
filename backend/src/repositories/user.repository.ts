@@ -93,7 +93,7 @@ class UserRepository {
 
   updateUser = async (props: User, id: number): Promise<boolean | null> => {
     try {
-      const { name, email, password } = props;
+      const { name, email, password, photo } = props;
 
       const hashedPassword = Crypt.createHash("sha256")
         .update(password)
@@ -103,6 +103,7 @@ class UserRepository {
         name: name,
         email: email,
         password: hashedPassword,
+        photo: photo,
       });
 
       return true;

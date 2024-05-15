@@ -9,6 +9,7 @@ export const slice = createSlice({
     user_email: "",
     user_password: "",
     isLogged: false,
+    user_pfp: "",
     token: "",
   },
   reducers: {

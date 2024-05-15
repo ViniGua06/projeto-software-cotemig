@@ -19,5 +19,3 @@ Para atualizar suas mudanças:
 2. Executar o comando `git commit -m "mensagem do commit"`, sendo a mensagem do commit de sua escolha
 
 3. Executar o comando `git push -u origin alguma_branch`, sendo "alguma_branch" a branch que irá ser atualizada
-
-![Carpini Futebol Clube](src/assets/thiago_carpini_coletiva-e1713065549277.webp)

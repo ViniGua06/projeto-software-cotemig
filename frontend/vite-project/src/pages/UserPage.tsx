@@ -5,17 +5,23 @@ import { select } from "../redux/user/slice";
 import url from "../assets/urlBackend";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import UserCard from "../components/UserCard";
 
 import { logout, changeUser, fetchUser } from "../redux/user/slice";
 
+import u_defult from "../assets/user_default.png";
+
 const UserPage = () => {
-  const { token, isLogged, user_id, user_email, user_name, user_password } =
-    useSelector(select);
+  const {
+    token,
+    isLogged,
+    user_id,
+    user_email,
+    user_name,
+    user_password,
+    user_pfp,
+  } = useSelector(select);
 
   const [id, setId] = useState(user_id);
-
-  const [tokenState, setTokenState] = useState(token);
 
   const dispatch = useDispatch();
 
@@ -55,7 +61,7 @@ const UserPage = () => {
           name: data.user.name,
           email: data.user.email,
           password: data.user.password,
-          token: data.token,
+          photo: data.user.photo,
         })
       );
     } catch (error) {
@@ -71,12 +77,28 @@ const UserPage = () => {
   return (
     <>
       <Header></Header>
-      <UserCard
-        id={parseInt(user_id)}
-        email={user_email}
-        name={user_name}
-        password={user_password}
-      ></UserCard>
+      <main style={{ padding: "3rem" }}>
+        {user_pfp ? (
+          <>
+            <img
+              src={user_pfp}
+              style={{ borderRadius: "50%" }}
+              height="40px"
+              alt=""
+            />
+          </>
+        ) : (
+          <>
+            <img
+              src={u_defult}
+              style={{ borderRadius: "50%" }}
+              height="90px"
+              alt=""
+            />
+          </>
+        )}
+        <h1>Ola, {user_name}</h1>
+      </main>
     </>
   );
 };

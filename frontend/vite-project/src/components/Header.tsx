@@ -1,11 +1,18 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import MenuHamb from "../sub-components/MenuHamb";
 
 import ResponsiveNav from "../components/ResponsiveNav";
+import { useSelector } from "react-redux";
+import { select } from "../redux/user/slice";
+
+import u_default from "../assets/user_default.png";
+import { ProphilePhoto } from "./ProphilePhoto";
 
 const Header = () => {
+  const { isLogged, user_pfp } = useSelector(select);
+  const navigate = useNavigate();
   return (
     <>
       <header>
@@ -22,9 +29,17 @@ const Header = () => {
           <li>
             <Link to="/contact">Nos contate</Link>
           </li>
-          <li>
-            <Link to="/signIn">Entrar</Link>
-          </li>
+          {isLogged ? (
+            <>
+              <ProphilePhoto src={user_pfp}></ProphilePhoto>
+            </>
+          ) : (
+            <>
+              <li>
+                <Link to="/signIn">Entrar</Link>
+              </li>
+            </>
+          )}
         </ul>
         <MenuHamb id="hamb" id_element="two"></MenuHamb>
       </header>
