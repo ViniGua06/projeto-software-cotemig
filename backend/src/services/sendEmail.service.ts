@@ -4,9 +4,6 @@ import { IEmail } from "../models/email.model";
 class sendEmailService {
   handle = (email: IEmail): Promise<boolean | null> => {
     try {
-      const emailReceiving = "22200460@aluno.cotemisfsetg.com.br";
-
-      console.log(email);
       const trasnporter = nodemailer.createTransport({
         service: "gmail",
         auth: {
