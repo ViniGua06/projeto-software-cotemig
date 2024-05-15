@@ -19,9 +19,7 @@ class UserController {
 
       const user = await repository.getUserById(parseInt(id));
 
-      const token = jwtService.createToken(id);
-
-      res.status(200).json({ user: user, token: token });
+      res.status(200).json({ user: user });
     } catch (error) {
       console.log(error);
       res.status(500).json({ message: "Algum erro ocorreu!", error: error });
