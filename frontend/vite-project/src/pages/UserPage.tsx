@@ -10,6 +10,8 @@ import { logout, changeUser, fetchUser } from "../redux/user/slice";
 
 import u_defult from "../assets/user_default.png";
 import { Modal } from "../components/Modal";
+import { ativar } from "../redux/modal/slice";
+import { ProphilePhoto } from "../components/ProphilePhoto";
 
 const UserPage = () => {
   const {
@@ -75,33 +77,41 @@ const UserPage = () => {
     testToken();
   }, []);
 
+  const [modal, setModal] = useState<string>("");
+
   return (
     <>
       <Header></Header>
       <main style={{ padding: "3rem" }}>
-        {user_pfp ? (
-          <>
-            <img
-              src={user_pfp}
-              style={{ borderRadius: "50%" }}
-              height="40px"
-              alt=""
-            />
-          </>
-        ) : (
-          <>
-            <img
-              src={u_defult}
-              style={{ borderRadius: "50%" }}
-              height="90px"
-              alt=""
-            />
-          </>
-        )}
-        <h1>Ola, {user_name}</h1>
+        <ProphilePhoto
+          onClick={() => {
+            setModal("Trocar Imagem");
+            dispatch(ativar());
+          }}
+        ></ProphilePhoto>
+        <h1
+          onClick={() => {
+            setModal("Editar Perfil");
+            dispatch(ativar());
+          }}
+        >
+          Ola, {user_name}
+        </h1>
       </main>
 
-      <Modal></Modal>
+      {modal == "Trocar Imagem" ? (
+        <>
+          <Modal title="Trocar Imagem de Perfil" submit={() => alert("ola")}>
+            <h1>ola</h1>
+          </Modal>
+        </>
+      ) : modal == "Editar Perfil" ? (
+        <>
+          <Modal title="Editar Perfil" submit={() => alert("ola")}>
+            <h1>ola</h1>
+          </Modal>
+        </>
+      ) : null}
     </>
   );
 };

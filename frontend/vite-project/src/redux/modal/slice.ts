@@ -20,4 +20,4 @@ export const { ativar, desativar } = slice.actions;
 
 export const select = (state: RootState) => state.modal;
 
-export slice.reducer
+export default slice.reducer;
