@@ -1,5 +1,7 @@
 import u_default from "../assets/user_default.png";
 
+import { ReactNode } from "react";
+
 interface IPfp {
   src: string | null;
 }

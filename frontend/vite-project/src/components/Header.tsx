@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import MenuHamb from "../sub-components/MenuHamb";
@@ -12,7 +12,7 @@ import { ProphilePhoto } from "./ProphilePhoto";
 
 const Header = () => {
   const { isLogged, user_pfp } = useSelector(select);
-  const navigate = useNavigate();
+
   return (
     <>
       <header>

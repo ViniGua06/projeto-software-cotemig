@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { logout, changeUser, fetchUser } from "../redux/user/slice";
 
 import u_defult from "../assets/user_default.png";
+import { Modal } from "../components/Modal";
 
 const UserPage = () => {
   const {
@@ -99,6 +100,8 @@ const UserPage = () => {
         )}
         <h1>Ola, {user_name}</h1>
       </main>
+
+      <Modal></Modal>
     </>
   );
 };
