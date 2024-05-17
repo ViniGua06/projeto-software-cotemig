@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import "../styles/form.css";
-import url from "../assets/urlBackend";
+import "../../styles/form.css";
+import url from "../../assets/urlBackend";
 
 const UpdatePasswordForm = ({ email }: { email: string }) => {
   const navigate = useNavigate();
