@@ -18,6 +18,26 @@ a {
   text-decoration: none;
 }
 
+#paragrafh-welcome{
+  padding-top: 2rem;
+  font-size: 1.5rem;
+  padding-inline:15rem;
+}
+
+#welcome-part2{
+  font-size: 5vh;
+  padding-top: 3rem;
+}
+
+#welcome{
+  font-size: 10vh;
+  padding-top: 6rem;
+}
+
+.main{
+  text-align: center;
+}
+
 header {
   min-width: 97%;
   height: 70px;
