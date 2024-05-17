@@ -151,7 +151,7 @@ const Form = (opt: IForm) => {
     }
   };
 
-  ///////////////////////////
+  ///////////////////////////HTML do forms
 
   const back = () => {
     navigate("/signIn");
@@ -193,7 +193,7 @@ const Form = (opt: IForm) => {
       <>
         <form id="formCadastro" onSubmit={cadastro}>
           <h1>Cadastro</h1>
-          <label>Nome</label>
+          <label>Nome da igreja</label>
           <input
             type="text"
             value={nomeCad}
