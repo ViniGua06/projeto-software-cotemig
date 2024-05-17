@@ -1,4 +1,4 @@
-import Form from "../components/Form";
+import Form from "../components/Form/Form";
 import Header from "../components/Header";
 
 const InputEmail = () => {

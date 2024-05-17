@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import url from "../assets/urlBackend";
-import UpdatePasswordForm from "../components/UpdatePasswordForm";
+import UpdatePasswordForm from "../components/Form/UpdatePasswordForm";
 
 const ForgotPassword = () => {
   const { token, email } = useParams();

@@ -6,6 +6,8 @@ import { ativar, desativar } from "../redux/modal/slice";
 import { select } from "../redux/modal/slice";
 import { useDispatch, useSelector } from "react-redux";
 
+import { ButtonCloseSvg } from "../assets/ButtonCloseSvg";
+
 interface IModal {
   modalAtivo: boolean;
 }
@@ -48,7 +50,7 @@ const ContentModal = styled.div`
 const HeaderModal = styled.div`
   display: flex;
   width: 100%;
-  height: 20%;
+  height: 10%;
   justify-content: space-between;
   align-items: center;
   background-color: whitesmoke;
@@ -57,7 +59,7 @@ const HeaderModal = styled.div`
 `;
 
 const MainModel = styled.div`
-  height: 60%;
+  height: 80%;
   width: 100%;
   padding-inline: 2rem;
   padding-block: 1rem;
@@ -66,7 +68,7 @@ const MainModel = styled.div`
 `;
 
 const FooterModel = styled.div`
-  height: 20%;
+  height: 10%;
   width: 100%;
   display: flex;
   justify-content: flex-start;
@@ -75,9 +77,11 @@ const FooterModel = styled.div`
 `;
 
 const CloseModalX = styled.h2`
+  height: 50%;
+
   &:hover {
-    color: red;
     cursor: pointer;
+    transform: scale(0.8);
   }
 `;
 
@@ -120,7 +124,9 @@ export const Modal = (props: IPropsModal) => {
         <ContentModal>
           <HeaderModal>
             <h1>{props.title}</h1>
-            <CloseModalX onClick={() => dispatch(desativar())}>X</CloseModalX>
+            <CloseModalX onClick={() => dispatch(desativar())}>
+              <ButtonCloseSvg></ButtonCloseSvg>
+            </CloseModalX>
           </HeaderModal>
           <MainModel>{props.children}</MainModel>
           <FooterModel>

@@ -4,13 +4,13 @@ import Header from "../components/Header";
 import "../styles/form.css";
 
 import EmailPic from "../assets/mail-2048128_1280.png";
-import Forms from "../components/Form";
+import Forms from "../components/Form/Form";
 
 const Contact = () => {
   return (
     <>
       <Header></Header>
-      
+
       <div className="form-container">
         <div>
           <img src={EmailPic} id="imgContato" />

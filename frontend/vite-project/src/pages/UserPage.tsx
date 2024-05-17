@@ -12,6 +12,7 @@ import u_defult from "../assets/user_default.png";
 import { Modal } from "../components/Modal";
 import { ativar } from "../redux/modal/slice";
 import { ProphilePhoto } from "../components/ProphilePhoto";
+import { ChangePfpForm } from "../components/Form/ChangePfpForm";
 
 const UserPage = () => {
   const {
@@ -102,7 +103,7 @@ const UserPage = () => {
       {modal == "Trocar Imagem" ? (
         <>
           <Modal title="Trocar Imagem de Perfil" submit={() => alert("ola")}>
-            <h1>ola</h1>
+            <ChangePfpForm />
           </Modal>
         </>
       ) : modal == "Editar Perfil" ? (

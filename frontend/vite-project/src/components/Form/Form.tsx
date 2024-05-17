@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-import { changeUser, logout } from "../redux/user/slice";
+import { changeUser, logout } from "../../redux/user/slice";
 
-import url from "../assets/urlBackend";
+import url from "../../assets/urlBackend";
 
-import "../styles/form.css";
+import "../../styles/form.css";
 import { useDispatch } from "react-redux";
 
 interface IForm {
@@ -151,7 +151,7 @@ const Form = (opt: IForm) => {
     }
   };
 
-  ///////////////////////////
+  ///////////////////////////HTML do forms
 
   const back = () => {
     navigate("/signIn");
@@ -193,7 +193,7 @@ const Form = (opt: IForm) => {
       <>
         <form id="formCadastro" onSubmit={cadastro}>
           <h1>Cadastro</h1>
-          <label>Nome</label>
+          <label>Nome da igreja</label>
           <input
             type="text"
             value={nomeCad}
