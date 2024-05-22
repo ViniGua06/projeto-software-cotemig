@@ -9,7 +9,8 @@ const PfpForm = styled.form`
   display: flex;
   flex-direction: column;
   width: 100%;
-  justify-content: center;
+  height: 100%;
+  justify-content: space-evenly;
   align-items: center;
 `;
 
@@ -41,12 +42,20 @@ export const ChangePfpForm = () => {
               const reader = new FileReader();
               reader.onload = () => {
                 setImagem(reader.result);
+                console.log(imagem);
               };
 
               reader.readAsDataURL(file);
             }
           }}
         />
+
+        {imagem == "" ? (
+          <>
+            <h2 style={{ color: "red" }}>Nenhuma Imagem Selecionada</h2>
+          </>
+        ) : null}
+
         <USerImg
           src={imagem ? imagem : user_pfp ? user_pfp : user_default}
         ></USerImg>

@@ -59,21 +59,12 @@ const HeaderModal = styled.div`
 `;
 
 const MainModel = styled.div`
-  height: 80%;
+  height: 90%;
   width: 100%;
   padding-inline: 2rem;
   padding-block: 1rem;
   border-bottom: solid rgba(0, 0, 0, 0.6);
   overflow-y: auto;
-`;
-
-const FooterModel = styled.div`
-  height: 10%;
-  width: 100%;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  padding-inline: 2rem;
 `;
 
 const CloseModalX = styled.h2`
@@ -85,23 +76,11 @@ const CloseModalX = styled.h2`
   }
 `;
 
-const CloseModalButton = styled.button`
-  width: 20%;
-  padding-block: 0.5rem;
-  background-color: whitesmoke;
-  border: solid rgba(0, 0, 0, 0.6);
-
-  &:hover {
-    background-color: green;
-    border: white solid;
-    color: white;
-  }
-`;
-
 interface IPropsModal {
   title: string;
   children: React.ReactNode;
   submit: () => void;
+  closeModal?: () => void;
 }
 
 export const Modal = (props: IPropsModal) => {
@@ -129,11 +108,6 @@ export const Modal = (props: IPropsModal) => {
             </CloseModalX>
           </HeaderModal>
           <MainModel>{props.children}</MainModel>
-          <FooterModel>
-            <CloseModalButton onClick={() => props.submit()}>
-              Enviar
-            </CloseModalButton>
-          </FooterModel>
         </ContentModal>
       </BackgroundModal>
     </>
