@@ -78,6 +78,11 @@ const UserPage = () => {
     testToken();
   }, []);
 
+  const deslogar = () => {
+    navigate("/signIn");
+    dispatch(logout());
+  };
+
   const [modal, setModal] = useState<string>("");
 
   return (
@@ -96,8 +101,9 @@ const UserPage = () => {
             dispatch(ativar());
           }}
         >
-          Ola, {user_name}
+          Ola, {user_name.toUpperCase()}
         </h1>
+        <button onClick={deslogar}>Deslogar</button>
       </main>
 
       {modal == "Trocar Imagem" ? (

@@ -20,7 +20,7 @@ const USerImg = styled.img`
   max-width: 15%;
   min-width: 15%;
   border-radius: 50%;
-  height: 100px;
+  height: 25%;
 `;
 
 const InputSubmit = styled.input`
@@ -126,8 +126,6 @@ const BrowserAddFile = styled.span`
   transition: all 0.3s;
 `;
 
-const AddFile = styled.div``;
-
 export const ChangePfpForm = () => {
   const { user_pfp } = useSelector(select);
   const [imagem, setImagem] = useState<any>("");
@@ -135,28 +133,6 @@ export const ChangePfpForm = () => {
   return (
     <>
       <PfpForm>
-        <USerImg src={user_pfp ? user_pfp : user_default}></USerImg>
-        <h1>Trocar Imagem de Perfil</h1>
-        {/* <input
-          type="file"
-          accept=".png "
-          onChange={(e) => {
-            const files = e.target.files;
-
-            if (files && files?.length > 0) {
-              const file = files[0];
-
-              const reader = new FileReader();
-              reader.onload = () => {
-                setImagem(reader.result);
-                console.log(imagem);
-              };
-
-              reader.readAsDataURL(file);
-            }
-          }}
-        /> */}
-
         <FormAddFile>
           <LabelAddFile>
             <DesignAddFile>
@@ -170,6 +146,8 @@ export const ChangePfpForm = () => {
             <input
               id="file"
               type="file"
+              required
+              accept=".png, .jpg, .jpeg"
               onChange={(e) => {
                 const files = e.target.files;
 
@@ -179,7 +157,6 @@ export const ChangePfpForm = () => {
                   const reader = new FileReader();
                   reader.onload = () => {
                     setImagem(reader.result);
-                    console.log(imagem);
                   };
 
                   reader.readAsDataURL(file);

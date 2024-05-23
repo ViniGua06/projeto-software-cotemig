@@ -193,7 +193,7 @@ const Form = (opt: IForm) => {
       <>
         <form id="formCadastro" onSubmit={cadastro}>
           <h1>Cadastro</h1>
-          <label>Nome da igreja</label>
+          <label>Nome</label>
           <input
             type="text"
             value={nomeCad}
