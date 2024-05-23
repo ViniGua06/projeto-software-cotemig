@@ -12,6 +12,11 @@ import { ProphilePhoto } from "./ProphilePhoto";
 
 const Header = () => {
   const { isLogged, user_pfp } = useSelector(select);
+  const navigate = useNavigate();
+
+  const goToUser = () => {
+    navigate("/user");
+  };
 
   return (
     <>
@@ -29,9 +34,10 @@ const Header = () => {
           <li>
             <Link to="/contact">Nos contate</Link>
           </li>
+
           {isLogged ? (
             <>
-              <ProphilePhoto src={user_pfp}></ProphilePhoto>
+              <ProphilePhoto onClick={goToUser} src={user_pfp}></ProphilePhoto>
             </>
           ) : (
             <>

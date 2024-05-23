@@ -4,16 +4,16 @@ import { ReactNode } from "react";
 
 interface IPfp {
   src?: string | null;
+  onClick?: () => void;
 }
 
-export const ProphilePhoto = ({ ...rest }, props: IPfp) => {
+export const ProphilePhoto = (props: IPfp) => {
   return (
     <>
       <img
-        {...rest}
+        onClick={props.onClick}
         style={{ borderRadius: "50%", cursor: "pointer" }}
         src={props.src || u_default}
-        alt=""
       />
     </>
   );
