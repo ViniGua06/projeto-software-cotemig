@@ -23,7 +23,7 @@ function App() {
           <Route path="/signIn" element={<SignIn />}></Route>
           <Route path="/recover" element={<InputEmail />}></Route>
           <Route path="/recover/sent" element={<EmailSent />}></Route>
-          <Route path="/sign" element={<SignUp />}></Route>
+          <Route path="/signUp" element={<SignUp />}></Route>
           <Route
             path="/forgotPassword/:token/:email"
             element={<ForgotPassword />}
