@@ -1,15 +1,15 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap');
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: "Poppins", sans-serif;
+  font-family: "Josefin Sans", sans-serif;
   transition: 0.3s;
 }
 
 body {
-  background: linear-gradient(to left, #339262, #b9ffdd);
+  background-image: url("../assets/background.png");
+  color: #F7DEC8;
 }
 
 a {
@@ -18,30 +18,39 @@ a {
   text-decoration: none;
 }
 
-#paragrafh-welcome{
+#paragrafh-welcome {
   padding-top: 2rem;
+  max-width: 52rem;
+  text-align: justify;
   font-size: 1.5rem;
-  padding-inline:15rem;
 }
 
-#welcome-part2{
+#welcome-part2 {
   font-size: 5vh;
   padding-top: 3rem;
 }
 
-#welcome{
-  font-size: 10vh;
-  padding-top: 6rem;
+.containerHome{
+  display: flex;
+  padding-top: 8em;
+  padding-inline: 5em;
+  align-items: center;
+  justify-content: space-evenly;
 }
 
-.main{
-  text-align: center;
+.img-wel{
+  display: grid;
+  place-items: center;
+  height: 100%;
 }
 
 header {
   min-width: 97%;
   height: 70px;
-  background-color: whitesmoke;
+  font-size: 18px;
+  font-weight: bold;
+  background-color: transparent;
+  color: #362720;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -50,6 +59,7 @@ header {
   padding-inline: 3rem;
   position: sticky;
   top: 0;
+  z-index: 99;
 }
 
 ul {
@@ -83,6 +93,15 @@ header > ul > li {
   display: none;
 }
 
+#btn-wel{
+  border-radius: 6px;
+  width: 211px;
+  font-size: 22px;
+  font-weight: bold;
+  height: 50px;
+  background-color: #F7DEC8;
+}
+
 #two {
   max-width: 100%;
   color: black;
@@ -90,6 +109,14 @@ header > ul > li {
   background-color: white;
   overflow: hidden;
   margin-inline: 1rem;
+}
+
+#text-wel{
+  text-align: start;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: center;
 }
 
 #two > ul {
