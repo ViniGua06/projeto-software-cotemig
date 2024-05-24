@@ -6,6 +6,11 @@ import Crypt from "crypto";
 const database = AppDataSource.getRepository("user");
 
 class UserRepository {
+  getAllUsers = async () => {
+    const users = await database.find();
+
+    return users;
+  };
   getUserById = async (id: number): Promise<User | null> => {
     try {
       const user = await database.findOne({
@@ -130,6 +135,22 @@ class UserRepository {
     } catch (error) {
       console.log(error);
       return null;
+    }
+  };
+
+  updatePhoto = async (
+    id: number | string,
+    photo: string
+  ): Promise<boolean> => {
+    try {
+      database.update(id, {
+        photo: photo,
+      });
+
+      return true;
+    } catch (error) {
+      console.log(error);
+      return false;
     }
   };
 }

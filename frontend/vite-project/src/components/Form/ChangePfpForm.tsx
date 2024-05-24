@@ -4,6 +4,7 @@ import { select } from "../../redux/user/slice";
 
 import user_default from "../../assets/user_default.png";
 import { useState } from "react";
+import url from "../../assets/urlBackend";
 
 const PfpForm = styled.form`
   display: flex;
@@ -130,9 +131,33 @@ export const ChangePfpForm = () => {
   const { user_pfp } = useSelector(select);
   const [imagem, setImagem] = useState<any>("");
 
+  const { user_id } = useSelector(select);
+
+  const changePfp = async (e: any) => {
+    try {
+      e.preventDefault();
+      const response = await fetch(`${url}/photo`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id: user_id,
+          photo: imagem,
+        }),
+      });
+
+      const data = await response.json();
+
+      alert(data.message);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
-      <PfpForm>
+      <PfpForm onSubmit={changePfp}>
         <FormAddFile>
           <LabelAddFile>
             <DesignAddFile>

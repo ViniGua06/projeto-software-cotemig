@@ -13,6 +13,12 @@ const jwtService = new JsonWebToken();
 const emailService = new sendEmailService();
 
 class UserController {
+  getAllUsers = async (req: Request, res: Response) => {
+    const users = await repository.getAllUsers();
+
+    res.status(200).json(users);
+  };
+
   getUserById = async (req: Request, res: Response) => {
     try {
       const id = req.params.id;
@@ -147,6 +153,21 @@ class UserController {
     } catch (error) {
       console.log(error);
       res.status(500).json({ error: error });
+    }
+  };
+
+  changeProphilePhoto = (req: Request, res: Response) => {
+    try {
+      const { id, photo } = req.body;
+
+      if (!repository.updatePhoto(id, photo)) {
+        return res.status(400).json({ message: "Bad Request" });
+      }
+
+      return res.status(200).json({ message: "Imagem de perfil atualizada!" });
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ message: "Erro no servidor", error: error });
     }
   };
 }

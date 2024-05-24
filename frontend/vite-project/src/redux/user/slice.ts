@@ -28,6 +28,7 @@ export const slice = createSlice({
         user_name: payload.name,
         user_email: payload.email,
         user_password: payload.password,
+        user_pfp: payload.photo,
       };
     },
 

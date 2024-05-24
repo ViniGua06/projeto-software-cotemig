@@ -47,6 +47,7 @@ const UserPage = () => {
 
       if (response.status == 403) {
         alert("Sessão de usuário expirada!" + data.message);
+        dispatch(logout());
         navigate("/signIn");
       }
     } catch (error) {
@@ -108,13 +109,13 @@ const UserPage = () => {
 
       {modal == "Trocar Imagem" ? (
         <>
-          <Modal title="Trocar Imagem de Perfil" submit={() => alert("ola")}>
+          <Modal title="Trocar Imagem de Perfil">
             <ChangePfpForm />
           </Modal>
         </>
       ) : modal == "Editar Perfil" ? (
         <>
-          <Modal title="Editar Perfil" submit={() => alert("ola")}>
+          <Modal title="Editar Perfil">
             <h1>ola</h1>
           </Modal>
         </>

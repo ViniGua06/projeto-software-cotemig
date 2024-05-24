@@ -79,7 +79,6 @@ const CloseModalX = styled.h2`
 interface IPropsModal {
   title: string;
   children: React.ReactNode;
-  submit: () => void;
   closeModal?: () => void;
 }
 
