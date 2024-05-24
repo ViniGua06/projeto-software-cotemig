@@ -37,7 +37,11 @@ const Header = () => {
 
           {isLogged ? (
             <>
-              <ProphilePhoto onClick={goToUser} src={user_pfp}></ProphilePhoto>
+              <ProphilePhoto
+                onClick={goToUser}
+                src={user_pfp}
+                height="100%"
+              ></ProphilePhoto>
             </>
           ) : (
             <>

@@ -11,6 +11,7 @@ import InputEmail from "./pages/InputEmail";
 import EmailSent from "./pages/EmailSent";
 import SignUp from "./pages/SignUp";
 import UserPage from "./pages/UserPage";
+import { NotAllowed } from "./pages/NotAllowed";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
             element={<ForgotPassword />}
           ></Route>
           <Route path="/user" element={<UserPage />}></Route>
+          <Route path="/user/notallowed" element={<NotAllowed />} />
         </Routes>
       </BrowserRouter>
     </>

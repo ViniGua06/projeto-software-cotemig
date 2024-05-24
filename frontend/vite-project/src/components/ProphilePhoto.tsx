@@ -6,6 +6,7 @@ import { select } from "../redux/user/slice";
 
 interface IPfp {
   src?: string | null;
+  height?: string;
   onClick?: () => void;
 }
 
@@ -18,8 +19,8 @@ export const ProphilePhoto = (props: IPfp) => {
         style={{
           borderRadius: "50%",
           cursor: "pointer",
-          width: "100px",
-          height: "100px",
+          width: props.height ? "60px" : "100px",
+          height: props.height ? props.height : "100px",
         }}
         src={user_pfp || u_default}
       />

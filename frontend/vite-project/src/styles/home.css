@@ -10,6 +10,7 @@
 
 body {
   background: linear-gradient(to left, #339262, #b9ffdd);
+  height: 100vh;
 }
 
 a {
@@ -18,23 +19,23 @@ a {
   text-decoration: none;
 }
 
-#paragrafh-welcome{
+#paragrafh-welcome {
   padding-top: 2rem;
   font-size: 1.5rem;
-  padding-inline:15rem;
+  padding-inline: 15rem;
 }
 
-#welcome-part2{
+#welcome-part2 {
   font-size: 5vh;
   padding-top: 3rem;
 }
 
-#welcome{
+#welcome {
   font-size: 10vh;
   padding-top: 6rem;
 }
 
-.main{
+.main {
   text-align: center;
 }
 
