@@ -13,7 +13,7 @@ body {
 }
 
 a {
-  color: black;
+  color: #362720;
   outline: none;
   text-decoration: none;
 }
@@ -30,7 +30,7 @@ a {
   padding-top: 3rem;
 }
 
-.containerHome{
+.containerHome {
   display: flex;
   padding-top: 8em;
   padding-inline: 5em;
@@ -38,25 +38,24 @@ a {
   justify-content: space-evenly;
 }
 
-.img-wel{
+.img-wel {
   display: grid;
   place-items: center;
   height: 100%;
 }
 
 header {
-  min-width: 97%;
+  width: 100%;
   height: 70px;
-  font-size: 18px;
+  font-size: 20px;
   font-weight: bold;
   background-color: transparent;
   color: #362720;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  margin: 1rem;
-  margin-bottom: 0;
-  padding-inline: 3rem;
+  justify-content: start;
+  margin: 0;
+  padding: 0 2rem;
   position: sticky;
   top: 0;
   z-index: 99;
@@ -68,20 +67,25 @@ ul {
 }
 
 #achei {
-  color: #006666;
+  color: #362720;
   font-size: 30px;
   font-weight: 600;
 }
 
 header > ul {
-  width: 60%;
-  gap: 1rem;
+  display: flex;
+  gap: 7rem;
+  margin: 10rem;
+  padding: 0;
+  list-style: none;
+  flex-shrink: 0;
 }
 
 header > ul > li {
-  width: 100%;
-  display: grid;
-  place-items: center;
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  margin: 0
 }
 
 #ola {
@@ -93,7 +97,7 @@ header > ul > li {
   display: none;
 }
 
-#btn-wel{
+#btn-wel {
   border-radius: 6px;
   width: 211px;
   font-size: 22px;
@@ -111,7 +115,7 @@ header > ul > li {
   margin-inline: 1rem;
 }
 
-#text-wel{
+#text-wel {
   text-align: start;
   display: flex;
   flex-direction: column;
