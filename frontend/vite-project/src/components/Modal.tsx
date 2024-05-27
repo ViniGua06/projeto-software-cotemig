@@ -1,10 +1,10 @@
-import { useEffect} from "react";
+import { useEffect } from "react";
 import styled, { keyframes } from "styled-components";
 
 // import { ativar, desativar } from "../redux/modal/slice";
 
 import { select } from "../redux/modal/slice";
-import {useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 import { ButtonCloseSvg } from "../assets/ButtonCloseSvg";
 
@@ -101,7 +101,7 @@ export const Modal = (props: IPropsModal) => {
         <ContentModal>
           <HeaderModal>
             <h1>{props.title}</h1>
-            <CloseModalX>
+            <CloseModalX onClick={props.closeModal}>
               <ButtonCloseSvg></ButtonCloseSvg>
             </CloseModalX>
           </HeaderModal>

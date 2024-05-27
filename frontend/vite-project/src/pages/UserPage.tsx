@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { logout, fetchUser } from "../redux/user/slice";
 import { Modal } from "../components/Modal";
-import { ativar } from "../redux/modal/slice";
+import { ativar, desativar } from "../redux/modal/slice";
 import { ProphilePhoto } from "../components/ProphilePhoto";
 import { ChangePfpForm } from "../components/Form/ChangePfpForm";
 
@@ -70,6 +70,10 @@ const UserPage = () => {
     }
   };
 
+  const des = () => {
+    dispatch(desativar());
+  };
+
   useEffect(() => {
     fetchUserInfo();
     testToken();
@@ -105,7 +109,7 @@ const UserPage = () => {
 
       {modal == "Trocar Imagem" ? (
         <>
-          <Modal title="Trocar Imagem de Perfil">
+          <Modal title="Trocar Imagem de Perfil" closeModal={des}>
             <ChangePfpForm />
           </Modal>
         </>
