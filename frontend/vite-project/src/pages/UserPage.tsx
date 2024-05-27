@@ -1,14 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
 import Header from "../components/Header";
-
 import { select } from "../redux/user/slice";
 import url from "../assets/urlBackend";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
-import { logout, changeUser, fetchUser } from "../redux/user/slice";
-
-import u_defult from "../assets/user_default.png";
+import { logout, fetchUser } from "../redux/user/slice";
 import { Modal } from "../components/Modal";
 import { ativar } from "../redux/modal/slice";
 import { ProphilePhoto } from "../components/ProphilePhoto";
@@ -17,15 +13,15 @@ import { ChangePfpForm } from "../components/Form/ChangePfpForm";
 const UserPage = () => {
   const {
     token,
-    isLogged,
+    // isLogged,
     user_id,
-    user_email,
+    // user_email,
     user_name,
-    user_password,
-    user_pfp,
+    // user_password,
+    // user_pfp,
   } = useSelector(select);
 
-  const [id, setId] = useState(user_id);
+  const [id] = useState(user_id);
 
   const dispatch = useDispatch();
 

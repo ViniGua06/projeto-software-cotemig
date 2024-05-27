@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import { useState} from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-import { changeUser, logout } from "../../redux/user/slice";
+import { changeUser } from "../../redux/user/slice";
 
 import url from "../../assets/urlBackend";
 

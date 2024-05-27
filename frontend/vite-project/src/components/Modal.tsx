@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect} from "react";
 import styled, { keyframes } from "styled-components";
 
-import { ativar, desativar } from "../redux/modal/slice";
+// import { ativar, desativar } from "../redux/modal/slice";
 
 import { select } from "../redux/modal/slice";
-import { useDispatch, useSelector } from "react-redux";
+import {useSelector } from "react-redux";
 
 import { ButtonCloseSvg } from "../assets/ButtonCloseSvg";
 
@@ -84,7 +84,6 @@ interface IPropsModal {
 
 export const Modal = (props: IPropsModal) => {
   const { ativo } = useSelector(select);
-  const dispatch = useDispatch();
 
   useEffect(() => {
     if (ativo) {
@@ -102,7 +101,7 @@ export const Modal = (props: IPropsModal) => {
         <ContentModal>
           <HeaderModal>
             <h1>{props.title}</h1>
-            <CloseModalX onClick={() => dispatch(desativar())}>
+            <CloseModalX>
               <ButtonCloseSvg></ButtonCloseSvg>
             </CloseModalX>
           </HeaderModal>

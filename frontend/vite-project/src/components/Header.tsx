@@ -1,13 +1,8 @@
-import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-
 import MenuHamb from "../sub-components/MenuHamb";
-
 import ResponsiveNav from "../components/ResponsiveNav";
 import { useSelector } from "react-redux";
 import { select } from "../redux/user/slice";
-
-import u_default from "../assets/user_default.png";
 import { ProphilePhoto } from "./ProphilePhoto";
 
 const Header = () => {

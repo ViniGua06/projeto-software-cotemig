@@ -1,5 +1,9 @@
+<<<<<<< Updated upstream
 import React, { useEffect, useState } from "react";
 import { Route, BrowserRouter, Routes, useLocation } from "react-router-dom";
+=======
+import { Route, BrowserRouter, Routes } from "react-router-dom";
+>>>>>>> Stashed changes
 import "./styles/home.css";
 
 import back from "./assets/background.png";

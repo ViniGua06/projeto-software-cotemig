@@ -1,7 +1,5 @@
 import { useSelector } from "react-redux";
 import u_default from "../assets/user_default.png";
-
-import { ReactNode } from "react";
 import { select } from "../redux/user/slice";
 
 interface IPfp {
