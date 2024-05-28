@@ -1,27 +1,35 @@
 import { useDispatch, useSelector } from "react-redux";
 import Header from "../components/Header";
+
 import { select } from "../redux/user/slice";
 import url from "../assets/urlBackend";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { logout, fetchUser } from "../redux/user/slice";
+
+import { logout, changeUser, fetchUser } from "../redux/user/slice";
+
+import axios from "axios";
+
+import u_defult from "../assets/user_default.png";
 import { Modal } from "../components/Modal";
-import { ativar, desativar } from "../redux/modal/slice";
+import { ativar } from "../redux/modal/slice";
 import { ProphilePhoto } from "../components/ProphilePhoto";
 import { ChangePfpForm } from "../components/Form/ChangePfpForm";
 
 const UserPage = () => {
   const {
     token,
-    // isLogged,
+    isLogged,
     user_id,
-    // user_email,
+    user_email,
     user_name,
-    // user_password,
-    // user_pfp,
+    user_password,
+    user_pfp,
   } = useSelector(select);
 
-  const [id] = useState(user_id);
+  const [imagem, setImagem] = useState("");
+
+  const [id, setId] = useState(user_id);
 
   const dispatch = useDispatch();
 
@@ -51,27 +59,38 @@ const UserPage = () => {
     }
   };
 
+  const fetchProfilePhoto = async () => {
+    try {
+      const response = await fetch(`${url}/photo/${user_id}`);
+
+      const blob = await response.blob();
+      const imageUrl = URL.createObjectURL(blob);
+
+      return imageUrl;
+    } catch (error) {
+      console.error("Erro ao buscar a foto de perfil:", error);
+    }
+  };
+
   const fetchUserInfo = async () => {
     try {
       const response = await fetch(`${url}/user/${id}`);
 
       const data = await response.json();
 
+      const photo = await fetchProfilePhoto();
+
       dispatch(
         fetchUser({
           name: data.user.name,
           email: data.user.email,
           password: data.user.password,
-          photo: data.user.photo,
+          photo: photo,
         })
       );
     } catch (error) {
       console.log(error);
     }
-  };
-
-  const des = () => {
-    dispatch(desativar());
   };
 
   useEffect(() => {
@@ -89,6 +108,7 @@ const UserPage = () => {
   return (
     <>
       <Header></Header>
+
       <main style={{ padding: "3rem" }}>
         <ProphilePhoto
           onClick={() => {
@@ -109,7 +129,7 @@ const UserPage = () => {
 
       {modal == "Trocar Imagem" ? (
         <>
-          <Modal title="Trocar Imagem de Perfil" closeModal={des}>
+          <Modal title="Trocar Imagem de Perfil">
             <ChangePfpForm />
           </Modal>
         </>

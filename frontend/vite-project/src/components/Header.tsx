@@ -9,8 +9,12 @@ const Header = () => {
   const { isLogged, user_pfp } = useSelector(select);
   const navigate = useNavigate();
 
-  const goToUser = () => {
-    navigate("/user");
+  const redirect = () => {
+    if (isLogged) {
+      navigate("/user");
+    } else {
+      navigate("/signIn");
+    }
   };
 
   return (
@@ -24,27 +28,11 @@ const Header = () => {
             <Link to="/churches">Igrejas Afiliadas</Link>
           </li>
           <li>
-            <Link to="/sign">Cadastrar sua Igreja</Link>
+            <a onClick={redirect}>Página do Fiel</a>
           </li>
           <li>
             <Link to="/contact">Nos contate</Link>
           </li>
-
-          {isLogged ? (
-            <>
-              <ProphilePhoto
-                onClick={goToUser}
-                src={user_pfp}
-                height="100%"
-              ></ProphilePhoto>
-            </>
-          ) : (
-            <>
-              <li>
-                <Link to="/signIn">Entrar</Link>
-              </li>
-            </>
-          )}
         </ul>
         <MenuHamb id="hamb" id_element="two"></MenuHamb>
       </header>

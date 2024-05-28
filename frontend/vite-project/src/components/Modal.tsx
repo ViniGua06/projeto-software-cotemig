@@ -3,8 +3,8 @@ import styled, { keyframes } from "styled-components";
 
 // import { ativar, desativar } from "../redux/modal/slice";
 
-import { select } from "../redux/modal/slice";
-import { useSelector } from "react-redux";
+import { desativar, select } from "../redux/modal/slice";
+import { useDispatch, useSelector } from "react-redux";
 
 import { ButtonCloseSvg } from "../assets/ButtonCloseSvg";
 
@@ -34,6 +34,7 @@ const BackgroundModal = styled.div<IModal>`
   align-items: center;
   padding-inline: 19rem;
   padding-block: 2rem;
+  z-index: 99;
 `;
 
 const ContentModal = styled.div`
@@ -85,6 +86,8 @@ interface IPropsModal {
 export const Modal = (props: IPropsModal) => {
   const { ativo } = useSelector(select);
 
+  const dispacth = useDispatch();
+
   useEffect(() => {
     if (ativo) {
       document.body.style.overflow = "hidden";
@@ -95,13 +98,17 @@ export const Modal = (props: IPropsModal) => {
       document.body.style.overflow = "auto";
     };
   }, [ativo]);
+
+  const closeMod = () => {
+    dispacth(desativar());
+  };
   return (
     <>
       <BackgroundModal modalAtivo={ativo}>
         <ContentModal>
           <HeaderModal>
             <h1>{props.title}</h1>
-            <CloseModalX onClick={props.closeModal}>
+            <CloseModalX onClick={closeMod}>
               <ButtonCloseSvg></ButtonCloseSvg>
             </CloseModalX>
           </HeaderModal>

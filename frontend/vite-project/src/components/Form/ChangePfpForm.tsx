@@ -6,6 +6,8 @@ import user_default from "../../assets/user_default.png";
 import { useState } from "react";
 import url from "../../assets/urlBackend";
 
+import imageCompression from "browser-image-compression";
+
 const PfpForm = styled.form`
   display: flex;
   flex-direction: column;
@@ -15,13 +17,12 @@ const PfpForm = styled.form`
   align-items: center;
   gap: 0.6rem;
 `;
-
 const USerImg = styled.img`
   box-shadow: 0 0 20px black;
-  max-width: 15%;
-  min-width: 15%;
+  max-width: 110px;
+  min-width: 110px;
   border-radius: 50%;
-  height: 25%;
+  height: 110px;
 `;
 
 const InputSubmit = styled.input`
@@ -136,15 +137,24 @@ export const ChangePfpForm = () => {
   const changePfp = async (e: any) => {
     try {
       e.preventDefault();
-      const response = await fetch(`${url}/photo`, {
+      const blobImage = await fetch(imagem).then((res) => res.blob());
+      const fileImage = new File([blobImage], "image.jpg", {
+        type: "image/jpeg",
+        lastModified: Date.now(),
+      });
+
+      const compressedImage = await imageCompression(fileImage, {
+        maxSizeMB: 0.1,
+        maxWidthOrHeight: 1920,
+      });
+
+      const formData = new FormData();
+
+      formData.append("photo", compressedImage, "image.jpg");
+
+      const response = await fetch(`${url}/photo/${user_id}`, {
         method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          id: user_id,
-          photo: imagem,
-        }),
+        body: formData,
       });
 
       const data = await response.json();

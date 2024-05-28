@@ -24,6 +24,10 @@ a {
   font-size: 1.5rem;
 }
 
+header a {
+  cursor: pointer;
+}
+
 #welcome-part2 {
   font-size: 5vh;
   padding-top: 3rem;
@@ -52,12 +56,12 @@ header {
   color: #362720;
   display: flex;
   align-items: center;
-  justify-content: start;
+  justify-content: space-between;
   margin: 0;
   padding: 0 2rem;
   position: sticky;
   top: 0;
-  z-index: 99;
+  z-index: 9;
 }
 
 ul {
@@ -69,22 +73,25 @@ ul {
   color: #362720;
   font-size: 30px;
   font-weight: 600;
+  width: 20%;
 }
 
 header > ul {
+  width: 60%;
+  height: 100%;
   display: flex;
   gap: 7rem;
   margin: 10rem;
   padding: 0;
   list-style: none;
-  flex-shrink: 0;
+  justify-content: space-evenly;
 }
 
 header > ul > li {
   display: flex;
   font-weight: 500;
   align-items: center;
-  margin: 0;
+  width: 100%;
 }
 
 #ola {
@@ -143,12 +150,6 @@ header > ul > li {
   color: white;
 }
 
-header * {
-  height: 100%;
-  display: flex;
-  align-items: center;
-}
-
 .userPhoto > img {
   border-radius: 50%;
   height: 70%;
@@ -190,7 +191,7 @@ header * {
 
 @media (max-width: 1360px) {
   header > ul {
-    width: 80%;
+    width: 100%;
   }
 
   #two > ul {

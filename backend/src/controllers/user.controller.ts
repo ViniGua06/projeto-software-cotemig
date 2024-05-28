@@ -7,6 +7,7 @@ import JsonWebToken from "../services/jwt.service";
 import { IEmail } from "../models/email.model";
 
 import sendEmailService from "../services/sendEmail.service";
+import path from "path";
 
 const repository = new UserRepository();
 const jwtService = new JsonWebToken();
@@ -17,6 +18,35 @@ class UserController {
     const users = await repository.getAllUsers();
 
     res.status(200).json(users);
+  };
+
+  getUserProfilePhoto = async (req: Request, res: Response) => {
+    try {
+      const { id } = req.params;
+      const user = await repository.getUserById(parseInt(id));
+
+      if (!user) {
+        return res.status(404).json({ message: "Usuário não encontrado" });
+      }
+
+      // Verificar se o usuário possui uma foto de perfil
+      if (!user.photo) {
+        return res
+          .status(404)
+          .json({ message: "Foto de perfil não encontrada" });
+      }
+
+      // Caminho para a foto de perfil (pode ser necessário ajustar o caminho conforme sua estrutura de arquivos)
+      const imagePath = path.resolve(__dirname, `../uploads/${user.photo}`);
+
+      // Enviar a foto de perfil para o cliente
+      res.sendFile(imagePath);
+    } catch (error) {
+      console.error(error);
+      res
+        .status(500)
+        .json({ message: "Erro ao buscar a foto de perfil", error });
+    }
   };
 
   getUserById = async (req: Request, res: Response) => {
@@ -156,13 +186,18 @@ class UserController {
     }
   };
 
-  changeProphilePhoto = (req: Request, res: Response) => {
+  changeProphilePhoto = async (req: Request, res: Response) => {
     try {
-      const { id, photo } = req.body;
+      const id = req.params.id;
+      const photo = req.file.filename;
+
+      console.log(id, photo);
 
       if (!repository.updatePhoto(id, photo)) {
         return res.status(400).json({ message: "Bad Request" });
       }
+
+      console.log(req.file);
 
       return res.status(200).json({ message: "Imagem de perfil atualizada!" });
     } catch (error) {
