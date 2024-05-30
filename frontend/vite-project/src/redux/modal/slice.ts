@@ -18,6 +18,6 @@ export const slice = createSlice({
 
 export const { ativar, desativar } = slice.actions;
 
-export const select = (state: RootState) => state.modal;
+export const modalSelect = (state: RootState) => state.modal;
 
 export default slice.reducer;

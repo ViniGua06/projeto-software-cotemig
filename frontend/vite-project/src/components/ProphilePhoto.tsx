@@ -1,15 +1,16 @@
 import { useSelector } from "react-redux";
 import u_default from "../assets/user_default.png";
-import { select } from "../redux/user/slice";
+import { userSelect } from "../redux/user/slice";
 
 interface IPfp {
   src?: string | null;
   height?: string;
   onClick?: () => void;
+  margin?: string;
 }
 
 export const ProphilePhoto = (props: IPfp) => {
-  const { user_pfp } = useSelector(select);
+  const { user_pfp } = useSelector(userSelect);
   return (
     <>
       <img
@@ -19,6 +20,7 @@ export const ProphilePhoto = (props: IPfp) => {
           cursor: "pointer",
           width: props.height ? "60px" : "100px",
           height: props.height ? props.height : "100px",
+          margin: props.margin,
         }}
         src={user_pfp || u_default}
       />

@@ -3,7 +3,7 @@ import styled, { keyframes } from "styled-components";
 
 // import { ativar, desativar } from "../redux/modal/slice";
 
-import { desativar, select } from "../redux/modal/slice";
+import { desativar, modalSelect } from "../redux/modal/slice";
 import { useDispatch, useSelector } from "react-redux";
 
 import { ButtonCloseSvg } from "../assets/ButtonCloseSvg";
@@ -84,7 +84,7 @@ interface IPropsModal {
 }
 
 export const Modal = (props: IPropsModal) => {
-  const { ativo } = useSelector(select);
+  const { ativo } = useSelector(modalSelect);
 
   const dispacth = useDispatch();
 

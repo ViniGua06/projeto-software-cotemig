@@ -1,4 +1,6 @@
 import { AppDataSource } from "../database/data-source";
+import { Church } from "../database/entity/Church";
+import { User_Church } from "../database/entity/Integrants";
 import { User } from "../database/entity/User";
 
 import Crypt from "crypto";
@@ -148,6 +150,39 @@ class UserRepository {
       });
 
       return true;
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
+  };
+
+  goToChurch = (church_id: number, user_id: number, role: string) => {
+    try {
+      const int = AppDataSource.getRepository(User_Church);
+
+      int.insert({
+        church: church_id,
+        user_id: user_id,
+        role: role,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  getChurchesByUser = async (id: number) => {
+    try {
+      const int = AppDataSource.getRepository(User_Church);
+      const churches = await int.query(
+        `SELECT c.id, c.name, c.photo, uc.role, COUNT(*) as total 
+        FROM user_church AS uc 
+        INNER JOIN church AS c ON uc.church = c.id 
+        WHERE uc.user_id = ${id} 
+        GROUP BY c.id, c.name, c.photo, uc.role;
+        `
+      );
+
+      return churches as Church[];
     } catch (error) {
       console.log(error);
       return false;

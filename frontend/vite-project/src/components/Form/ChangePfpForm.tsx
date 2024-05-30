@@ -1,12 +1,13 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import { select } from "../../redux/user/slice";
+import { userSelect } from "../../redux/user/slice";
 
 import user_default from "../../assets/user_default.png";
 import { useState } from "react";
 import url from "../../assets/urlBackend";
 
 import imageCompression from "browser-image-compression";
+import { desativar } from "../../redux/modal/slice";
 
 const PfpForm = styled.form`
   display: flex;
@@ -86,7 +87,7 @@ const InputSubmit = styled.input`
   }
 `;
 
-const FormAddFile = styled.form`
+export const FormAddFile = styled.form`
   width: fit-content;
   height: fit-content;
   display: flex;
@@ -94,7 +95,7 @@ const FormAddFile = styled.form`
   justify-content: center;
 `;
 
-const LabelAddFile = styled.label`
+export const LabelAddFile = styled.label`
   & input {
     display: none;
   }
@@ -112,15 +113,19 @@ const LabelAddFile = styled.label`
   box-shadow: 0px 0px 200px -50px rgba(0, 0, 0, 0.719);
 `;
 
-const DesignAddFile = styled.div`
+export const DesignAddFile = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 5px;
+
+  & > p {
+    color: black;
+  }
 `;
 
-const BrowserAddFile = styled.span`
+export const BrowserAddFile = styled.span`
   background-color: rgb(82, 82, 82);
   padding: 5px 15px;
   border-radius: 10px;
@@ -129,10 +134,10 @@ const BrowserAddFile = styled.span`
 `;
 
 export const ChangePfpForm = () => {
-  const { user_pfp } = useSelector(select);
+  const { user_pfp, user_id } = useSelector(userSelect);
   const [imagem, setImagem] = useState<any>("");
 
-  const { user_id } = useSelector(select);
+  const dispacth = useDispatch();
 
   const changePfp = async (e: any) => {
     try {
@@ -160,6 +165,8 @@ export const ChangePfpForm = () => {
       const data = await response.json();
 
       alert(data.message);
+
+      dispacth(desativar());
     } catch (error) {
       console.log(error);
     }

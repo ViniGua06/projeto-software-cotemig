@@ -2,11 +2,11 @@ import { Link, useNavigate } from "react-router-dom";
 import MenuHamb from "../sub-components/MenuHamb";
 import ResponsiveNav from "../components/ResponsiveNav";
 import { useSelector } from "react-redux";
-import { select } from "../redux/user/slice";
+import { userSelect } from "../redux/user/slice";
 import { ProphilePhoto } from "./ProphilePhoto";
 
 const Header = () => {
-  const { isLogged, user_pfp } = useSelector(select);
+  const { isLogged, user_pfp } = useSelector(userSelect);
   const navigate = useNavigate();
 
   const redirect = () => {

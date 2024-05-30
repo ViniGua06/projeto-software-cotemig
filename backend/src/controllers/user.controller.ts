@@ -29,17 +29,16 @@ class UserController {
         return res.status(404).json({ message: "Usuário não encontrado" });
       }
 
-      // Verificar se o usuário possui uma foto de perfil
-      if (!user.photo) {
+      console.log(user.photo);
+
+      if (user.photo == null) {
         return res
           .status(404)
           .json({ message: "Foto de perfil não encontrada" });
       }
 
-      // Caminho para a foto de perfil (pode ser necessário ajustar o caminho conforme sua estrutura de arquivos)
       const imagePath = path.resolve(__dirname, `../uploads/${user.photo}`);
 
-      // Enviar a foto de perfil para o cliente
       res.sendFile(imagePath);
     } catch (error) {
       console.error(error);
@@ -200,6 +199,33 @@ class UserController {
       console.log(req.file);
 
       return res.status(200).json({ message: "Imagem de perfil atualizada!" });
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ message: "Erro no servidor", error: error });
+    }
+  };
+
+  goToChurch = (req: Request, res: Response) => {
+    try {
+      const id = req.params.id;
+      const { church_id, role } = req.body;
+
+      repository.goToChurch(church_id, parseInt(id), role);
+
+      res.status(201).json({ message: "BOA" });
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ message: "Erro no servidor", error: error });
+    }
+  };
+
+  getChurchesByUser = async (req: Request, res: Response) => {
+    const id = req.params.id;
+
+    const churches = await repository.getChurchesByUser(parseInt(id));
+
+    res.status(200).json(churches);
+    try {
     } catch (error) {
       console.log(error);
       res.status(500).json({ message: "Erro no servidor", error: error });

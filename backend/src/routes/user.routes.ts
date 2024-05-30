@@ -21,11 +21,13 @@ userRouter.patch("/user/:id", verifyToken, userController.updateUser);
 userRouter.patch("/forgotPassword", userController.forgotPassword);
 userRouter.post("/testToken", verifyToken, userController.testToken);
 userRouter.put("/password", userController.updatePassword);
-userRouter.get("/photo/:id", userController.getUserProfilePhoto);
+userRouter.get("/photo/:id", verifyToken, userController.getUserProfilePhoto);
 userRouter.put(
   "/photo/:id",
   upload.single("photo"),
   userController.changeProphilePhoto
 );
+userRouter.get("/churches/:id", userController.getChurchesByUser);
+userRouter.post("/goToChurch/:id", userController.goToChurch);
 
 export default userRouter;

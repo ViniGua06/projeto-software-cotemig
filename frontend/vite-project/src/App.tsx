@@ -16,6 +16,7 @@ import EmailSent from "./pages/EmailSent";
 import SignUp from "./pages/SignUp";
 import UserPage from "./pages/UserPage";
 import { NotAllowed } from "./pages/NotAllowed";
+import { CreateChurch } from "./pages/CreateChurch";
 
 interface IGlobal {
   bgColor: string;
@@ -60,6 +61,7 @@ function App() {
         ></Route>
         <Route path="/user" element={<UserPage />}></Route>
         <Route path="/user/notallowed" element={<NotAllowed />} />
+        <Route path="/church/create" element={<CreateChurch />}></Route>
       </Routes>
     </>
   );

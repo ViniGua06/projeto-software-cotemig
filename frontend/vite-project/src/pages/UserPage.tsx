@@ -1,7 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
 import Header from "../components/Header";
 
-import { select } from "../redux/user/slice";
+import { userSelect } from "../redux/user/slice";
+import { modalSelect } from "../redux/modal/slice";
+
 import url from "../assets/urlBackend";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -16,6 +18,10 @@ import { ativar } from "../redux/modal/slice";
 import { ProphilePhoto } from "../components/ProphilePhoto";
 import { ChangePfpForm } from "../components/Form/ChangePfpForm";
 
+import ApiService from "../services/Api.service";
+import { ChurchesTab } from "../components/ChurchesTab";
+import styled from "styled-components";
+
 const UserPage = () => {
   const {
     token,
@@ -25,7 +31,11 @@ const UserPage = () => {
     user_name,
     user_password,
     user_pfp,
-  } = useSelector(select);
+  } = useSelector(userSelect);
+
+  const api = ApiService();
+
+  const { ativo } = useSelector(modalSelect);
 
   const [imagem, setImagem] = useState("");
 
@@ -35,72 +45,19 @@ const UserPage = () => {
 
   const navigate = useNavigate();
 
-  const testToken = async () => {
-    try {
-      const response = await fetch(`${url}/testToken`, {
-        method: "POST",
-        headers: {
-          "x-acess-token": token,
-        },
-        body: JSON.stringify({
-          test: "Teste",
-        }),
-      });
-
-      const data = await response.json();
-
-      if (response.status == 403) {
-        alert("Sessão de usuário expirada!" + data.message);
-        dispatch(logout());
-        navigate("/signIn");
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const fetchProfilePhoto = async () => {
-    try {
-      const response = await fetch(`${url}/photo/${user_id}`);
-
-      const blob = await response.blob();
-      const imageUrl = URL.createObjectURL(blob);
-
-      return imageUrl;
-    } catch (error) {
-      console.error("Erro ao buscar a foto de perfil:", error);
-    }
-  };
-
-  const fetchUserInfo = async () => {
-    try {
-      const response = await fetch(`${url}/user/${id}`);
-
-      const data = await response.json();
-
-      const photo = await fetchProfilePhoto();
-
-      dispatch(
-        fetchUser({
-          name: data.user.name,
-          email: data.user.email,
-          password: data.user.password,
-          photo: photo,
-        })
-      );
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   useEffect(() => {
-    fetchUserInfo();
-    testToken();
-  }, []);
+    api.fetchUserInfo();
+    api.testToken();
+    console.log(user_pfp, "user");
+  }, [ativo]);
 
   const deslogar = () => {
     navigate("/signIn");
     dispatch(logout());
+  };
+
+  const goToCreateChurch = () => {
+    navigate("/church/create");
   };
 
   const [modal, setModal] = useState<string>("");
@@ -109,23 +66,36 @@ const UserPage = () => {
     <>
       <Header></Header>
 
-      <main style={{ padding: "3rem" }}>
-        <ProphilePhoto
-          onClick={() => {
-            setModal("Trocar Imagem");
-            dispatch(ativar());
-          }}
-        ></ProphilePhoto>
-        <h1
-          onClick={() => {
-            setModal("Editar Perfil");
-            dispatch(ativar());
-          }}
-        >
-          Ola, {user_name.toUpperCase()}
-        </h1>
-        <button onClick={deslogar}>Deslogar</button>
-      </main>
+      <MainUserPage>
+        <FirstSection>
+          <div>
+            <ProphilePhoto
+              margin="0 0 2rem 0"
+              onClick={() => {
+                setModal("Trocar Imagem");
+                dispatch(ativar());
+              }}
+            ></ProphilePhoto>
+            <h1
+              onClick={() => {
+                setModal("Editar Perfil");
+                dispatch(ativar());
+              }}
+            >
+              Ola, {user_name.toUpperCase()}
+            </h1>
+          </div>
+
+          <div>
+            <ChurchesTab></ChurchesTab>
+            <CadastrarChurchButton onClick={goToCreateChurch}>
+              Cadastrar Igreja
+            </CadastrarChurchButton>
+            <EnterChurchButton>Ingressar numa Instituição</EnterChurchButton>
+            <SairButton onClick={deslogar}>Sair</SairButton>
+          </div>
+        </FirstSection>
+      </MainUserPage>
 
       {modal == "Trocar Imagem" ? (
         <>
@@ -145,3 +115,65 @@ const UserPage = () => {
 };
 
 export default UserPage;
+
+const SairButton = styled.button`
+  background-color: rgb(211, 47, 47);
+  border: none;
+  color: white;
+  padding: 1rem 1.5rem;
+  margin-top: 1rem;
+  border-radius: 1rem;
+  font-size: 1rem;
+
+  &:hover {
+    background-color: red;
+    cursor: pointer;
+  }
+`;
+
+const MainUserPage = styled.main`
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+`;
+
+const FirstSection = styled.section`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+
+  & > div {
+    display: flex;
+    flex-direction: column;
+  }
+`;
+
+const CadastrarChurchButton = styled.button`
+  background-color: rgb(76, 175, 80);
+  border: none;
+  color: white;
+  padding: 1rem 1.5rem;
+  margin-top: 1rem;
+  border-radius: 1rem;
+  font-size: 1rem;
+
+  &:hover {
+    background-color: green;
+    cursor: pointer;
+  }
+`;
+
+const EnterChurchButton = styled.button`
+  background-color: rgb(33, 150, 243);
+  border: none;
+  color: white;
+  padding: 1rem 1.5rem;
+  margin-top: 1rem;
+  border-radius: 1rem;
+  font-size: 1rem;
+
+  &:hover {
+    background-color: blue;
+    cursor: pointer;
+  }
+`;
