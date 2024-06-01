@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 * {
   box-sizing: border-box;
   margin: 0;
@@ -43,12 +44,17 @@ header a {
 
 .img-wel {
   display: grid;
+  -webkit-user-drag: none;
+  -moz-user-drag: none;    
+  -o-user-drag: none;   
+  user-select: none; 
+  pointer-events: none;
   place-items: center;
   height: 100%;
 }
 
 header {
-  width: 100%;
+  width: 75%;
   height: 70px;
   font-size: 20px;
   font-weight: bold;
@@ -72,6 +78,7 @@ ul {
 #achei {
   color: #362720;
   font-size: 30px;
+  font-family: "Montserrat", sans-serif;
   font-weight: 600;
   width: 20%;
 }
@@ -106,6 +113,7 @@ header > ul > li {
 #btn-wel {
   border-radius: 6px;
   width: 211px;
+  cursor: pointer;
   font-size: 22px;
   font-weight: bold;
   height: 50px;
@@ -121,12 +129,11 @@ header > ul > li {
   margin-inline: 1rem;
 }
 
-#text-wel {
-  text-align: start;
-  display: flex;
-  flex-direction: column;
-  align-items: start;
-  justify-content: center;
+.text-wel {
+  -webkit-user-drag: none;
+  -moz-user-drag: none;    
+  -o-user-drag: none;   
+  user-select: none;     
 }
 
 #two > ul {
