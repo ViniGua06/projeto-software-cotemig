@@ -48,7 +48,6 @@ const UserPage = () => {
   useEffect(() => {
     api.fetchUserInfo();
     api.testToken();
-    console.log(user_pfp, "user");
   }, [ativo]);
 
   const deslogar = () => {
