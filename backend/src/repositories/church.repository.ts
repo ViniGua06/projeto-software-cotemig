@@ -25,6 +25,7 @@ export class ChurchRepository {
       const log = await database.insert({
         name: church.name,
         photo: church.photo,
+        code: church.code,
       });
 
       console.log(log.identifiers[0].id);

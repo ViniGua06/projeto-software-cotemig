@@ -65,14 +65,19 @@ const ApiService = () => {
 
       const photo = await fetchProfilePhoto();
 
-      dispatch(
-        fetchUser({
-          name: data.user.name,
-          email: data.user.email,
-          password: data.user.password,
-          photo: photo,
-        })
-      );
+      if (response.status == 403) {
+        dispatch(logout());
+        navigate("/signIn");
+      } else {
+        dispatch(
+          fetchUser({
+            name: data.user.name,
+            email: data.user.email,
+            password: data.user.password,
+            photo: photo,
+          })
+        );
+      }
     } catch (error) {
       console.log(error);
     }

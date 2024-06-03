@@ -10,6 +10,7 @@ import imageCompression from "browser-image-compression";
 import url from "../../assets/urlBackend";
 import { useSelector } from "react-redux";
 import { userSelect } from "../../redux/user/slice";
+import { useNavigate } from "react-router-dom";
 
 export const CreateChurchForm = () => {
   const [codigo, setCodigo] = useState("");
@@ -18,6 +19,8 @@ export const CreateChurchForm = () => {
   const [nomeIgreja, setNomeIgreja] = useState("");
 
   const { user_id } = useSelector(userSelect);
+
+  const navigate = useNavigate();
 
   const submit = async (e: any) => {
     try {
@@ -37,7 +40,7 @@ export const CreateChurchForm = () => {
 
       formData.append("photo", compressedImage, "image.jpg");
       formData.append("name", nomeIgreja);
-      formData.append("code", "er");
+      formData.append("code", codigo);
 
       const response = await fetch(`${url}/church/${user_id}`, {
         method: "POST",
@@ -47,6 +50,8 @@ export const CreateChurchForm = () => {
       const data = await response.json();
 
       alert(data.message);
+
+      navigate("/user");
     } catch (error) {
       console.log(error);
     }
