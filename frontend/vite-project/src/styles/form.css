@@ -98,7 +98,7 @@
 #formLogin {
   display: flex;
   flex-direction: column;
-  margin-inline: 9rem;
+  margin-inline: 20rem;
   height: fit-content;
   align-items: center;
   justify-content: space-around;
@@ -127,7 +127,7 @@
   width: 100%;
   height: 40px;
   padding-top: 1rem;
-  font-size: larger;
+  font-size: 2rem;
 }
 
 #formLogin label {
@@ -141,19 +141,18 @@
   background-color: #006666;
   color: white;
   border: none;
-  padding: 0.7rem;
+  font-size: 1.25rem;
+  padding: 0.8rem;
   border-radius: 1rem;
   cursor: pointer;
 }
 
-#formLogin input[type="submit"]:hover {
-  background-color: chocolate;
+#formLogin i {
+  font-size: 1.25rem;
 }
 
-.ct-input {
-  display: flex;
-  width: 100%;
-  justify-content: center;
+#formLogin input[type="submit"]:hover {
+  background-color: chocolate;
 }
 
 #formLogin i:hover {
