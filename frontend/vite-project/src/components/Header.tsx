@@ -4,6 +4,7 @@ import ResponsiveNav from "../components/ResponsiveNav";
 import { useSelector } from "react-redux";
 import { userSelect } from "../redux/user/slice";
 import { ProphilePhoto } from "./ProphilePhoto";
+import { Gear } from "../sub-components/Gear";
 
 const Header = () => {
   const { isLogged, user_pfp } = useSelector(userSelect);
@@ -34,6 +35,13 @@ const Header = () => {
             <Link to="/contact">Nos contate</Link>
           </li>
         </ul>
+
+        {isLogged ? (
+          <>
+            <Gear></Gear>
+          </>
+        ) : null}
+
         <MenuHamb id="hamb" id_element="two"></MenuHamb>
       </header>
       <ResponsiveNav></ResponsiveNav>
