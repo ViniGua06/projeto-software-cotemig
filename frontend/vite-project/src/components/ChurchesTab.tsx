@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import ChurchService from "../services/Church.service";
 import styled from "styled-components";
 
-import Church_Default from "../assets/sistema_paroquias.png";
 
 export interface IChurch {
   id?: number | string;

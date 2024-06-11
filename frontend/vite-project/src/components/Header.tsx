@@ -3,12 +3,11 @@ import MenuHamb from "../sub-components/MenuHamb";
 import ResponsiveNav from "../components/ResponsiveNav";
 import { useSelector } from "react-redux";
 import { userSelect } from "../redux/user/slice";
-import { ProphilePhoto } from "./ProphilePhoto";
 import { Gear } from "../sub-components/Gear";
 import { DropDown } from "../sub-components/DropDown";
 
 const Header = () => {
-  const { isLogged, user_pfp } = useSelector(userSelect);
+  const { isLogged } = useSelector(userSelect);
   const navigate = useNavigate();
 
   const redirect = () => {

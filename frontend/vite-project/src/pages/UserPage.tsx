@@ -4,15 +4,11 @@ import Header from "../components/Header";
 import { userSelect } from "../redux/user/slice";
 import { modalSelect } from "../redux/modal/slice";
 
-import url from "../assets/urlBackend";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { logout, changeUser, fetchUser } from "../redux/user/slice";
+import { logout } from "../redux/user/slice";
 
-import axios from "axios";
-
-import u_defult from "../assets/user_default.png";
 import { Modal } from "../components/Modal";
 import { ativar } from "../redux/modal/slice";
 import { ProphilePhoto } from "../components/ProphilePhoto";
@@ -23,23 +19,11 @@ import { ChurchesTab } from "../components/ChurchesTab";
 import styled from "styled-components";
 
 const UserPage = () => {
-  const {
-    token,
-    isLogged,
-    user_id,
-    user_email,
-    user_name,
-    user_password,
-    user_pfp,
-  } = useSelector(userSelect);
+  const { user_name } = useSelector(userSelect);
 
   const api = ApiService();
 
   const { ativo } = useSelector(modalSelect);
-
-  const [imagem, setImagem] = useState("");
-
-  const [id, setId] = useState(user_id);
 
   const dispatch = useDispatch();
 

@@ -5,7 +5,7 @@ import {
   FormAddFile,
   LabelAddFile,
 } from "./ChangePfpForm";
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import imageCompression from "browser-image-compression";
 import url from "../../assets/urlBackend";
 import { useSelector } from "react-redux";
