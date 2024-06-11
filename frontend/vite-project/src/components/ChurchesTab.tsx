@@ -69,8 +69,11 @@ export const ChurchesTab = () => {
 const ChurchesContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: fit-content;
-  height: fit-content;
+  justify-content: space-evenly;
+  padding-left: 1rem;
+  width: 40rem;
+  border-radius: 10px;
+  height: 7rem;
   background-color: whitesmoke;
   color: black;
   margin-top: 2rem;
@@ -78,6 +81,7 @@ const ChurchesContainer = styled.div`
   & > h1 {
     color: black;
     border-bottom: solid black 1px;
+    text-transform: uppercase;
   }
 `;
 

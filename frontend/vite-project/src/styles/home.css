@@ -54,7 +54,7 @@ header a {
 }
 
 header {
-  width: 100%;
+  max-width: 75%;
   height: 70px;
   font-size: 20px;
   font-weight: bold;

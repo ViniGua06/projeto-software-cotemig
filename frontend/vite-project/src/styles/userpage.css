@@ -14,8 +14,13 @@
 }
 
 #enter{
-    width: 50%;
+    width: 10%;
     height: auto;
+}
+
+#signImg{
+  width: 5%;
+  height: auto;
 }
 
 .SairButton{
@@ -23,7 +28,7 @@
   color: white;
   padding: .75rem; 
   width: 5rem;
-  margin-left: 11rem;
+  margin-left: 17rem;
   display: flex;
   justify-content: center;
   margin-top: 20rem;
@@ -37,35 +42,27 @@
 .CadastrarChurchButton{
     background-color: rgb(76, 175, 80);
   border: none;
-  margin-left: 11rem;
-  text-transform: uppercase;
-  color: white;
-  width: 5rem;
   padding: 1rem 1.5rem;
   margin-top: 1rem;
   border-radius: 1rem;
-  font-size: 1rem;
 }
 
 .CadastrarChurchButton:hover {
-    background-color: green;
     font-weight: 900;
+    background-color: white;
     cursor: pointer;
 }
 
 .EnterChurchButton{
     background-color: rgb(33, 150, 243);
   border: none;
-  color: white;
-  text-transform: uppercase;
   padding: 1rem 1.5rem;
   margin-top: 1rem;
   border-radius: 1rem;
-  font-size: 1rem;
 }
 
 .EnterChurchButton:hover{
-    background-color: blue;
+    background-color: white;
     font-weight: 900;
     cursor: pointer;
 }
