@@ -2,7 +2,7 @@ import Header from "../components/Header";
 
 import "../styles/form.css";
 
-import EmailPic from "../assets/mail-2048128_1280.png";
+import EmailPic from "";
 import Forms from "../components/Form/Form";
 
 const Contact = () => {

@@ -59,9 +59,10 @@
   max-width: 100vw;
   height: fit-content;
   display: flex;
+  border-radius: 15px;
   justify-content: space-evenly;
   margin-inline: 1rem;
-  background-color: #006666;
+  background-color: #f69444;
 }
 
 .form-container div {
