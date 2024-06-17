@@ -1,3 +1,3 @@
-const url = "https://projeto-software-cotemig.vercel.app";
+const url = "http://localhost:2000";
 
 export default url;

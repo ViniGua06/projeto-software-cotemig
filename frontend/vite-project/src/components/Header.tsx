@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { userSelect } from "../redux/user/slice";
 import { Gear } from "../sub-components/Gear";
 import { DropDown } from "../sub-components/DropDown";
+import { useState } from "react";
 
 const Header = () => {
   const { isLogged } = useSelector(userSelect);
@@ -17,6 +18,8 @@ const Header = () => {
       navigate("/signIn");
     }
   };
+
+  const [drop, setDrop] = useState(false);
 
   return (
     <>
@@ -38,8 +41,12 @@ const Header = () => {
 
         {isLogged ? (
           <>
-            <Gear>
-              <DropDown></DropDown>
+            <Gear
+              onClick={() => {
+                setDrop(!drop);
+              }}
+            >
+              <DropDown display={drop} setDisplay={setDrop}></DropDown>
             </Gear>
           </>
         ) : null}

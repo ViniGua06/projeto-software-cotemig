@@ -97,9 +97,9 @@
 /*  Form Login  */
 
 #formLogin {
+  width: 100%;
   display: flex;
   flex-direction: column;
-  margin-inline: 20rem;
   height: fit-content;
   align-items: center;
   justify-content: space-around;

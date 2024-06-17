@@ -8,25 +8,25 @@
   transition: 0.3s;
 }
 
-#logout{
-    width: 50%;
-    height: auto;
+#logout {
+  width: 50%;
+  height: auto;
 }
 
-#enter{
-    width: 10%;
-    height: auto;
+#enter {
+  width: 10%;
+  height: auto;
 }
 
-#signImg{
+#signImg {
   width: 5%;
   height: auto;
 }
 
-.SairButton{
-    border: none;
+.SairButton {
+  border: none;
   color: white;
-  padding: .75rem; 
+  padding: 0.75rem;
   width: 5rem;
   margin-left: 17rem;
   display: flex;
@@ -39,8 +39,8 @@
     cursor: pointer;
   }
 }
-.CadastrarChurchButton{
-    background-color: rgb(76, 175, 80);
+.CadastrarChurchButton {
+  background-color: rgb(76, 175, 80);
   border: none;
   padding: 1rem 1.5rem;
   margin-top: 1rem;
@@ -48,33 +48,33 @@
 }
 
 .CadastrarChurchButton:hover {
-    font-weight: 900;
-    background-color: white;
-    cursor: pointer;
+  font-weight: 900;
+  background-color: white;
+  cursor: pointer;
 }
 
-.EnterChurchButton{
-    background-color: rgb(33, 150, 243);
+.EnterChurchButton {
+  background-color: rgb(33, 150, 243);
   border: none;
   padding: 1rem 1.5rem;
   margin-top: 1rem;
   border-radius: 1rem;
 }
 
-.EnterChurchButton:hover{
-    background-color: white;
-    font-weight: 900;
-    cursor: pointer;
+.EnterChurchButton:hover {
+  background-color: white;
+  font-weight: 900;
+  cursor: pointer;
 }
 
-#MainUserPage{
-    padding: 3rem;
+#MainUserPage {
+  padding: 3rem;
   display: flex;
   flex-direction: column;
 }
 
-#FirstSection{
-    display: flex;
+#FirstSection {
+  display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
@@ -82,6 +82,8 @@
 }
 
 #FirstSection > div {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }

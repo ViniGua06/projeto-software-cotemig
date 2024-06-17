@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import ChurchService from "../services/Church.service";
 import styled from "styled-components";
 
-
 export interface IChurch {
   id?: number | string;
   name?: string;
@@ -68,12 +67,12 @@ export const ChurchesTab = () => {
 
 const ChurchesContainer = styled.div`
   display: flex;
+  height: 400px;
   flex-direction: column;
   justify-content: space-evenly;
-  padding-left: 1rem;
   width: 40rem;
   border-radius: 10px;
-  height: 7rem;
+  height: fit-content;
   background-color: whitesmoke;
   color: black;
   margin-top: 2rem;
@@ -82,6 +81,8 @@ const ChurchesContainer = styled.div`
     color: black;
     border-bottom: solid black 1px;
     text-transform: uppercase;
+    text-align: center;
+    padding: 1rem 0;
   }
 `;
 

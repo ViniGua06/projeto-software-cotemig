@@ -5,13 +5,14 @@ export const slice = createSlice({
   name: "modal",
   initialState: {
     ativo: false,
+    tipo: "",
   },
   reducers: {
-    ativar(state) {
-      return { ...state, ativo: true };
+    ativar(state, { payload }) {
+      return { ...state, ativo: true, tipo: payload };
     },
     desativar(state) {
-      return { ...state, ativo: false };
+      return { ...state, ativo: false, tipo: "" };
     },
   },
 });

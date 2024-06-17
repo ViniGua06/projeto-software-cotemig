@@ -104,7 +104,9 @@ class UserController {
       return res.status(200).json({ message: "Usuário atualizado" });
     } catch (error) {
       console.log(error);
-      res.status(500).json({ message: "Algum erro ocorreu!", error: error });
+      res
+        .status(500)
+        .json({ message: "Algum erro ocorreu!", error: error.message });
     }
   };
 

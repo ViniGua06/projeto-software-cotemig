@@ -99,25 +99,28 @@ class UserRepository {
   };
 
   updateUser = async (props: User, id: number): Promise<boolean | null> => {
-    try {
-      const { name, email, password, photo } = props;
+    const { name, email, password, photo } = props;
 
-      const hashedPassword = Crypt.createHash("sha256")
-        .update(password)
-        .digest("hex");
+    const hashedPassword = Crypt.createHash("sha256")
+      .update(password)
+      .digest("hex");
 
-      await database.update(id, {
-        name: name,
-        email: email,
-        password: hashedPassword,
-        photo: photo,
-      });
+    const user = await this.checkIfEmailIsValid(email);
 
-      return true;
-    } catch (error) {
-      console.log(error);
-      return null;
+    if (user) {
+      if (user.id !== id) {
+        throw new Error("Email já cadastrado! Tente outro");
+      }
     }
+
+    await database.update(id, {
+      name: name,
+      email: email,
+      password: hashedPassword,
+      photo: photo,
+    });
+
+    return true;
   };
 
   updatePassword = async (senha: string, email: string) => {

@@ -23,12 +23,12 @@ const ModalAnimation = keyframes`
 `;
 
 const BackgroundModal = styled.div<IModal>`
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   background-color: rgba(0, 0, 0, 0.7);
   height: 100vh;
-  width: 100%;
+  width: 100vw;
   display: ${(props) => (props.modalAtivo ? "flex" : "none")};
   justify-content: center;
   align-items: center;
@@ -107,7 +107,7 @@ export const Modal = (props: IPropsModal) => {
       <BackgroundModal modalAtivo={ativo}>
         <ContentModal>
           <HeaderModal>
-            <h1>{props.title}</h1>
+            <h2>{props.title}</h2>
             <CloseModalX onClick={closeMod}>
               <ButtonCloseSvg></ButtonCloseSvg>
             </CloseModalX>
