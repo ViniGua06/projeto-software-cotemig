@@ -92,15 +92,18 @@ export const UpdateUserForm = () => {
           minLength={5}
           required
         />
-        <UpdateFormLabel>Confirmar Senha</UpdateFormLabel>
+        <UpdateFormLabel>
+          Confirmar Senha (caso queira trocar a senha)
+        </UpdateFormLabel>
         <UpdateFormInput
           type="password"
           onChange={(e) => setSenha2(e.target.value)}
           minLength={5}
         />
 
-        {(senha1 != senha2 || senha1 == "" || senha2 == "") &&
-        senha1 != user_password ? (
+        {((senha1 != senha2 || senha1 == "" || senha2 == "") &&
+          senha1 != user_password) ||
+        senha2 != "" ? (
           <>
             <ErrorMessage>Senhas não conferem</ErrorMessage>
           </>
