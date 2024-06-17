@@ -5,12 +5,12 @@ import { useState } from "react";
 import url from "../../assets/urlBackend";
 
 import { FormEvent } from "react";
-import { desativar } from "../../redux/modal/slice";
 
 export const UpdateUserForm = () => {
-  const { user_name, user_email, user_id, token } = useSelector(userSelect);
+  const { user_name, user_email, user_id, token, user_password } =
+    useSelector(userSelect);
 
-  const [senha1, setSenha1] = useState("");
+  const [senha1, setSenha1] = useState(user_password);
   const [senha2, setSenha2] = useState("");
 
   const [nome, setNome] = useState(user_name);
@@ -19,7 +19,7 @@ export const UpdateUserForm = () => {
   const hanldeSubmit = async (e: FormEvent<HTMLFormElement>) => {
     try {
       e.preventDefault();
-      if (senha1 == senha2) {
+      if (senha1 == senha2 && senha1 != user_password) {
         const res = await fetch(`${url}/user/${user_id}`, {
           method: "PATCH",
           headers: {
@@ -30,6 +30,26 @@ export const UpdateUserForm = () => {
             name: nome,
             email: email,
             password: senha1,
+          }),
+        });
+
+        const data = await res.json();
+
+        if (data.error) {
+          alert(data.error);
+        } else {
+          location.reload();
+        }
+      } else {
+        const res = await fetch(`${url}/user/${user_id}`, {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            "x-acess-token": token,
+          },
+          body: JSON.stringify({
+            name: nome,
+            email: email,
           }),
         });
 
@@ -67,6 +87,7 @@ export const UpdateUserForm = () => {
         <UpdateFormLabel>Senha</UpdateFormLabel>
         <UpdateFormInput
           type="password"
+          value={senha1}
           onChange={(e) => setSenha1(e.target.value)}
           minLength={5}
           required
@@ -76,10 +97,10 @@ export const UpdateUserForm = () => {
           type="password"
           onChange={(e) => setSenha2(e.target.value)}
           minLength={5}
-          required
         />
 
-        {senha1 != senha2 || senha1 == "" || senha2 == "" ? (
+        {(senha1 != senha2 || senha1 == "" || senha2 == "") &&
+        senha1 != user_password ? (
           <>
             <ErrorMessage>Senhas não conferem</ErrorMessage>
           </>
