@@ -7,6 +7,10 @@ import Crypt from "crypto";
 
 const database = AppDataSource.getRepository("user");
 
+import { ChurchRepository } from "./church.repository";
+
+const churchRepository = new ChurchRepository();
+
 class UserRepository {
   getAllUsers = async () => {
     const users = await database.find();
@@ -179,6 +183,34 @@ class UserRepository {
     } catch (error) {
       console.log(error);
     }
+  };
+
+  enterChurch = async (user_id: number, code: string) => {
+    const church = await churchRepository.getChurchByCode(code);
+
+    if (!church) {
+      throw new Error("Igreja não encontrada!");
+    }
+
+    const uc = AppDataSource.getRepository(User_Church);
+
+    const verify = await uc.findOne({
+      where: {
+        user_id: user_id,
+        church: church.id,
+      },
+    });
+
+    if (verify) {
+      console.log(verify);
+      throw new Error("Usuário já está na igreja!");
+    }
+
+    uc.insert({
+      church: church.id,
+      user_id: user_id,
+      role: "normal",
+    });
   };
 
   getChurchesByUser = async (id: number) => {

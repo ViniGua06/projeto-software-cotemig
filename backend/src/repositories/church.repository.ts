@@ -20,6 +20,20 @@ export class ChurchRepository {
     return church;
   };
 
+  getChurchByCode = async (code: string) => {
+    const church = await database.findOne({
+      where: {
+        code: code,
+      },
+    });
+
+    if (!church) {
+      return false;
+    }
+
+    return church;
+  };
+
   insertChurch = async (church: Church) => {
     try {
       const log = await database.insert({

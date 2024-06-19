@@ -10,6 +10,8 @@ import userRouter from "./routes/user.routes";
 import bodyParser from "body-parser";
 import churchRouter from "./routes/church.routes";
 
+import verifyToken from "./middlewares/tokenVerifyier.middleware";
+
 const app = Express();
 const PORT = process.env.PORT || 2000;
 
@@ -18,6 +20,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(userRouter);
+app.use(verifyToken);
 app.use(churchRouter);
 
 AppDataSource.initialize()

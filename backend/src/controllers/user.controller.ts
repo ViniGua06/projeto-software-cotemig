@@ -225,6 +225,18 @@ class UserController {
     }
   };
 
+  enterChurch = async (req: Request, res: Response) => {
+    try {
+      const { user_id, code } = req.body;
+      await repository.enterChurch(user_id, code);
+
+      res.status(200).json({ message: "Entrou na igreja" });
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ message: "Erro", error: error.message });
+    }
+  };
+
   getChurchesByUser = async (req: Request, res: Response) => {
     const id = req.params.id;
 

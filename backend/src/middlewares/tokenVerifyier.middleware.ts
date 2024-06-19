@@ -5,8 +5,6 @@ import Jwt from "jsonwebtoken";
 const verifyToken = (req: Request, res: Response, next: NextFunction) => {
   const token = req.headers["x-acess-token"];
 
-  console.log(token);
-
   if (!token) {
     return res.status(403).json({ message: "Token faltando" });
   }

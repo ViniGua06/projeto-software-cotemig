@@ -5,7 +5,7 @@ import {
   FormAddFile,
   LabelAddFile,
 } from "./ChangePfpForm";
-import {  useState } from "react";
+import { useState } from "react";
 import imageCompression from "browser-image-compression";
 import url from "../../assets/urlBackend";
 import { useSelector } from "react-redux";
@@ -18,7 +18,7 @@ export const CreateChurchForm = () => {
   const [imagem, setImagem] = useState<any>("");
   const [nomeIgreja, setNomeIgreja] = useState("");
 
-  const { user_id } = useSelector(userSelect);
+  const { user_id, token } = useSelector(userSelect);
 
   const navigate = useNavigate();
 
@@ -44,6 +44,9 @@ export const CreateChurchForm = () => {
 
       const response = await fetch(`${url}/church/${user_id}`, {
         method: "POST",
+        headers: {
+          "x-acess-token": token,
+        },
         body: formData,
       });
 

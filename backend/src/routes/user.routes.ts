@@ -29,5 +29,6 @@ userRouter.put(
 );
 userRouter.get("/churches/:id", userController.getChurchesByUser);
 userRouter.post("/goToChurch/:id", userController.goToChurch);
+userRouter.post("/enterchurch", userController.enterChurch);
 
 export default userRouter;

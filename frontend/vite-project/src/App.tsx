@@ -17,6 +17,7 @@ import SignUp from "./pages/SignUp";
 import UserPage from "./pages/UserPage";
 import { NotAllowed } from "./pages/NotAllowed";
 import { CreateChurch } from "./pages/CreateChurch";
+import { EnterChurch } from "./pages/EnterChurch";
 
 interface IGlobal {
   bgColor: string;
@@ -24,8 +25,9 @@ interface IGlobal {
 
 const GlobalStyle = createGlobalStyle`
   body {
-    background: ${(props: IGlobal) => props.bgColor}
+    background: ${(props: IGlobal) => props.bgColor};
   }
+
 `;
 
 function App() {
@@ -62,6 +64,7 @@ function App() {
         <Route path="/user" element={<UserPage />}></Route>
         <Route path="/user/notallowed" element={<NotAllowed />} />
         <Route path="/church/create" element={<CreateChurch />}></Route>
+        <Route path="/enterchurch" element={<EnterChurch />}></Route>
       </Routes>
     </>
   );
