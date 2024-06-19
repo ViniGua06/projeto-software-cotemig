@@ -10,9 +10,7 @@ const Contact = () => {
       <Header></Header>
 
       <div className="form-container">
-        <div>
-          
-        </div>
+        
         <Forms opt="contato"></Forms>
       </div>
     </>

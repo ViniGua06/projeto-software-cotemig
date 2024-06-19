@@ -243,14 +243,14 @@ const Form = (opt: IForm) => {
   return (
     <>
       <form id="formContato" onSubmit={sendEmail}>
-        <label>Assunto</label>
+        <label>Nome</label>
         <input
           type="text"
-          onChange={(e) => setAssunto(e.target.value)}
+          onChange={(e) => setNome(e.target.value)}
           required
         />
-        <label>Nome</label>
-        <input type="text" onChange={(e) => setNome(e.target.value)} required />
+        <label>Assunto</label>
+        <input type="text" onChange={(e) => setAssunto(e.target.value)} required />
         <label>Mensagem</label>
         <textarea
           onChange={(e) => setMensagem(e.target.value)}
