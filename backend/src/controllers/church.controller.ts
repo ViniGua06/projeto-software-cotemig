@@ -78,4 +78,74 @@ export class ChurchController {
         .json({ message: "Erro ao buscar a foto de perfil", error });
     }
   };
+
+  getChurchIntegrantProphilePhoto = async (req: Request, res: Response) => {
+    try {
+      const { id } = req.params;
+      const photo = await churchRepository.getIntegrantProphilePhoto(
+        parseInt(id)
+      );
+
+      if (photo == null) {
+        return res
+          .status(404)
+          .json({ message: "Foto de perfil da não encontrada" });
+      }
+
+      const imagePath = path.resolve(__dirname, `../uploads/${photo}`);
+
+      res.sendFile(imagePath);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: error.message, error });
+    }
+  };
+
+  getChurchIntegrants = async (req: Request, res: Response) => {
+    try {
+      const { id } = req.params;
+
+      const integrants = await churchRepository.getChurchIntegrants(
+        parseInt(id)
+      );
+
+      console.log(integrants, "INIBOUIDB");
+
+      res.status(200).json(integrants);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ message: error.message });
+    }
+  };
+
+  getUserRole = async (req: Request, res: Response) => {
+    try {
+      const { user_id, church_id } = req.params;
+
+      const user = await churchRepository.getUserRole(
+        parseInt(church_id),
+        parseInt(user_id)
+      );
+
+      res.status(200).json(user.role);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ message: error.message });
+    }
+  };
+
+  removeIntegrant = async (req: Request, res: Response) => {
+    try {
+      const { church_id, user_id } = req.params;
+      await churchRepository.deleteIntegrant(
+        parseInt(church_id),
+        parseInt(user_id)
+      );
+
+      res.status(200).json({ message: "Usuário deletado!" });
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ message: error.message });
+    }
+  };
 }

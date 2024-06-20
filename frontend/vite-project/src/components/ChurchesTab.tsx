@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import ChurchService from "../services/Church.service";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 export interface IChurch {
   id?: number | string;
@@ -16,6 +17,8 @@ export const ChurchesTab = () => {
   const [quantidade, setQuantidade] = useState(0);
 
   const service = ChurchService();
+
+  const navigate = useNavigate();
 
   const setArray = async () => {
     const newArray = await service.getChurchesByUser();
@@ -35,6 +38,11 @@ export const ChurchesTab = () => {
     if (churches.length > 0) setQuantidade(churches.length);
   }, [churches]);
 
+  const goToChurch = async (church_id: number | undefined | string) => {
+    await service.changeChurchService(church_id);
+    navigate("/user/church");
+  };
+
   return (
     <>
       <ChurchesContainer>
@@ -45,7 +53,7 @@ export const ChurchesTab = () => {
               {churches.map((item: IChurch) => {
                 return (
                   <>
-                    <ChurchLi key={item.id}>
+                    <ChurchLi key={item.id} onClick={() => goToChurch(item.id)}>
                       <ChurchPhoto src={item.photo} alt="foto"></ChurchPhoto>
                       <h2>{item.name}</h2>
                       <div>Cargo: {item.role}</div>

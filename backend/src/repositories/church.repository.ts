@@ -1,7 +1,11 @@
 import { AppDataSource } from "../database/data-source";
 import { Church } from "../database/entity/Church";
+import { User_Church } from "../database/entity/Integrants";
+import { User } from "../database/entity/User";
 
 const database = AppDataSource.getRepository(Church);
+const integrants = AppDataSource.getRepository(User_Church);
+const user = AppDataSource.getRepository(User);
 
 export class ChurchRepository {
   getAllChurches = async () => {
@@ -48,6 +52,56 @@ export class ChurchRepository {
     } catch (error) {
       console.log(error);
       return false;
+    }
+  };
+
+  getChurchIntegrants = async (church_id: number) => {
+    const integ = await integrants.query(
+      `SELECT * FROM user_church as i
+    INNER JOIN "user" as u 
+    ON i.user_id = u.id
+    WHERE i.church = $1`,
+      [church_id]
+    );
+
+    return integ;
+  };
+
+  getUserRole = async (church_id: number, user_id: number) => {
+    const user = await integrants.findOne({
+      where: {
+        church: church_id,
+        user_id: user_id,
+      },
+    });
+
+    if (!user) {
+      throw new Error("Usuario nao encontrado");
+    }
+
+    return user;
+  };
+
+  getIntegrantProphilePhoto = async (user_id: number) => {
+    const photo = await user.query(
+      `SELECT photo FROM "user"
+    INNER JOIN user_church as uc
+    ON user.id = uc.user_id
+    WHERE user.id = $1`,
+      [user_id]
+    );
+
+    return photo;
+  };
+
+  deleteIntegrant = async (church_id: number, user_id: number) => {
+    const affected = await integrants.delete({
+      church: church_id,
+      user_id: user_id,
+    });
+
+    if (!affected.affected) {
+      throw new Error("Usuário não removido!");
     }
   };
 }
