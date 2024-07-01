@@ -8,6 +8,7 @@ import styled from "styled-components";
 import igreja from "../assets/igreja.svg";
 import { userSelect } from "../redux/user/slice";
 import url from "../assets/urlBackend";
+import { useNavigate } from "react-router-dom";
 
 interface IIntegrants {
   id: string;
@@ -30,6 +31,8 @@ export const ChurchPage = () => {
   const { user_id, token } = useSelector(userSelect);
 
   const churchService = ChurchService();
+
+  const navigate = useNavigate();
 
   const getInfo = async () => {
     await churchService.changeChurchService(church_id);
@@ -55,6 +58,10 @@ export const ChurchPage = () => {
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const goToChat = () => {
+    navigate("/church/chat");
   };
 
   useEffect(() => {
@@ -113,6 +120,8 @@ export const ChurchPage = () => {
             })}
           </tbody>
         </Table>
+
+        <button onClick={goToChat}>Chat</button>
       </Main>
     </>
   );

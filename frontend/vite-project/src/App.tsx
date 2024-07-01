@@ -19,6 +19,7 @@ import { NotAllowed } from "./pages/NotAllowed";
 import { CreateChurch } from "./pages/CreateChurch";
 import { EnterChurch } from "./pages/EnterChurch";
 import { ChurchPage } from "./pages/ChurchPage";
+import { Chat } from "./pages/Chat";
 
 interface IGlobal {
   bgColor: string;
@@ -67,6 +68,7 @@ function App() {
         <Route path="/church/create" element={<CreateChurch />}></Route>
         <Route path="/enterchurch" element={<EnterChurch />}></Route>
         <Route path="/user/church" element={<ChurchPage />}></Route>
+        <Route path="/church/chat" element={<Chat />}></Route>
       </Routes>
     </>
   );
