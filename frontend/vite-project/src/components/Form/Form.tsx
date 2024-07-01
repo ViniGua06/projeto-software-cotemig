@@ -1,4 +1,4 @@
-import { useState} from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import { changeUser } from "../../redux/user/slice";
@@ -6,6 +6,7 @@ import { changeUser } from "../../redux/user/slice";
 import url from "../../assets/urlBackend";
 
 import "../../styles/form.css";
+import "../Form/styles/form.css";
 import { useDispatch } from "react-redux";
 
 interface IForm {
@@ -191,34 +192,57 @@ const Form = (opt: IForm) => {
   } else if (opt.opt === "cadastrar") {
     return (
       <>
-        <form id="formCadastro" onSubmit={cadastro}>
-          <h1>Cadastro</h1>
-          <label>Nome</label>
-          <input
-            type="text"
-            value={nomeCad}
-            onChange={(e) => setNomeCad(e.target.value)}
-            required
-          />
-          <label>Email</label>
-          <input
-            type="email"
-            required
-            value={emailCad}
-            onChange={(e) => setEmailCad(e.target.value)}
-          />
-          <label>Senha</label>
-          <input
-            type="password"
-            value={senhaCad}
-            onChange={(e) => setSenhaCad(e.target.value)}
-            required
-          />
-          <input type="submit"></input>
-          <Link to="/signIn">
-            <i>Já tenho uma conta</i>
-          </Link>
-        </form>
+        <div className="container">
+          <div className="form_area">
+            <p className="title">CRIAR CONTA</p>
+            <form action="">
+              <div className="form_group">
+                <label className="sub_title" htmlFor="name">
+                  Nome
+                </label>
+                <input
+                  placeholder="Digite seu nome e sobrenome"
+                  className="form_style"
+                  type="text"
+                ></input>
+              </div>
+              <div className="form_group">
+                <label className="sub_title" htmlFor="email">
+                  Email
+                </label>
+                <input
+                  placeholder="Digite seu email"
+                  id="email"
+                  className="form_style"
+                  type="email"
+                ></input>
+              </div>
+              <div className="form_group">
+                <label className="sub_title" htmlFor="password">
+                  Senha
+                </label>
+                <input
+                  placeholder="Digite uma senha"
+                  id="password"
+                  className="form_style"
+                  type="password"
+                ></input>
+              </div>
+              <div>
+                <button className="btn">CRIAR</button>
+                <p>
+                  Jà possui uma conta?{" "}
+                  <a className="link" href="">
+                    Faça Login
+                  </a>
+                </p>
+                <a className="link" href=""></a>
+              </div>
+              <a className="link" href=""></a>
+            </form>
+          </div>
+          <a className="link" href=""></a>
+        </div>
       </>
     );
   } else if (opt.opt === "inputEmail") {
@@ -244,13 +268,13 @@ const Form = (opt: IForm) => {
     <>
       <form id="formContato" onSubmit={sendEmail}>
         <label>Nome</label>
+        <input type="text" onChange={(e) => setNome(e.target.value)} required />
+        <label>Assunto</label>
         <input
           type="text"
-          onChange={(e) => setNome(e.target.value)}
+          onChange={(e) => setAssunto(e.target.value)}
           required
         />
-        <label>Assunto</label>
-        <input type="text" onChange={(e) => setAssunto(e.target.value)} required />
         <label>Mensagem</label>
         <textarea
           onChange={(e) => setMensagem(e.target.value)}
