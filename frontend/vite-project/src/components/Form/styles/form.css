@@ -1,7 +1,7 @@
 .container {
   display: flex;
   align-items: center;
-  margin-top: 3rem;
+  margin-top: -5rem;
   flex-direction: column;
   text-align: center;
 }
@@ -31,6 +31,10 @@
   margin: 5px 0;
 }
 
+#p-link{
+  color: #000000;
+}
+
 .form_group {
   display: flex;
   flex-direction: column;
@@ -58,8 +62,10 @@
   padding: 15px;
   margin: 25px 0px;
   width: 290px;
+  color: white;
+  cursor: pointer;
   font-size: 15px;
-  background: #de5499;
+  background: #5474de;
   border-radius: 10px;
   font-weight: 800;
   box-shadow: 3px 3px 0px 0px #e99f4c;

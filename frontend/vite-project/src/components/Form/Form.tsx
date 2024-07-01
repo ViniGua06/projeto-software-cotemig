@@ -195,12 +195,15 @@ const Form = (opt: IForm) => {
         <div className="container">
           <div className="form_area">
             <p className="title">CRIAR CONTA</p>
-            <form action="">
+            <form onSubmit={cadastro}>
               <div className="form_group">
                 <label className="sub_title" htmlFor="name">
                   Nome
                 </label>
                 <input
+                  value={nomeCad}
+                  onChange={(e) => setNomeCad(e.target.value)}
+                  required
                   placeholder="Digite seu nome e sobrenome"
                   className="form_style"
                   type="text"
@@ -211,6 +214,9 @@ const Form = (opt: IForm) => {
                   Email
                 </label>
                 <input
+                  value={emailCad}
+                  onChange={(e) => setEmailCad(e.target.value)}
+                  required
                   placeholder="Digite seu email"
                   id="email"
                   className="form_style"
@@ -222,6 +228,9 @@ const Form = (opt: IForm) => {
                   Senha
                 </label>
                 <input
+                  value={senhaCad}
+                  onChange={(e) => setSenhaCad(e.target.value)}
+                  required
                   placeholder="Digite uma senha"
                   id="password"
                   className="form_style"
@@ -230,18 +239,15 @@ const Form = (opt: IForm) => {
               </div>
               <div>
                 <button className="btn">CRIAR</button>
-                <p>
-                  Jà possui uma conta?{" "}
-                  <a className="link" href="">
+                <p id="p-link">
+                  Jà possui uma conta?
+                  <a className="link" href="/signIn">
                     Faça Login
                   </a>
                 </p>
-                <a className="link" href=""></a>
               </div>
-              <a className="link" href=""></a>
             </form>
           </div>
-          <a className="link" href=""></a>
         </div>
       </>
     );
