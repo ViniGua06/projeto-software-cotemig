@@ -161,32 +161,51 @@ const Form = (opt: IForm) => {
   if (opt.opt === "logar") {
     return (
       <>
-        <form id="formLogin" onSubmit={login}>
-          <h1>Login</h1>
-          <label>Email</label>
-          <input
-            type="email"
-            value={emailLogin}
-            onChange={(e) => setEmailLogin(e.target.value)}
-            required
-          />
-          <label>Senha</label>
-          <input
-            type="password"
-            value={senhaLogin}
-            onChange={(e) => setSenhaLogin(e.target.value)}
-            required
-          />
-          <Link to="/recover">
-            <i>Esqueci a senha</i>
-          </Link>
-          <div className="ct-input">
-            <input type="submit" value="Logar"></input>
+        <div className="container">
+          <div className="form_area">
+            <p className="title">Login</p>
+            <form onSubmit={login}>
+              <div className="form_group">
+                <label className="sub_title" htmlFor="email">
+                  Email
+                </label>
+                <input
+                  value={emailLogin}
+                  onChange={(e) => setEmailLogin(e.target.value)}
+                  required
+                  placeholder="Digite seu email"
+                  id="email"
+                  className="form_style"
+                  type="email"
+                ></input>
+              </div>
+              <div className="form_group">
+                <label className="sub_title" htmlFor="password">
+                  Senha
+                </label>
+                <input
+                  value={senhaLogin}
+                  onChange={(e) => setSenhaLogin(e.target.value)}
+                  required
+                  placeholder="Digite uma senha"
+                  id="password"
+                  className="form_style"
+                  type="password"
+                ></input>
+              </div>
+              <div>
+                <i>Esqueci minha senha</i>
+                <button type="submit" className="btn" value="Logar">CRIAR</button>
+                <p id="p-link">
+                  Ainda não tenho uma conta
+                  <a className="link" href="/signUp">
+                    Crie uma conta
+                  </a>
+                </p>
+              </div>
+            </form>
           </div>
-          <Link to="/signUp">
-            <i>Ainda não tenho uma conta</i>
-          </Link>
-        </form>
+        </div>
       </>
     );
   } else if (opt.opt === "cadastrar") {
