@@ -46,6 +46,14 @@ AppDataSource.initialize()
 
         socket.emit("conectou", "CONECTOU A SALA " + id);
       });
+
+      socket.on("message", ({ mensagem, user_id, church_id }) => {
+        console.log("Mensagem recebida: " + mensagem, user_id, church_id);
+
+        const data = Date.now();
+
+        io.to(String(church_id)).emit("mess", { mensagem, data, user_id });
+      });
     });
   })
   .catch((error) => {

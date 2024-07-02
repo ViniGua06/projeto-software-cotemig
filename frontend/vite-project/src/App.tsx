@@ -30,6 +30,8 @@ const GlobalStyle = createGlobalStyle`
     background: ${(props: IGlobal) => props.bgColor};
   }
 
+
+
 `;
 
 function App() {

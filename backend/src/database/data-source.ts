@@ -3,6 +3,7 @@ import { DataSource } from "typeorm";
 import { User } from "./entity/User";
 import { Church } from "./entity/Church";
 import { User_Church } from "./entity/Integrants";
+import { Message } from "./entity/Message";
 
 export const AppDataSource = new DataSource({
   type: "postgres",
@@ -13,7 +14,7 @@ export const AppDataSource = new DataSource({
   database: "qcezcnow",
   synchronize: false,
   logging: false,
-  entities: [Church, User_Church, User],
-  migrations: ["./migration/*.ts"],
+  entities: [Church, User_Church, User, Message],
+  migrations: [__dirname + "/migration/*.ts"],
   subscribers: [],
 });

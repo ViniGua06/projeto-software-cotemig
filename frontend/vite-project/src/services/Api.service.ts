@@ -71,6 +71,7 @@ const ApiService = () => {
       } else {
         dispatch(
           fetchUser({
+            id: data.user.id,
             name: data.user.name,
             email: data.user.email,
             password: data.user.password,

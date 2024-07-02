@@ -1,16 +1,16 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
 
 @Entity()
-export class User_Church {
+export class Message {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column({ nullable: false })
-  user_id: number;
-
-  @Column({ nullable: true })
-  church: number;
+  text: string;
 
   @Column({ nullable: false })
-  role: string;
+  user_id: number;
+
+  @Column({ nullable: false })
+  church_id: number;
 }
