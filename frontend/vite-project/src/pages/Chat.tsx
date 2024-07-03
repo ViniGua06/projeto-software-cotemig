@@ -1,5 +1,6 @@
 import { Socket, io } from "socket.io-client";
 import url from "../assets/urlBackend";
+import imageBack from "../assets/fundo.jpg";
 import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { churchSelect } from "../redux/church/slice";
@@ -79,7 +80,7 @@ export const Chat = () => {
     <>
       <Main>
         <ChatContainer>
-          <MessageContainer>
+          <MessageContainer style={{backgroundImage: "url(" + imageBack + ")"}}>
             {mensagens.map((item, index) => (
               <MessageItem key={index} isCurrentUser={item.id === user_id}>
                 <h1>{item.message}</h1>
@@ -113,13 +114,14 @@ const Main = styled.main`
 const ChatContainer = styled.div`
   max-width: 100%;
   height: 100%;
-  background: whitesmoke;
+  background: white;
 `;
 
 const MessageContainer = styled.div`
   width: 100%;
   height: 80%;
   border: solid black 1px;
+  background-image: ${imageBack};
   overflow-y: auto;
   padding: 2rem;
   display: flex;
@@ -141,10 +143,15 @@ const Form = styled.form`
 const MessageItem = styled.div<{ isCurrentUser: boolean }>`
   display: flex;
   align-self: ${(props) => (props.isCurrentUser ? "flex-end" : "flex-start")};
+  background: ${(props) => (props.isCurrentUser ? "#2aa32c" : "#164a17")};
   margin-bottom: 1rem;
   flex-direction: column;
   border-radius: 3rem;
-  background: green;
   width: fit-content;
-  padding: 1rem;
+  padding: 1.5rem;
+  gap: 1rem; 
+  
+  & > h1 {
+    color: white;
+  }
 `;
