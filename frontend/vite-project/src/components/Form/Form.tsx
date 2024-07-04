@@ -163,7 +163,7 @@ const Form = (opt: IForm) => {
       <>
         <div className="container">
           <div className="form_area">
-            <p className="title">Login</p>
+            <p className="title">ENTRAR</p>
             <form onSubmit={login}>
               <div className="form_group">
                 <label className="sub_title" htmlFor="email">
@@ -187,17 +187,16 @@ const Form = (opt: IForm) => {
                   value={senhaLogin}
                   onChange={(e) => setSenhaLogin(e.target.value)}
                   required
-                  placeholder="Digite uma senha"
+                  placeholder="Digite sua senha"
                   id="password"
                   className="form_style"
                   type="password"
                 ></input>
               </div>
               <div>
-                <i>Esqueci minha senha</i>
-                <button type="submit" className="btn" value="Logar">CRIAR</button>
+                <button className="btn">LOGAR</button>
                 <p id="p-link">
-                  Ainda não tenho uma conta
+                  Não possui uma conta?
                   <a className="link" href="/signUp">
                     Crie uma conta
                   </a>

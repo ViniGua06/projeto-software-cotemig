@@ -16,7 +16,7 @@
   width: 50%;
   border: 2px solid #264143;
   border-radius: 20px;
-  box-shadow: 3px 4px 0px 1px #e99f4c;
+  box-shadow: 3px 4px 0px 1px #b66e33;
 }
 
 .title {
@@ -45,7 +45,7 @@
 .form_style {
   outline: none;
   border: 2px solid #264143;
-  box-shadow: 3px 4px 0px 1px #e99f4c;
+  box-shadow: 3px 4px 0px 1px #b66e33;
   width: 290px;
   padding: 12px 10px;
   border-radius: 4px;
@@ -55,7 +55,7 @@
 .form_style:focus,
 .btn:focus {
   transform: translateY(4px);
-  box-shadow: 1px 2px 0px 0px #e99f4c;
+  box-shadow: 1px 2px 0px 0px #b66e33;
 }
 
 .btn {
@@ -68,7 +68,7 @@
   background: #5474de;
   border-radius: 10px;
   font-weight: 800;
-  box-shadow: 3px 3px 0px 0px #e99f4c;
+  box-shadow: 3px 3px 0px 0px #b66e33;
 }
 
 .btn:hover {
