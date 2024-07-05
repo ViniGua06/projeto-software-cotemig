@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import Header from "../components/Header";
 import { churchSelect } from "../redux/church/slice";
@@ -9,6 +10,8 @@ import igreja from "../assets/igreja.svg";
 import { userSelect } from "../redux/user/slice";
 import url from "../assets/urlBackend";
 import { useNavigate } from "react-router-dom";
+
+import default_ from "../assets/images.png";
 
 interface IIntegrants {
   id: string;
@@ -66,7 +69,8 @@ export const ChurchPage = () => {
 
   useEffect(() => {
     getInfo();
-    console.log(church_photo);
+    console.log("token", token);
+    console.log("uset", user_id);
   }, []);
 
   return (
@@ -89,35 +93,50 @@ export const ChurchPage = () => {
               ) : null}
             </tr>
           </thead>
+
           <tbody>
-            {integrants.map((item: IIntegrants) => {
-              return (
-                <tr>
-                  <td>
-                    <img
-                      src={item.photo}
-                      alt="imagem"
-                      height={"60px"}
-                      width={"60px"}
-                      style={{ borderRadius: "50%" }}
-                    />
-                  </td>
-                  <td>{item.name}</td>
-                  <td>{item.role}</td>
-                  {role == "admin" ? (
-                    <>
-                      {user_id != item.id ? (
-                        <>
-                          <RemoveTd onClick={() => remove(parseInt(item.id))}>
-                            Remover
-                          </RemoveTd>
-                        </>
-                      ) : null}
-                    </>
-                  ) : null}
-                </tr>
-              );
-            })}
+            {integrants && integrants.length > 0 ? (
+              integrants.map((item: IIntegrants) => {
+                const [photoSrc, setPhotoSrc] = useState(item.photo);
+                const handleImageError = () => {
+                  if (item.photo && item.photo.trim() !== "") {
+                    setPhotoSrc(default_);
+                  }
+                };
+
+                return (
+                  <tr key={item.id}>
+                    <td>
+                      <img
+                        src={photoSrc}
+                        alt="imagem"
+                        height={"60px"}
+                        width={"60px"}
+                        style={{ borderRadius: "50%" }}
+                        onError={handleImageError}
+                      />
+                    </td>
+                    <td>{item.name}</td>
+                    <td>{item.role}</td>
+                    {role == "admin" ? (
+                      <>
+                        {user_id != item.id ? (
+                          <>
+                            <RemoveTd onClick={() => remove(parseInt(item.id))}>
+                              Remover
+                            </RemoveTd>
+                          </>
+                        ) : null}
+                      </>
+                    ) : null}
+                  </tr>
+                );
+              })
+            ) : (
+              <tr>
+                <td colSpan={4}>Nenhum integrante encontrado</td>
+              </tr>
+            )}
           </tbody>
         </Table>
 

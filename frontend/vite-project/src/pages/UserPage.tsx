@@ -20,7 +20,7 @@ import { ChurchesTab } from "../components/ChurchesTab";
 import { UpdateUserForm } from "../components/Form/UpdateUserForm";
 
 const UserPage = () => {
-  const { user_name } = useSelector(userSelect);
+  const { user_name, token } = useSelector(userSelect);
 
   const api = ApiService();
 

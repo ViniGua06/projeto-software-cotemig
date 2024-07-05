@@ -1,11 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-
 import { changeUser } from "../../redux/user/slice";
-
 import url from "../../assets/urlBackend";
-
-import "../../styles/form.css";
 import "../Form/styles/form.css";
 import { useDispatch } from "react-redux";
 
@@ -163,7 +159,7 @@ const Form = (opt: IForm) => {
       <>
         <div className="container">
           <div className="form_area">
-            <p className="title">Login</p>
+            <p className="title">ENTRAR</p>
             <form onSubmit={login}>
               <div className="form_group">
                 <label className="sub_title" htmlFor="email">
@@ -187,17 +183,16 @@ const Form = (opt: IForm) => {
                   value={senhaLogin}
                   onChange={(e) => setSenhaLogin(e.target.value)}
                   required
-                  placeholder="Digite uma senha"
+                  placeholder="Digite sua senha"
                   id="password"
                   className="form_style"
                   type="password"
                 ></input>
               </div>
               <div>
-                <i>Esqueci minha senha</i>
-                <button type="submit" className="btn" value="Logar">CRIAR</button>
+                <button className="btn">LOGAR</button>
                 <p id="p-link">
-                  Ainda não tenho uma conta
+                  Não possui uma conta?
                   <a className="link" href="/signUp">
                     Crie uma conta
                   </a>
@@ -291,22 +286,54 @@ const Form = (opt: IForm) => {
 
   return (
     <>
-      <form id="formContato" onSubmit={sendEmail}>
-        <label>Nome</label>
-        <input type="text" onChange={(e) => setNome(e.target.value)} required />
-        <label>Assunto</label>
-        <input
-          type="text"
-          onChange={(e) => setAssunto(e.target.value)}
-          required
-        />
-        <label>Mensagem</label>
-        <textarea
-          onChange={(e) => setMensagem(e.target.value)}
-          required
-        ></textarea>
-        <input type="submit" id="btnContato" value="Enviar"></input>
-      </form>
+      <div className="container">
+          <div className="form_area">
+            <p className="title">Suporte ao Cliente</p>
+            <form onSubmit={sendEmail}>
+              <div className="form_group">
+                <label className="sub_title">
+                  Nome
+                </label>
+                <input
+                  value={nomeCad}
+                  onChange={(e) => setNome(e.target.value)}
+                  required
+                  placeholder="Digite seu nome e sobrenome"
+                  className="form_style"
+                  type="text"
+                ></input>
+              </div>
+              <div className="form_group">
+                <label className="sub_title">
+                  Assunto
+                </label>
+                <input
+                  value={emailCad}
+                  onChange={(e) => setAssunto(e.target.value)}
+                  required
+                  placeholder="Digite o assunto"
+                  className="form_style"
+                  type="text"
+                ></input>
+              </div>
+              <div className="form_group">
+                <label className="sub_title">
+                  Descrição
+                </label>
+                <input
+                  onChange={(e) => setMensagem(e.target.value)}
+                  required
+                  placeholder="Digite a descrição"
+                  className="form_style"
+                  type="text"
+                ></input>
+              </div>
+              <div>
+                <button className="btn">ENVIAR</button>
+              </div>
+            </form>
+          </div>
+        </div>
     </>
   );
 };
