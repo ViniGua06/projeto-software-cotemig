@@ -12,20 +12,17 @@ export const Chat = () => {
   const { user_id, token, user_email, user_name } = useSelector(userSelect);
 
   const socketRef = useRef<Socket | null>(null);
+  const messagesEndRef = useRef<HTMLDivElement>(null); // Referência para a última mensagem
 
   const [mensagem, setMensagem] = useState("");
-
   const [mensagens, setMensagens] = useState<any[]>([]);
-
   const service = ApiService();
 
   useEffect(() => {
-    console.log(mensagens);
     const newSocket = io(url);
 
     newSocket.on("connect", () => {
       console.log("Conectado");
-
       newSocket.emit("room", church_id);
     });
 
@@ -37,7 +34,6 @@ export const Chat = () => {
 
     newSocket.on("mess", ({ mensagem, data, user_id }) => {
       const rightDate = new Date(data).toLocaleString("pt-BR");
-
       setMensagens((current: any) => [
         ...current,
         { message: mensagem, date: rightDate, id: user_id },
@@ -57,6 +53,10 @@ export const Chat = () => {
     fetchInfo();
   }, []);
 
+  useEffect(() => {
+    scrollToBottom();
+  }, [mensagens]);
+
   const fetchInfo = async () => {
     await service.fetchUserInfo();
   };
@@ -65,13 +65,19 @@ export const Chat = () => {
     try {
       e.preventDefault();
 
-      console.log(user_id, user_email, user_name);
-
       if (socketRef.current) {
         socketRef.current.emit("message", { mensagem, user_id, church_id });
+
+        setMensagem("");
       }
     } catch (error) {
       console.log(error);
+    }
+  };
+
+  const scrollToBottom = () => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
     }
   };
 
@@ -86,6 +92,7 @@ export const Chat = () => {
                 <h3>{item.date}</h3>
               </MessageItem>
             ))}
+            <div ref={messagesEndRef} />
           </MessageContainer>
 
           <FormContainer>
@@ -129,7 +136,6 @@ const MessageContainer = styled.div`
 const FormContainer = styled.div`
   width: 100%;
   height: 20%;
-  border: solid;
   border: solid black 1px;
 `;
 
@@ -143,8 +149,12 @@ const MessageItem = styled.div<{ isCurrentUser: boolean }>`
   align-self: ${(props) => (props.isCurrentUser ? "flex-end" : "flex-start")};
   margin-bottom: 1rem;
   flex-direction: column;
-  border-radius: 3rem;
-  background: green;
-  width: fit-content;
+  border-radius: 1rem;
+  background: ${(props) => (props.isCurrentUser ? "green" : "lightgray")};
+  max-width: 50%;
   padding: 1rem;
+  word-wrap: break-word;
+  & > h1 {
+    color: whitesmoke;
+  }
 `;
