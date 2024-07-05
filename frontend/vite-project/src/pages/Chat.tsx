@@ -80,9 +80,11 @@ export const Chat = () => {
     <>
       <Main>
         <ChatContainer>
-          <MessageContainer style={{backgroundImage: "url(" + imageBack + ")"}}>
+          <MessageContainer
+            style={{ backgroundImage: "url(" + imageBack + ")" }}
+          >
             {mensagens.map((item, index) => (
-              <MessageItem key={index} isCurrentUser={item.id === user_id}>
+              <MessageItem key={index} iscurrentUser={item.id === user_id}>
                 <h1>{item.message}</h1>
                 <h3>{item.date}</h3>
               </MessageItem>
@@ -140,17 +142,17 @@ const Form = styled.form`
   height: 100%;
 `;
 
-const MessageItem = styled.div<{ isCurrentUser: boolean }>`
+const MessageItem = styled.div<{ iscurrentUser: boolean }>`
   display: flex;
-  align-self: ${(props) => (props.isCurrentUser ? "flex-end" : "flex-start")};
-  background: ${(props) => (props.isCurrentUser ? "#2aa32c" : "#164a17")};
+  align-self: ${(props) => (props.iscurrentUser ? "flex-end" : "flex-start")};
+  background: ${(props) => (props.iscurrentUser ? "#2aa32c" : "#164a17")};
   margin-bottom: 1rem;
   flex-direction: column;
   border-radius: 3rem;
   width: fit-content;
   padding: 1.5rem;
-  gap: 1rem; 
-  
+  gap: 1rem;
+
   & > h1 {
     color: white;
   }
