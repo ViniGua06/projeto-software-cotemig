@@ -14,15 +14,15 @@
   background-color: #eddcd9;
   height: 60%;
   width: 50%;
-  border: 2px solid #264143;
+  border: 5px solid #673f1e;
   border-radius: 20px;
-  box-shadow: 3px 4px 0px 1px #b66e33;
 }
 
 .title {
   color: #264143;
   font-weight: 900;
   font-size: 1.5em;
+  user-select: none;
   margin-top: 20px;
 }
 
@@ -66,7 +66,8 @@
   cursor: pointer;
   font-size: 15px;
   background: #5474de;
-  border-radius: 10px;
+  border-radius: 20px;
+  user-select: none;
   font-weight: 800;
   box-shadow: 3px 3px 0px 0px #b66e33;
 }
