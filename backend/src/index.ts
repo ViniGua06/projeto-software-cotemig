@@ -15,7 +15,13 @@ const server = http.createServer(app);
 
 const PORT = process.env.PORT || 2000;
 
-app.use(Cors());
+const corsOptions = {
+  origin: "http://localhost:5173",
+  methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
+  allowedHeaders: ["Content-Type", "Authorization", "x-acess-token"],
+};
+
+app.use(Cors(corsOptions));
 app.use(Express.json());
 app.use(Express.urlencoded({ extended: true }));
 
@@ -26,10 +32,10 @@ AppDataSource.initialize()
   .then(() => {
     const io = new Server(server, {
       cors: {
-        origin: "*", // Permitir solicitações de qualquer origem
-        methods: ["GET", "POST"], // Métodos permitidos
-        allowedHeaders: ["my-custom-header"], // Cabeçalhos personalizados permitidos
-        credentials: true, // Permitir credenciais (cookies, cabeçalhos de autorização, etc.)
+        origin: "*",
+        methods: ["GET", "POST"],
+        allowedHeaders: ["Content-Type", "Authorization"],
+        credentials: true,
       },
     });
 
