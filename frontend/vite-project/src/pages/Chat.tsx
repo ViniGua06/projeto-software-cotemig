@@ -90,7 +90,7 @@ export const Chat = () => {
             style={{ backgroundImage: "url(" + imageBack + ")" }}
           >
             {mensagens.map((item, index) => (
-              <MessageItem key={index} iscurrentUser={item.id === user_id}>
+              <MessageItem key={index} iscurrentuser={item.id === user_id}>
                 <h1>{item.message}</h1>
                 <h3>{item.date}</h3>
               </MessageItem>
@@ -148,14 +148,14 @@ const Form = styled.form`
   height: 100%;
 `;
 
-const MessageItem = styled.div<{ iscurrentUser: boolean }>`
+const MessageItem = styled.div<{ iscurrentuser: boolean }>`
   display: flex;
-  align-self: ${(props) => (props.iscurrentUser ? "flex-end" : "flex-start")};
-  background: ${(props) => (props.iscurrentUser ? "#2aa32c" : "#164a17")};
+  align-self: ${(props) => (props.iscurrentuser ? "flex-end" : "flex-start")};
+  background: ${(props) => (props.iscurrentuser ? "#2aa32c" : "#164a17")};
   margin-bottom: 1rem;
   flex-direction: column;
   border-radius: 1rem;
-  background: ${(props) => (props.isCurrentUser ? "green" : "lightgray")};
+  background: ${(props) => (props.iscurrentuser ? "green" : "lightgray")};
   max-width: 50%;
   padding: 1rem;
   word-wrap: break-word;
