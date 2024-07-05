@@ -20,7 +20,6 @@ app.use(Express.json());
 app.use(Express.urlencoded({ extended: true }));
 
 app.use(userRouter);
-app.use(verifyToken);
 app.use(churchRouter);
 
 AppDataSource.initialize()
