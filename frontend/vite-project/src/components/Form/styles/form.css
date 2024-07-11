@@ -35,6 +35,16 @@
   color: #000000;
 }
 
+#pass-loc{
+  margin-top: 20px;
+}
+
+.link-pass{
+  color: #003cff;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
 .form_group {
   display: flex;
   flex-direction: column;
@@ -78,7 +88,7 @@
 
 .link {
   font-weight: 800;
-  color: #000000;
   font-size: 1rem;
+  color: #000000;
   padding: 5px;
 }

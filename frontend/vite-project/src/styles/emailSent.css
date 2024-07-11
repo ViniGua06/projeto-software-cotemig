@@ -4,10 +4,6 @@ h2 {
   font-weight: 500;
 }
 
-.container a {
-  color: black;
-}
-
 .container a:hover {
   text-decoration: underline;
 }
