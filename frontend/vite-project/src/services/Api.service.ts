@@ -40,12 +40,11 @@ const ApiService = () => {
           "x-acess-token": token,
         },
       });
-      console.log(user_pfp, "POHOY");
 
       const blob = await response.blob();
       const imageUrl = URL.createObjectURL(blob);
 
-      console.log(response.status, imageUrl);
+      console.log(response.status, imageUrl, "OLAAAAAAAAA");
 
       if (response.status != 404) {
         return imageUrl;
@@ -64,6 +63,8 @@ const ApiService = () => {
       const data = await response.json();
 
       const photo = await fetchProfilePhoto();
+
+      console.log(photo, "FOTOOOOOOO");
 
       if (response.status == 403) {
         dispatch(logout());

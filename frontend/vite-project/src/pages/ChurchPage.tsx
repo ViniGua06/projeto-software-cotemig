@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import React, { FormEvent, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Header from "../components/Header";
 import { churchSelect } from "../redux/church/slice";
 import { useEffect } from "react";
@@ -12,6 +12,9 @@ import url from "../assets/urlBackend";
 import { useNavigate } from "react-router-dom";
 
 import default_ from "../assets/images.png";
+import ApiService from "../services/Api.service";
+import { ativar, desativar, modalSelect } from "../redux/modal/slice";
+import { Modal } from "../components/Modal";
 
 interface IIntegrants {
   id: string;
@@ -30,6 +33,12 @@ export const ChurchPage = () => {
     church_id,
     role,
   } = useSelector(churchSelect);
+
+  const { tipo } = useSelector(modalSelect);
+
+  const apiService = ApiService();
+
+  const dispatch = useDispatch();
 
   const { user_id, token } = useSelector(userSelect);
 
@@ -67,11 +76,47 @@ export const ChurchPage = () => {
     navigate("/church/chat");
   };
 
+  const goToNotices = () => {
+    navigate("/church/notices");
+  };
+
+  const goToCreateNotice = () => {
+    dispatch(ativar({ tipo: "Criar Aviso" }));
+  };
+
   useEffect(() => {
+    apiService.fetchUserInfo();
+
     getInfo();
     console.log("token", token);
     console.log("uset", user_id);
   }, []);
+
+  const [text, setText] = useState("");
+
+  const createNotice = async (e: FormEvent) => {
+    try {
+      e.preventDefault();
+      const res = await fetch(`${url}/notice`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          text: text,
+          user_id: user_id,
+          church_id: church_id,
+        }),
+      });
+
+      if (res.status == 201) {
+        alert("Aviso criado com sucesso");
+        dispatch(desativar());
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <>
@@ -141,10 +186,55 @@ export const ChurchPage = () => {
         </Table>
 
         <button onClick={goToChat}>Chat</button>
+        {role == "admin" ? (
+          <>
+            <button onClick={goToCreateNotice}>Criar Aviso</button>
+          </>
+        ) : null}
+        <button onClick={goToNotices}>Avisos</button>
+
+        <Modal title="Criar Aviso">
+          <Form onSubmit={createNotice}>
+            <label>Aviso</label>
+            <textarea
+              value={text}
+              onChange={(e) => setText(e.target.value)}
+              required
+            ></textarea>
+            <button type="submit">Enviar</button>
+          </Form>
+        </Modal>
       </Main>
     </>
   );
 };
+
+const Form = styled.form`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+
+  & > label {
+    color: black;
+  }
+
+  & > textarea {
+    outline: none;
+    padding: 1rem;
+    max-width: 60%;
+    min-width: 60%;
+  }
+
+  & > button {
+    padding: 0.8rem 1rem;
+    border-radius: 1rem;
+    cursor: pointer;
+  }
+`;
 
 const ChurchPhoto = styled.img`
   margin-top: 1rem;

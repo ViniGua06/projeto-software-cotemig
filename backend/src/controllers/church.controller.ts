@@ -3,6 +3,7 @@ import { ChurchRepository } from "../repositories/church.repository";
 import { Church } from "../database/entity/Church";
 import UserRepository from "../repositories/user.repository";
 import path from "path";
+import { Notice } from "../database/entity/Notice";
 
 const churchRepository = new ChurchRepository();
 const userRepository = new UserRepository();
@@ -143,6 +144,35 @@ export class ChurchController {
       );
 
       res.status(200).json({ message: "Usuário deletado!" });
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ message: error.message });
+    }
+  };
+
+  getNotices = async (req: Request, res: Response) => {
+    try {
+      const { user_id, church_id } = req.params;
+
+      const notices = await churchRepository.getNotices(
+        parseInt(user_id),
+        parseInt(church_id)
+      );
+
+      res.status(200).json(notices);
+    } catch (error) {
+      console.log(error);
+      res.status(400).json({ message: error.message });
+    }
+  };
+
+  createNotice = async (req: Request, res: Response) => {
+    try {
+      const notice: Notice = req.body;
+
+      await churchRepository.insertNotice(notice);
+
+      res.status(201).json({ message: "Aviso criado!" });
     } catch (error) {
       console.log(error);
       res.status(500).json({ message: error.message });

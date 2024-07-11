@@ -1,6 +1,7 @@
 import { AppDataSource } from "../database/data-source";
 import { Church } from "../database/entity/Church";
 import { User_Church } from "../database/entity/Integrants";
+import { Notice } from "../database/entity/Notice";
 import { User } from "../database/entity/User";
 
 const database = AppDataSource.getRepository(Church);
@@ -102,6 +103,47 @@ export class ChurchRepository {
 
     if (!affected.affected) {
       throw new Error("Usuário não removido!");
+    }
+  };
+
+  getNotices = async (user_id: number, church_id: number) => {
+    const noticeRepo = AppDataSource.getRepository(Notice);
+
+    const notices = await noticeRepo.find({
+      where: {
+        user_id: user_id,
+        church_id: church_id,
+      },
+    });
+
+    for (let item of notices) {
+      const user = await noticeRepo.query(
+        `SELECT u.name FROM "user" AS u INNER JOIN notice AS n ON u.id = n.user_id where u.id = $1`,
+        [item.user_id]
+      );
+      item.user_id = user[0].name;
+    }
+
+    console.log(notices);
+
+    if (notices.length == 0) {
+      throw new Error("Nenhuma notícia encontrada!");
+    }
+
+    return notices;
+  };
+
+  insertNotice = async (notice: Notice) => {
+    const noticeRepo = AppDataSource.getRepository(Notice);
+
+    const not = await noticeRepo.insert({
+      text: notice.text,
+      user_id: notice.user_id,
+      church_id: notice.church_id,
+    });
+
+    if (!not.identifiers) {
+      throw new Error("Noticia não inserida!");
     }
   };
 }

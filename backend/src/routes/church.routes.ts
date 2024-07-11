@@ -27,4 +27,7 @@ churchRouter.delete(
   churchController.removeIntegrant
 );
 
+churchRouter.get("/notices/:user_id/:church_id", churchController.getNotices);
+churchRouter.post("/notice", churchController.createNotice);
+
 export default churchRouter;

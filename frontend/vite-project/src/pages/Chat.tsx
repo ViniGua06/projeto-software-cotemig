@@ -13,7 +13,7 @@ export const Chat = () => {
   const { user_id, token, user_email, user_name } = useSelector(userSelect);
 
   const socketRef = useRef<Socket | null>(null);
-  const messagesEndRef = useRef<HTMLDivElement>(null); // Referência para a última mensagem
+  const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const [mensagem, setMensagem] = useState("");
   const [mensagens, setMensagens] = useState<any[]>([]);
