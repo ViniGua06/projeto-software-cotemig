@@ -194,9 +194,12 @@ const Form = (opt: IForm) => {
                 <p id="p-link">
                   Não possui uma conta?
                   <a className="link" href="/signUp">
-                    Crie uma conta
+                    Crie uma conta.
                   </a>
                 </p>
+              </div>
+              <div>
+              <p id="pass-loc"><Link className="link-pass" to="/recover">Esqueci minha senha</Link></p>
               </div>
             </form>
           </div>
