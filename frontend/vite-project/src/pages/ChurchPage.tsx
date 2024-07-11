@@ -1,4 +1,4 @@
-import React, { FormEvent, useState } from "react";
+import React, { FormEvent, useCallback, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Header from "../components/Header";
 import { churchSelect } from "../redux/church/slice";
@@ -155,6 +155,7 @@ export const ChurchPage = () => {
       console.log(error);
     }
   };
+  const [photoSrcs, setPhotoSrcs] = useState(integrants.map(() => ""));
 
   return (
     <>
@@ -180,19 +181,19 @@ export const ChurchPage = () => {
 
           <tbody>
             {integrants && integrants.length > 0 ? (
-              integrants.map((item: IIntegrants) => {
-                const [photoSrc, setPhotoSrc] = useState(item.photo);
+              integrants.map((item: IIntegrants, index: number) => {
                 const handleImageError = () => {
-                  if (item.photo && item.photo.trim() !== "") {
-                    setPhotoSrc(default_);
-                  }
+                  setPhotoSrcs((prevPhotoSrcs) => {
+                    prevPhotoSrcs[index] = default_;
+                    return [...prevPhotoSrcs];
+                  });
                 };
                 return (
                   <>
                     <tr key={item.id}>
                       <td>
                         <img
-                          src={photoSrc}
+                          src={photoSrcs[index] || item.photo}
                           alt="imagem"
                           height={"60px"}
                           width={"60px"}
