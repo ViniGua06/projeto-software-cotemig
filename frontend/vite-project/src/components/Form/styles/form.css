@@ -6,6 +6,58 @@
   text-align: center;
 }
 
+.formEmail {
+  display: flex;
+  flex-direction: column;
+  gap: 5rem;
+  border: 5px solid #673f1e;
+  background-color: #eddcd9;
+  margin-inline: 30rem;
+  margin-top: 8rem;
+  text-align: center;
+  height: 60%;
+  width: 50%;
+  align-items: center;
+  padding-inline: 12rem;
+}
+
+.formEmail h1,
+.formEmail h2 {
+  font-weight: 500;
+  color: #006666;
+}
+
+.formEmail input[type="email"] {
+  border-inline: none;
+  border-top: none;
+  outline: none;
+  width: 50%;
+  background-color: transparent;
+}
+
+.formEmail input[type="submit"] {
+  width: 10rem;
+  color: white;
+  font-size: 1.2rem;
+  background: #5474de;
+  border-radius: 20px;
+  user-select: none;
+  font-weight: 800;
+  box-shadow: 3px 3px 0px 0px #b66e33;
+  padding-block: 0.4rem;
+  cursor: pointer;
+}
+
+.formEmail button {
+  border: none;
+  background-color: #b76b1f;
+  color: white;
+  width: 15%;
+  border-radius: 2rem;
+  padding-block: 0.4rem;
+  cursor: pointer;
+}
+
 .form_area {
   display: flex;
   justify-content: center;
