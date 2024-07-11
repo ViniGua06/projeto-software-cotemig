@@ -64,7 +64,7 @@ const ApiService = () => {
 
       const photo = await fetchProfilePhoto();
 
-      console.log(photo, "FOTOOOOOOO");
+      console.log("DATA", data);
 
       if (response.status == 403) {
         dispatch(logout());
@@ -77,6 +77,7 @@ const ApiService = () => {
             email: data.user.email,
             password: data.user.password,
             photo: photo,
+            token: token,
           })
         );
       }

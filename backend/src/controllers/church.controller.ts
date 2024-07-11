@@ -152,12 +152,9 @@ export class ChurchController {
 
   getNotices = async (req: Request, res: Response) => {
     try {
-      const { user_id, church_id } = req.params;
+      const { church_id } = req.params;
 
-      const notices = await churchRepository.getNotices(
-        parseInt(user_id),
-        parseInt(church_id)
-      );
+      const notices = await churchRepository.getNotices(parseInt(church_id));
 
       res.status(200).json(notices);
     } catch (error) {
@@ -176,6 +173,23 @@ export class ChurchController {
     } catch (error) {
       console.log(error);
       res.status(500).json({ message: error.message });
+    }
+  };
+
+  changeUserRole = async (req: Request, res: Response) => {
+    try {
+      const { church_id, user_id, role } = req.body;
+
+      await churchRepository.changeUserRole(
+        parseInt(church_id),
+        parseInt(user_id),
+        role
+      );
+
+      res.status(200).json({ message: "Permissões atualizadas!" });
+    } catch (error) {
+      console.log(error);
+      res.status(400).json({ message: error.message });
     }
   };
 }

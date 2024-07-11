@@ -139,9 +139,21 @@ const Form = (opt: IForm) => {
       alert(data.message);
 
       if (response.status == 200) {
-        dispatch(changeUser({ id: data.userId, token: data.token }));
+        const res = await fetch(`${url}/user/${data.userId}`);
+        const user = await res.json();
+
+        dispatch(
+          changeUser({
+            id: data.userId,
+            name: user.name,
+            email: user.email,
+            password: user.password,
+            token: data.token,
+          })
+        );
 
         navigate("/user");
+        window.location.reload();
       }
     } catch (error) {
       console.log(error);
@@ -199,7 +211,11 @@ const Form = (opt: IForm) => {
                 </p>
               </div>
               <div>
-              <p id="pass-loc"><Link className="link-pass" to="/recover">Esqueci minha senha</Link></p>
+                <p id="pass-loc">
+                  <Link className="link-pass" to="/recover">
+                    Esqueci minha senha
+                  </Link>
+                </p>
               </div>
             </form>
           </div>
@@ -290,53 +306,47 @@ const Form = (opt: IForm) => {
   return (
     <>
       <div className="container">
-          <div className="form_area">
-            <p className="title">Suporte ao Cliente</p>
-            <form onSubmit={sendEmail}>
-              <div className="form_group">
-                <label className="sub_title">
-                  Nome
-                </label>
-                <input
-                  value={nomeCad}
-                  onChange={(e) => setNome(e.target.value)}
-                  required
-                  placeholder="Digite seu nome e sobrenome"
-                  className="form_style"
-                  type="text"
-                ></input>
-              </div>
-              <div className="form_group">
-                <label className="sub_title">
-                  Assunto
-                </label>
-                <input
-                  value={emailCad}
-                  onChange={(e) => setAssunto(e.target.value)}
-                  required
-                  placeholder="Digite o assunto"
-                  className="form_style"
-                  type="text"
-                ></input>
-              </div>
-              <div className="form_group">
-                <label className="sub_title">
-                  Descrição
-                </label>
-                <input
-                  onChange={(e) => setMensagem(e.target.value)}
-                  required
-                  placeholder="Digite a descrição"
-                  className="form_style"
-                  type="text"
-                ></input>
-              </div>
-              <div>
-                <button className="btn">ENVIAR</button>
-              </div>
-            </form>
-          </div>
+        <div className="form_area">
+          <p className="title">Suporte ao Cliente</p>
+          <form onSubmit={sendEmail}>
+            <div className="form_group">
+              <label className="sub_title">Nome</label>
+              <input
+                value={nomeCad}
+                onChange={(e) => setNome(e.target.value)}
+                required
+                placeholder="Digite seu nome e sobrenome"
+                className="form_style"
+                type="text"
+              ></input>
+            </div>
+            <div className="form_group">
+              <label className="sub_title">Assunto</label>
+              <input
+                value={emailCad}
+                onChange={(e) => setAssunto(e.target.value)}
+                required
+                placeholder="Digite o assunto"
+                className="form_style"
+                type="text"
+              ></input>
+            </div>
+            <div className="form_group">
+              <label className="sub_title">Descrição</label>
+              <input
+                onChange={(e) => setMensagem(e.target.value)}
+                required
+                placeholder="Digite a descrição"
+                className="form_style"
+                type="text"
+              ></input>
+            </div>
+            <div>
+              <button className="btn">ENVIAR</button>
+            </div>
+          </form>
         </div>
+      </div>
     </>
   );
 };

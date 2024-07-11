@@ -15,6 +15,7 @@ import default_ from "../assets/images.png";
 import ApiService from "../services/Api.service";
 import { ativar, desativar, modalSelect } from "../redux/modal/slice";
 import { Modal } from "../components/Modal";
+import { UpdateUserForm } from "../components/Form/UpdateUserForm";
 
 interface IIntegrants {
   id: string;
@@ -40,7 +41,7 @@ export const ChurchPage = () => {
 
   const dispatch = useDispatch();
 
-  const { user_id, token } = useSelector(userSelect);
+  const { user_id, token, user_email } = useSelector(userSelect);
 
   const churchService = ChurchService();
 
@@ -81,15 +82,13 @@ export const ChurchPage = () => {
   };
 
   const goToCreateNotice = () => {
-    dispatch(ativar({ tipo: "Criar Aviso" }));
+    dispatch(ativar("Criar Aviso"));
   };
 
   useEffect(() => {
     apiService.fetchUserInfo();
 
     getInfo();
-    console.log("token", token);
-    console.log("uset", user_id);
   }, []);
 
   const [text, setText] = useState("");
@@ -118,6 +117,45 @@ export const ChurchPage = () => {
     }
   };
 
+  const editar = () => {
+    dispatch(ativar("Mudar Permissões"));
+  };
+
+  const [roleUpds, setRoleUpds] = useState("");
+  const [id, setId] = useState(0);
+
+  const changePermission = async (e: FormEvent) => {
+    try {
+      e.preventDefault();
+
+      const res = await fetch(`${url}/integrantrole`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          church_id: church_id,
+          user_id: id,
+          role: roleUpds,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (res.status == 200) {
+        dispatch(desativar());
+        apiService.fetchUserInfo();
+        churchService.changeChurchService(church_id);
+
+        getInfo();
+      } else {
+        alert(data.message);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
       <Header></Header>
@@ -134,6 +172,7 @@ export const ChurchPage = () => {
               {role == "admin" ? (
                 <>
                   <th>Editar</th>
+                  <th>Remover</th>
                 </>
               ) : null}
             </tr>
@@ -148,33 +187,44 @@ export const ChurchPage = () => {
                     setPhotoSrc(default_);
                   }
                 };
-
                 return (
-                  <tr key={item.id}>
-                    <td>
-                      <img
-                        src={photoSrc}
-                        alt="imagem"
-                        height={"60px"}
-                        width={"60px"}
-                        style={{ borderRadius: "50%" }}
-                        onError={handleImageError}
-                      />
-                    </td>
-                    <td>{item.name}</td>
-                    <td>{item.role}</td>
-                    {role == "admin" ? (
-                      <>
-                        {user_id != item.id ? (
-                          <>
-                            <RemoveTd onClick={() => remove(parseInt(item.id))}>
-                              Remover
-                            </RemoveTd>
-                          </>
-                        ) : null}
-                      </>
-                    ) : null}
-                  </tr>
+                  <>
+                    <tr key={item.id}>
+                      <td>
+                        <img
+                          src={photoSrc}
+                          alt="imagem"
+                          height={"60px"}
+                          width={"60px"}
+                          style={{ borderRadius: "50%" }}
+                          onError={handleImageError}
+                        />
+                      </td>
+                      <td>{item.name}</td>
+                      <td>{item.role}</td>
+                      {role == "admin" ? (
+                        <>
+                          {user_id != item.id ? (
+                            <>
+                              <RemoveTd
+                                onClick={() => {
+                                  editar();
+                                  setId(parseInt(item.id));
+                                }}
+                              >
+                                Editar
+                              </RemoveTd>
+                              <RemoveTd
+                                onClick={() => remove(parseInt(item.id))}
+                              >
+                                Remover
+                              </RemoveTd>
+                            </>
+                          ) : null}
+                        </>
+                      ) : null}
+                    </tr>
+                  </>
                 );
               })
             ) : (
@@ -193,21 +243,58 @@ export const ChurchPage = () => {
         ) : null}
         <button onClick={goToNotices}>Avisos</button>
 
-        <Modal title="Criar Aviso">
-          <Form onSubmit={createNotice}>
-            <label>Aviso</label>
-            <textarea
-              value={text}
-              onChange={(e) => setText(e.target.value)}
-              required
-            ></textarea>
-            <button type="submit">Enviar</button>
-          </Form>
-        </Modal>
+        {tipo == "Criar Aviso" ? (
+          <>
+            <Modal title="Criar Aviso">
+              <Form onSubmit={createNotice}>
+                <label>Aviso</label>
+                <textarea
+                  value={text}
+                  onChange={(e) => setText(e.target.value)}
+                  required
+                ></textarea>
+                <button type="submit">Enviar</button>
+              </Form>
+            </Modal>
+          </>
+        ) : tipo == "Mudar Permissões" ? (
+          <>
+            <Modal title="Mudar Permissões">
+              <form onSubmit={changePermission}>
+                <Select
+                  value={roleUpds}
+                  onChange={(e) => setRoleUpds(e.target.value)}
+                  required
+                >
+                  <option value="">Selecione uma opção</option>
+                  <option value="admin">Admin</option>
+                  <option value="normal">Normal</option>
+                </Select>
+
+                <PermitSubmit type="submit">Enviar</PermitSubmit>
+              </form>
+            </Modal>
+          </>
+        ) : tipo == "Editar Perfil" ? (
+          <>
+            <Modal title={"Editar Perfil"}>
+              <UpdateUserForm></UpdateUserForm>
+            </Modal>
+          </>
+        ) : null}
       </Main>
     </>
   );
 };
+
+const PermitSubmit = styled.button`
+  padding: 0.6rem;
+`;
+
+const Select = styled.select`
+  outline: none;
+  padding: 0.5rem;
+`;
 
 const Form = styled.form`
   width: 100%;

@@ -102,6 +102,7 @@ export const Chat = () => {
             <Form onSubmit={enviarMensagem}>
               <input
                 type="text"
+                required
                 value={mensagem}
                 onChange={(e) => setMensagem(e.target.value)}
               />

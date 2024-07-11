@@ -14,7 +14,7 @@ export const Notices = () => {
 
   const getNotices = async () => {
     try {
-      const res = await fetch(`${url}/notices/${user_id}/${church_id}`);
+      const res = await fetch(`${url}/notices/${parseInt(church_id)}`);
 
       const data = await res.json();
 
@@ -22,7 +22,7 @@ export const Notices = () => {
         setNotices(data.reverse());
       }
     } catch (error) {
-      console.log(error);
+      console.log("OLA", error);
     }
   };
 

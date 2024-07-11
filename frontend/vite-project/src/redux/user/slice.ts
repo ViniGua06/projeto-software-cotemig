@@ -1,6 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../store";
 
+const initialState = {
+  user_id: "",
+  user_name: "",
+  user_email: "",
+  user_password: "",
+  isLogged: false,
+  user_pfp: "",
+  token: "",
+};
+
 export const slice = createSlice({
   name: "user",
   initialState: {
@@ -25,20 +35,17 @@ export const slice = createSlice({
     fetchUser(state, { payload }) {
       return {
         ...state,
+        user_id: payload.id,
         user_name: payload.name,
         user_email: payload.email,
         user_password: payload.password,
         user_pfp: payload.photo,
+        token: payload.token,
       };
     },
 
-    logout(state) {
-      return {
-        ...state,
-        user_id: "",
-        isLogged: false,
-        token: "",
-      };
+    logout() {
+      return initialState;
     },
   },
 });

@@ -106,12 +106,13 @@ export class ChurchRepository {
     }
   };
 
-  getNotices = async (user_id: number, church_id: number) => {
+  getNotices = async (church_id: number) => {
     const noticeRepo = AppDataSource.getRepository(Notice);
+
+    console.log(church_id, "IDDDDDDD");
 
     const notices = await noticeRepo.find({
       where: {
-        user_id: user_id,
         church_id: church_id,
       },
     });
@@ -123,8 +124,6 @@ export class ChurchRepository {
       );
       item.user_id = user[0].name;
     }
-
-    console.log(notices);
 
     if (notices.length == 0) {
       throw new Error("Nenhuma notícia encontrada!");
@@ -144,6 +143,25 @@ export class ChurchRepository {
 
     if (!not.identifiers) {
       throw new Error("Noticia não inserida!");
+    }
+  };
+
+  changeUserRole = async (
+    church_id: number,
+    user_id: number,
+    role: "admin" | "normal"
+  ) => {
+    const int = await integrants.update(
+      { user_id: user_id, church: church_id },
+      {
+        user_id: user_id,
+        church: church_id,
+        role: role,
+      }
+    );
+
+    if (int.affected == 0) {
+      throw new Error("Nenhum usuário afetado");
     }
   };
 }
