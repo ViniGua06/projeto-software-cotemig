@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+
 .container {
   display: flex;
   align-items: center;
@@ -9,52 +11,64 @@
 .formEmail {
   display: flex;
   flex-direction: column;
-  gap: 5rem;
+  gap: 2rem;
   border: 5px solid #673f1e;
+  border-radius: 20px;
   background-color: #eddcd9;
-  margin-inline: 30rem;
-  margin-top: 8rem;
+  margin: 5rem auto; 
+  padding: 2rem; 
+  max-width: 50rem;
   text-align: center;
-  height: 60%;
-  width: 50%;
-  align-items: center;
-  padding-inline: 12rem;
 }
 
 .formEmail h1,
 .formEmail h2 {
   font-weight: 500;
+  font-family: "Montserrat", sans-serif;
   color: #006666;
 }
 
 .formEmail input[type="email"] {
-  border-inline: none;
-  border-top: none;
+  border: 1px solid #673f1e;
+  border-radius: 5px;
+  padding: 0.5rem;
   outline: none;
-  width: 50%;
+  display: flex;
+  align-self: center;
+  font-size: 20px;
+  height: 2.5rem;
+  width: 50%; 
   background-color: transparent;
 }
 
 .formEmail input[type="submit"] {
-  width: 10rem;
+  width: 30%;
   color: white;
   font-size: 1.2rem;
+  display: flex;
+  font-family: "Montserrat", sans-serif;
+  align-self: center;
   background: #5474de;
   border-radius: 20px;
+  text-transform: uppercase;
   user-select: none;
-  font-weight: 800;
-  box-shadow: 3px 3px 0px 0px #b66e33;
-  padding-block: 0.4rem;
+  font-weight: 600;
+  padding: 0.4rem;
   cursor: pointer;
+  border: none;
 }
-
 .formEmail button {
   border: none;
   background-color: #b76b1f;
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  text-align: center;
   color: white;
-  width: 15%;
+  font-family: "Montserrat", sans-serif;
+  width: 20%;
   border-radius: 2rem;
-  padding-block: 0.4rem;
+  padding: 0.5rem;
   cursor: pointer;
 }
 
@@ -143,4 +157,32 @@
   font-size: 1rem;
   color: #000000;
   padding: 5px;
+}
+
+/* Responsividade */
+
+@media (max-width: 765px) {
+  .formEmail{
+  border: 5px solid #673f1e;
+  border-radius: 20px;
+  background-color: #eddcd9;
+  padding: 2rem; 
+  width: 80%;
+  text-align: center;
+}
+}
+@media (max-width: 1024px) {
+  .formEmail{
+  width: 70%;
+  }
+  .formEmail h1, .formEmail h2 {
+  font-weight: 500;
+  font-size: 1.2rem;
+  font-family: "Montserrat", sans-serif;
+  color: #006666;
+}
+}
+
+@media (max-width: 1360px) {
+
 }

@@ -289,15 +289,17 @@ const Form = (opt: IForm) => {
       <>
         <form className="formEmail" onSubmit={enviarEmail}>
           <h1>Recuperar Senha</h1>
-          <h2>Digite o email que cadastrou sua conta para recuperar a senha</h2>
+          <h2>Digite o email que você cadastrou sua conta</h2>
           <input
             type="email"
             value={emailRecover}
             onChange={(e) => setEmailRecover(e.target.value)}
             required
           />
-          <input type="submit" value="Enviar" />
-          <button onClick={back}>Voltar</button>
+          <input className="btn-send" type="submit" value="Enviar" />
+          <button type="button" onClick={back}>
+            Voltar
+          </button>
         </form>
       </>
     );
