@@ -5,6 +5,7 @@ import { userSelect } from "../../redux/user/slice";
 import user_default from "../../assets/user_default.png";
 import { useState } from "react";
 import url from "../../assets/urlBackend";
+import './styles/changePfp.css';
 
 import imageCompression from "browser-image-compression";
 import { desativar } from "../../redux/modal/slice";
