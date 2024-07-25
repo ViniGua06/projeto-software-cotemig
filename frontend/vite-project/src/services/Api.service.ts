@@ -44,8 +44,6 @@ const ApiService = () => {
       const blob = await response.blob();
       const imageUrl = URL.createObjectURL(blob);
 
-      console.log(response.status, imageUrl, "OLAAAAAAAAA");
-
       if (response.status != 404) {
         return imageUrl;
       }

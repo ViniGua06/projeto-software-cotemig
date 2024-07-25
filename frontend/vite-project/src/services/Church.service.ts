@@ -91,13 +91,15 @@ const ChurchService = () => {
 
       const integrants = await getChurchIntegrants(church_id);
 
-      const roleResponse = await fetch(`${url}/${church_id}/${user_id}`, {
+      const roleResponse = await fetch(`${url}/role/${church_id}/${user_id}`, {
         headers: {
           "x-acess-token": token,
         },
       });
 
       const roleData = await roleResponse.json();
+
+      console.log(data, "TESTE");
 
       dispatch(
         changeChurch({

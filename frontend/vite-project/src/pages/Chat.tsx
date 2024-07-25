@@ -7,6 +7,7 @@ import { churchSelect } from "../redux/church/slice";
 import { userSelect } from "../redux/user/slice";
 import styled from "styled-components";
 import ApiService from "../services/Api.service";
+import React from "react";
 
 export const Chat = () => {
   const { church_id } = useSelector(churchSelect);
@@ -19,8 +20,65 @@ export const Chat = () => {
   const [mensagens, setMensagens] = useState<any[]>([]);
   const service = ApiService();
 
+  const [count, setCount] = useState(0);
+
+  const getMessages = async () => {
+    try {
+      const res = await fetch(`${url}/messages/${church_id}`, {
+        headers: {
+          "x-acess-token": token,
+        },
+      });
+      const data = await res.json();
+
+      console.log(data);
+
+      const updatedMessages = await Promise.all(
+        data.map(async (obj: any) => {
+          try {
+            const resPhoto = await fetch(`${url}/photo/${obj.user_id}`);
+            const photoBlob = await resPhoto.blob();
+
+            const res = await fetch(`${url}/user/${obj.user_id}`);
+
+            const data = await res.json();
+
+            const rightDate = new Date(obj.created_at).toLocaleString("pt-BR", {
+              day: "2-digit",
+              month: "2-digit",
+              year: "2-digit",
+              hour: "2-digit",
+              minute: "2-digit",
+            });
+
+            obj.name = data.user.name;
+            obj.photo = URL.createObjectURL(photoBlob);
+            obj.created_at = rightDate;
+          } catch (photoError) {
+            console.error(
+              `Error fetching photo for user ${obj.user_id}:`,
+              photoError
+            );
+            obj.photo = null;
+          }
+          return obj;
+        })
+      );
+
+      setMensagens(updatedMessages);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getMessages();
+  }, []);
+
   useEffect(() => {
     const newSocket = io(url);
+
+    console.log(mensagens);
 
     newSocket.on("connect", () => {
       console.log("Conectado");
@@ -33,11 +91,24 @@ export const Chat = () => {
       console.log(message);
     });
 
-    newSocket.on("mess", ({ mensagem, data, user_id }) => {
+    newSocket.on("mess", async ({ mensagem, data, user_id, user_name }) => {
+      setCount(count + 1);
       const rightDate = new Date(data).toLocaleString("pt-BR");
+
+      const res = await fetch(`${url}/photo/${user_id}`);
+
+      const blob = await res.blob();
+
+      const imageUrl = URL.createObjectURL(blob);
       setMensagens((current: any) => [
         ...current,
-        { message: mensagem, date: rightDate, id: user_id },
+        {
+          text: mensagem,
+          created_at: rightDate,
+          user_id: user_id,
+          photo: imageUrl,
+          name: user_name,
+        },
       ]);
     });
 
@@ -55,8 +126,14 @@ export const Chat = () => {
   }, []);
 
   useEffect(() => {
-    scrollToBottom();
-  }, [mensagens]);
+    if (
+      (mensagens.length > 0 &&
+        mensagens[mensagens.length - 1].user_id === user_id) ||
+      count == 0
+    ) {
+      scrollToBottom();
+    }
+  }, [mensagens, user_id]);
 
   const fetchInfo = async () => {
     await service.fetchUserInfo();
@@ -67,9 +144,15 @@ export const Chat = () => {
       e.preventDefault();
 
       if (socketRef.current) {
-        socketRef.current.emit("message", { mensagem, user_id, church_id });
+        socketRef.current.emit("message", {
+          mensagem,
+          user_id,
+          church_id,
+          user_name,
+        });
 
         setMensagem("");
+        scrollToBottom();
       }
     } catch (error) {
       console.log(error);
@@ -90,10 +173,56 @@ export const Chat = () => {
             style={{ backgroundImage: "url(" + imageBack + ")" }}
           >
             {mensagens.map((item, index) => (
-              <MessageItem key={index} iscurrentuser={item.id === user_id}>
-                <h1>{item.message}</h1>
-                <h3>{item.date}</h3>
-              </MessageItem>
+              <React.Fragment key={index}>
+                <div
+                  style={{
+                    width: "fit-content",
+                    height: "fit-content",
+                    padding: ".8rem",
+                    color: "black",
+                    fontWeight: 900,
+                    fontSize: "1.3rem",
+                    background: "white",
+                    alignSelf:
+                      user_id == item.user_id ? "flex-end" : "flex-start",
+                  }}
+                >
+                  {item.name}
+                </div>
+                <MessageItem iscurrentuser={item.user_id === user_id}>
+                  {item.user_id === user_id ? (
+                    <>
+                      <TextMessage>
+                        <h1>{item.text}</h1>
+                        <h3>{item.created_at}</h3>
+                      </TextMessage>
+                      <ImageMessage>
+                        <img
+                          src={item.photo}
+                          height={"40px"}
+                          width={"40px"}
+                          alt=""
+                        />
+                      </ImageMessage>
+                    </>
+                  ) : (
+                    <>
+                      <ImageMessage>
+                        <img
+                          src={item.photo}
+                          height={"40px"}
+                          width={"40px"}
+                          alt=""
+                        />
+                      </ImageMessage>
+                      <TextMessage style={{ paddingLeft: "1rem" }}>
+                        <h1>{item.text}</h1>
+                        <h3>{item.created_at}</h3>
+                      </TextMessage>
+                    </>
+                  )}
+                </MessageItem>
+              </React.Fragment>
             ))}
             <div ref={messagesEndRef} />
           </MessageContainer>
@@ -114,6 +243,29 @@ export const Chat = () => {
     </>
   );
 };
+
+const ImageMessage = styled.div`
+  width: 20%;
+  display: grid;
+  place-items: center;
+
+  & > img {
+    border-radius: 50%;
+  }
+`;
+
+const TextMessage = styled.div`
+  width: 80%;
+  height: 100%;
+
+  & > h1 {
+    color: whitesmoke;
+  }
+
+  & > h3 {
+    color: black;
+  }
+`;
 
 const Main = styled.main`
   width: 100vw;
@@ -152,14 +304,14 @@ const Form = styled.form`
 const MessageItem = styled.div<{ iscurrentuser: boolean }>`
   display: flex;
   align-self: ${(props) => (props.iscurrentuser ? "flex-end" : "flex-start")};
-  background: ${(props) => (props.iscurrentuser ? "#2aa32c" : "#164a17")};
   margin-bottom: 1rem;
-  flex-direction: column;
+  flex-direction: row;
   border-radius: 1rem;
-  background: ${(props) => (props.iscurrentuser ? "green" : "lightgray")};
+  background: ${(props) => (props.iscurrentuser ? "green" : "brown")};
   max-width: 50%;
   padding: 1rem;
   word-wrap: break-word;
+
   & > h1 {
     color: whitesmoke;
   }

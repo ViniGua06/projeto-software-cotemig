@@ -155,7 +155,7 @@ export const ChurchPage = () => {
       console.log(error);
     }
   };
-  const [photoSrcs, setPhotoSrcs] = useState(integrants.map(() => ""));
+  const [photoSrcs, setPhotoSrcs] = useState(integrants?.map(() => "") || []);
 
   return (
     <>
@@ -180,7 +180,7 @@ export const ChurchPage = () => {
           </thead>
 
           <tbody>
-            {integrants && integrants.length > 0 ? (
+            {integrants && integrants?.length > 0 ? (
               integrants.map((item: IIntegrants, index: number) => {
                 const handleImageError = () => {
                   setPhotoSrcs((prevPhotoSrcs) => {

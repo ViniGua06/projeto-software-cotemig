@@ -38,8 +38,9 @@ export const ChurchesTab = () => {
     if (churches.length > 0) setQuantidade(churches.length);
   }, [churches]);
 
-  const goToChurch = async (church_id: number | undefined | string) => {
+  const goToChurch = async (church_id: any) => {
     await service.changeChurchService(church_id);
+    console.log(church_id, "INGREJA");
     navigate("/user/church");
   };
 
