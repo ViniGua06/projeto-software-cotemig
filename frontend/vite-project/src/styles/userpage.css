@@ -29,11 +29,11 @@
   width: 5rem;
   display: flex;
   justify-content: center;
-  margin-top: 15rem;
+  margin-top: 10rem;
   border-radius: 1rem;
 
   &:hover {
-    background-color: red;
+    background-color: rgb(255, 70, 70);
     cursor: pointer;
   }
 }
@@ -47,7 +47,7 @@
 
 .CadastrarChurchButton:hover {
   font-weight: 900;
-  background-color: white;
+  background-color: rgba(76, 175, 79, 0.600);
   cursor: pointer;
 }
 
@@ -60,7 +60,7 @@
 }
 
 .EnterChurchButton:hover {
-  background-color: white;
+  background-color: rgb(33, 150, 243, 0.600);
   font-weight: 900;
   cursor: pointer;
 }
