@@ -9,6 +9,9 @@ import { Server, Socket } from "socket.io";
 import userRouter from "./routes/user.routes";
 import churchRouter from "./routes/church.routes";
 import verifyToken from "./middlewares/tokenVerifyier.middleware";
+import { MessageRepository } from "./repositories/message.repository";
+import { messageRouter } from "./routes/message.routes";
+import UserRepository from "./repositories/user.repository";
 
 const app = Express();
 const server = http.createServer(app);
@@ -26,7 +29,9 @@ app.use(Express.json());
 app.use(Express.urlencoded({ extended: true }));
 
 app.use(userRouter);
+app.use(verifyToken);
 app.use(churchRouter);
+app.use(messageRouter);
 
 AppDataSource.initialize()
   .then(() => {
@@ -44,21 +49,35 @@ AppDataSource.initialize()
     });
 
     io.on("connection", (socket) => {
-      console.log(`Novo cliente conectado - ID: ${socket.id}`);
-
       socket.on("room", (id: number) => {
         socket.join(String(id));
 
         socket.emit("conectou", "CONECTOU A SALA " + id);
       });
 
-      socket.on("message", ({ mensagem, user_id, church_id }) => {
-        console.log("Mensagem recebida: " + mensagem, user_id, church_id);
+      socket.on(
+        "message",
+        async ({ mensagem, user_id, church_id, user_name }) => {
+          const data = Date.now();
 
-        const data = Date.now();
+          console.log("name", user_name);
 
-        io.to(String(church_id)).emit("mess", { mensagem, data, user_id });
-      });
+          const messageRepo = new MessageRepository();
+
+          await messageRepo.insertMessage({
+            text: mensagem,
+            church_id: church_id,
+            user_id: user_id,
+          });
+
+          io.to(String(church_id)).emit("mess", {
+            mensagem,
+            data,
+            user_id,
+            user_name,
+          });
+        }
+      );
     });
   })
   .catch((error) => {

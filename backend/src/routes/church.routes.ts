@@ -23,7 +23,7 @@ churchRouter.post(
 );
 churchRouter.get("/notices/:church_id", churchController.getNotices);
 
-churchRouter.get("/:church_id/:user_id", churchController.getUserRole);
+churchRouter.get("/role/:church_id/:user_id", churchController.getUserRole);
 churchRouter.delete(
   "/integrant/:user_id/church/:church_id",
   churchController.removeIntegrant
