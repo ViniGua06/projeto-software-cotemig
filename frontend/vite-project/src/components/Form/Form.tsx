@@ -135,6 +135,7 @@ const Form = (opt: IForm) => {
       });
 
       const data = await response.json();
+      console.log(data);
 
       alert(data.message);
 

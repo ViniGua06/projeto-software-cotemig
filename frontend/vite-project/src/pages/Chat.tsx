@@ -8,6 +8,19 @@ import { userSelect } from "../redux/user/slice";
 import styled from "styled-components";
 import ApiService from "../services/Api.service";
 import React from "react";
+import ChurchService from "../services/Church.service";
+
+const checkImageURL = (url: string): Promise<boolean> => {
+  return new Promise((resolve) => {
+    const img = new Image();
+    img.onload = () => resolve(true);
+    img.onerror = () => resolve(false);
+    img.src = url;
+  });
+};
+
+const defaultImage =
+  "https://t4.ftcdn.net/jpg/05/89/93/27/360_F_589932782_vQAEAZhHnq1QCGu5ikwrYaQD0Mmurm0N.webp";
 
 export const Chat = () => {
   const { church_id } = useSelector(churchSelect);
@@ -21,6 +34,8 @@ export const Chat = () => {
   const service = ApiService();
 
   const [count, setCount] = useState(0);
+
+  const churchServices = ChurchService();
 
   const getMessages = async () => {
     try {
@@ -52,14 +67,18 @@ export const Chat = () => {
             });
 
             obj.name = data.user.name;
-            obj.photo = URL.createObjectURL(photoBlob);
+
+            const photoURL = URL.createObjectURL(photoBlob);
+            const isValid = await checkImageURL(photoURL);
+            obj.photo = isValid ? photoURL : defaultImage;
+
             obj.created_at = rightDate;
           } catch (photoError) {
             console.error(
               `Error fetching photo for user ${obj.user_id}:`,
               photoError
             );
-            obj.photo = null;
+            obj.photo = defaultImage;
           }
           return obj;
         })
@@ -96,17 +115,18 @@ export const Chat = () => {
       const rightDate = new Date(data).toLocaleString("pt-BR");
 
       const res = await fetch(`${url}/photo/${user_id}`);
-
       const blob = await res.blob();
 
       const imageUrl = URL.createObjectURL(blob);
+      const isValid = await checkImageURL(imageUrl);
+
       setMensagens((current: any) => [
         ...current,
         {
           text: mensagem,
           created_at: rightDate,
           user_id: user_id,
-          photo: imageUrl,
+          photo: isValid ? imageUrl : defaultImage,
           name: user_name,
         },
       ]);
@@ -123,15 +143,18 @@ export const Chat = () => {
 
   useEffect(() => {
     fetchInfo();
+    churchServices.changeChurchService(church_id);
   }, []);
 
   useEffect(() => {
     if (
-      (mensagens.length > 0 &&
-        mensagens[mensagens.length - 1].user_id === user_id) ||
-      count == 0
+      mensagens.length > 0 &&
+      mensagens[mensagens.length - 1].user_id === user_id &&
+      count != 0
     ) {
-      scrollToBottom();
+      scrollToBottom("smooth");
+    } else {
+      scrollToBottom("instant");
     }
   }, [mensagens, user_id]);
 
@@ -152,16 +175,16 @@ export const Chat = () => {
         });
 
         setMensagem("");
-        scrollToBottom();
+        scrollToBottom("smooth");
       }
     } catch (error) {
       console.log(error);
     }
   };
 
-  const scrollToBottom = () => {
+  const scrollToBottom = (behavior: "smooth" | "instant") => {
     if (messagesEndRef.current) {
-      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+      messagesEndRef.current.scrollIntoView({ behavior });
     }
   };
 

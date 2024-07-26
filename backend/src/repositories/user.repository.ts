@@ -2,32 +2,32 @@ import { AppDataSource } from "../database/data-source";
 import { Church } from "../database/entity/Church";
 import { User_Church } from "../database/entity/Integrants";
 import { User } from "../database/entity/User";
-
 import Crypt from "crypto";
 
-const database = AppDataSource.getRepository("user");
+const database = AppDataSource.getRepository(User); // Certifique-se de usar a entidade correta
 
 import { ChurchRepository } from "./church.repository";
-
 const churchRepository = new ChurchRepository();
 
 class UserRepository {
   getAllUsers = async () => {
-    const users = await database.find();
-
-    return users;
+    try {
+      const users = await database.find();
+      return users;
+    } catch (error) {
+      console.error("Failed to get all users:", error);
+      return [];
+    }
   };
+
   getUserById = async (id: number): Promise<User | null> => {
     try {
       const user = await database.findOne({
-        where: {
-          id: id,
-        },
+        where: { id: id },
       });
-
       return user as User;
     } catch (error) {
-      console.log(error);
+      console.error(`Failed to get user by id ${id}:`, error);
       return null;
     }
   };
@@ -38,21 +38,18 @@ class UserRepository {
       if (senha) {
         hashedPassword = Crypt.createHash("sha256").update(senha).digest("hex");
       } else {
-        console.error("Senha não fornecida");
+        console.error("Password not provided");
+        return null;
       }
 
       const user = await database.findOne({
-        where: {
-          email: email,
-          password: hashedPassword,
-        },
+        where: { email: email, password: hashedPassword },
       });
 
       console.log(user);
-
       return user;
     } catch (error) {
-      console.log(error);
+      console.error(`Failed to get user by email and password:`, error);
       return null;
     }
   };
@@ -63,15 +60,13 @@ class UserRepository {
         .update(user.password)
         .digest("hex");
 
-      console.log(hashedPassword);
-
       if (
-        user.name != "" &&
-        user.email != "" &&
-        user.password != "" &&
         user.name &&
+        user.name !== "" &&
         user.email &&
-        user.password
+        user.email !== "" &&
+        user.password &&
+        user.password !== ""
       ) {
         const insertedUser = await database.insert({
           name: user.name,
@@ -80,9 +75,12 @@ class UserRepository {
         });
 
         return insertedUser.identifiers[0].id;
+      } else {
+        console.error("Invalid user data");
+        return null;
       }
     } catch (error) {
-      console.log(error);
+      console.error("Failed to insert user:", error);
       return null;
     }
   };
@@ -90,49 +88,38 @@ class UserRepository {
   checkIfEmailIsValid = async (email: string): Promise<User | null> => {
     try {
       const user = await database.findOne({
-        where: {
-          email: email,
-        },
+        where: { email: email },
       });
-
       return user as User;
     } catch (error) {
-      console.log(error);
+      console.error(`Failed to check if email is valid for ${email}:`, error);
       return null;
     }
   };
 
   updateUser = async (props: User, id: number): Promise<boolean | null> => {
-    const { name, email, password, photo } = props;
+    try {
+      const { name, email, password, photo } = props;
+      const updateData: Partial<User> = { name, email, photo };
 
-    if (password) {
-      const hashedPassword = Crypt.createHash("sha256")
-        .update(password)
-        .digest("hex");
-
-      const user = await this.checkIfEmailIsValid(email);
-
-      if (user) {
-        if (user.id !== id) {
-          throw new Error("Email já cadastrado! Tente outro");
-        }
+      if (password) {
+        const hashedPassword = Crypt.createHash("sha256")
+          .update(password)
+          .digest("hex");
+        updateData.password = hashedPassword;
       }
 
-      await database.update(id, {
-        name: name,
-        email: email,
-        password: hashedPassword,
-        photo: photo,
-      });
-    } else {
-      await database.update(id, {
-        name: name,
-        email: email,
-        photo: photo,
-      });
-    }
+      const user = await this.checkIfEmailIsValid(email);
+      if (user && user.id !== id) {
+        throw new Error("Email already registered! Try another");
+      }
 
-    return true;
+      await database.update(id, updateData);
+      return true;
+    } catch (error) {
+      console.error(`Failed to update user with id ${id}:`, error);
+      return null;
+    }
   };
 
   updatePassword = async (senha: string, email: string) => {
@@ -140,17 +127,13 @@ class UserRepository {
       const hashedPassword = Crypt.createHash("sha256")
         .update(senha)
         .digest("hex");
-
       const user = await database.update(
         { email: email },
-        {
-          password: hashedPassword,
-        }
+        { password: hashedPassword }
       );
-
       return user;
     } catch (error) {
-      console.log(error);
+      console.error(`Failed to update password for email ${email}:`, error);
       return null;
     }
   };
@@ -160,75 +143,68 @@ class UserRepository {
     photo: string
   ): Promise<boolean> => {
     try {
-      database.update(id, {
-        photo: photo,
-      });
-
+      await database.update(id, { photo: photo });
       return true;
     } catch (error) {
-      console.log(error);
+      console.error(`Failed to update photo for user with id ${id}:`, error);
       return false;
     }
   };
 
-  goToChurch = (church_id: number, user_id: number, role: string) => {
+  goToChurch = async (church_id: number, user_id: number, role: string) => {
     try {
       const int = AppDataSource.getRepository(User_Church);
-
-      int.insert({
-        church: church_id,
-        user_id: user_id,
-        role: role,
-      });
+      await int.insert({ church: church_id, user_id: user_id, role: role });
     } catch (error) {
-      console.log(error);
+      console.error(
+        `Failed to insert user ${user_id} into church ${church_id}:`,
+        error
+      );
     }
   };
 
   enterChurch = async (user_id: number, code: string) => {
-    const church = await churchRepository.getChurchByCode(code);
+    try {
+      const church = await churchRepository.getChurchByCode(code);
+      if (!church) {
+        throw new Error("Church not found!");
+      }
 
-    if (!church) {
-      throw new Error("Igreja não encontrada!");
+      const uc = AppDataSource.getRepository(User_Church);
+      const verify = await uc.findOne({
+        where: { user_id: user_id, church: church.id },
+      });
+
+      if (verify) {
+        console.log(verify);
+        throw new Error("User already in church!");
+      }
+
+      await uc.insert({ church: church.id, user_id: user_id, role: "normal" });
+    } catch (error) {
+      console.error(
+        `Failed to enter church for user ${user_id} with code ${code}:`,
+        error
+      );
+      throw error;
     }
-
-    const uc = AppDataSource.getRepository(User_Church);
-
-    const verify = await uc.findOne({
-      where: {
-        user_id: user_id,
-        church: church.id,
-      },
-    });
-
-    if (verify) {
-      console.log(verify);
-      throw new Error("Usuário já está na igreja!");
-    }
-
-    uc.insert({
-      church: church.id,
-      user_id: user_id,
-      role: "normal",
-    });
   };
 
   getChurchesByUser = async (id: number) => {
     try {
       const int = AppDataSource.getRepository(User_Church);
-      const churches = await int.query(
-        `SELECT c.id, c.name, c.photo, uc.role, COUNT(*) as total 
+      const churches = await int.query(`
+        SELECT c.id, c.name, c.photo, uc.role, COUNT(*) as total 
         FROM user_church AS uc 
         INNER JOIN church AS c ON uc.church = c.id 
         WHERE uc.user_id = ${id} 
         GROUP BY c.id, c.name, c.photo, uc.role;
-        `
-      );
+      `);
 
       return churches as Church[];
     } catch (error) {
-      console.log(error);
-      return false;
+      console.error(`Failed to get churches for user ${id}:`, error);
+      return [];
     }
   };
 }
