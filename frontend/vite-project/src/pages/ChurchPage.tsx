@@ -16,6 +16,7 @@ import ApiService from "../services/Api.service";
 import { ativar, desativar, modalSelect } from "../redux/modal/slice";
 import { Modal } from "../components/Modal";
 import { UpdateUserForm } from "../components/Form/UpdateUserForm";
+import { UpdateChurchForm } from "../components/Form/UpdateChurchForm";
 
 interface IIntegrants {
   id: string;
@@ -157,6 +158,10 @@ export const ChurchPage = () => {
   };
   const [photoSrcs, setPhotoSrcs] = useState(integrants?.map(() => "") || []);
 
+  const goToUpdateChurchForm = () => {
+    dispatch(ativar("Update Church"));
+  };
+
   return (
     <>
       <Header></Header>
@@ -240,6 +245,7 @@ export const ChurchPage = () => {
         {role == "admin" ? (
           <>
             <button onClick={goToCreateNotice}>Criar Aviso</button>
+            <button onClick={goToUpdateChurchForm}>Editar Igreja</button>
           </>
         ) : null}
         <button onClick={goToNotices}>Avisos</button>
@@ -280,6 +286,12 @@ export const ChurchPage = () => {
           <>
             <Modal title={"Editar Perfil"}>
               <UpdateUserForm></UpdateUserForm>
+            </Modal>
+          </>
+        ) : tipo == "Update Church" ? (
+          <>
+            <Modal title="Atualizar igreja">
+              <UpdateChurchForm></UpdateChurchForm>
             </Modal>
           </>
         ) : null}

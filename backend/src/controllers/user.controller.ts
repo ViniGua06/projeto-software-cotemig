@@ -180,7 +180,7 @@ class UserController {
         return res.status(400).json({ message: "Credenciais erradas!" });
       }
 
-      const token = jwtService.createToken(user.id);
+      const token = jwtService.createToken(user.id.toString());
 
       return res
         .status(200)
@@ -196,13 +196,9 @@ class UserController {
       const id = req.params.id;
       const photo = req.file.filename;
 
-      console.log(id, photo);
-
       if (!repository.updatePhoto(id, photo)) {
         return res.status(400).json({ message: "Bad Request" });
       }
-
-      console.log(req.file);
 
       return res.status(200).json({ message: "Imagem de perfil atualizada!" });
     } catch (error) {

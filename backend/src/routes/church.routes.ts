@@ -32,5 +32,6 @@ churchRouter.delete(
 churchRouter.post("/notice", churchController.createNotice);
 
 churchRouter.put("/integrantrole", churchController.changeUserRole);
+churchRouter.put("/church/:id", churchController.updateChurch);
 
 export default churchRouter;

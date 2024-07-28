@@ -192,4 +192,18 @@ export class ChurchController {
       res.status(400).json({ message: error.message });
     }
   };
+
+  updateChurch = async (req: Request, res: Response) => {
+    try {
+      const church: Church = req.body;
+      const { id } = req.params;
+
+      await churchRepository.updateChurch(parseInt(id), church);
+
+      res.status(200).json({ message: "Igreja atualizada!" });
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ message: error.message });
+    }
+  };
 }
