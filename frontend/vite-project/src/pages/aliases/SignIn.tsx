@@ -1,6 +1,6 @@
-import Header from "../components/Header";
+import Header from "../../components/Header";
 
-import Form from "../components/Form/Form";
+import Form from "../../components/Form/Form";
 
 const SignIn = () => {
   return (

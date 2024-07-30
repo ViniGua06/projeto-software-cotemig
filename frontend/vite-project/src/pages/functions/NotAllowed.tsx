@@ -1,4 +1,4 @@
-import { InformModal } from "../components/InformModal";
+import { InformModal } from "../../components/InformModal";
 
 export const NotAllowed = () => {
   return (

@@ -1,14 +1,14 @@
 import { Socket, io } from "socket.io-client";
-import url from "../assets/urlBackend";
-import imageBack from "../assets/fundo.jpg";
+import url from "../../assets/urlBackend";
+import imageBack from "../../assets/fundo.jpg";
 import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
-import { churchSelect } from "../redux/church/slice";
-import { userSelect } from "../redux/user/slice";
+import { churchSelect } from "../../redux/church/slice";
+import { userSelect } from "../../redux/user/slice";
 import styled from "styled-components";
-import ApiService from "../services/Api.service";
+import ApiService from "../../services/Api.service";
 import React from "react";
-import ChurchService from "../services/Church.service";
+import ChurchService from "../../services/Church.service";
 
 const checkImageURL = (url: string): Promise<boolean> => {
   return new Promise((resolve) => {

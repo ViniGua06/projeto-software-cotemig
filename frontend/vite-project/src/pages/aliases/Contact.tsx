@@ -1,8 +1,8 @@
-import Header from "../components/Header";
+import Header from "../../components/Header";
 
-import "../styles/form.css";
+import "../../styles/form.css";
 
-import Forms from "../components/Form/Form";
+import Forms from "../../components/Form/Form";
 
 const Contact = () => {
   return (
@@ -10,7 +10,6 @@ const Contact = () => {
       <Header></Header>
 
       <div className="form-container">
-        
         <Forms opt="contato"></Forms>
       </div>
     </>
