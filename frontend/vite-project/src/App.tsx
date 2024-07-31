@@ -6,21 +6,21 @@ import back from "./assets/background.png";
 
 import { createGlobalStyle } from "styled-components";
 
-import Home from "./pages/Home";
-import Contact from "./pages/Contact";
-import SignIn from "./pages/SignIn";
-import ForgotPassword from "./pages/ForgotPassword";
+import Home from "./pages/aliases/Home";
+import Contact from "./pages/aliases/Contact";
+import SignIn from "./pages/aliases/SignIn";
+import ForgotPassword from "./pages/functions/ForgotPassword";
 import Churches from "./pages/Churches";
-import InputEmail from "./pages/InputEmail";
-import EmailSent from "./pages/EmailSent";
-import SignUp from "./pages/SignUp";
+import InputEmail from "./pages/aliases/InputEmail";
+import EmailSent from "./pages/functions/EmailSent";
+import SignUp from "./pages/aliases/SignUp";
 import UserPage from "./pages/UserPage";
-import { NotAllowed } from "./pages/NotAllowed";
+import { NotAllowed } from "./pages/functions/NotAllowed";
 import { CreateChurch } from "./pages/CreateChurch";
-import { EnterChurch } from "./pages/EnterChurch";
+import { EnterChurch } from "./pages/functions/EnterChurch";
 import { ChurchPage } from "./pages/ChurchPage";
-import { Chat } from "./pages/Chat";
-import { Notices } from "./pages/Notices";
+import { Chat } from "./pages/functions/Chat";
+import { Notices } from "./pages/functions/Notices";
 
 interface IGlobal {
   bgColor: string;

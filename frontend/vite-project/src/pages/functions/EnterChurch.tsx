@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import ChurchService from "../services/Church.service";
+import ChurchService from "../../services/Church.service";
 import { useState } from "react";
 
 export const EnterChurch = () => {

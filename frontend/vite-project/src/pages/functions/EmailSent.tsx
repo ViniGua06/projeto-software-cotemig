@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-import "../styles/emailSent.css";
+import "../../styles/emailSent.css";
 
 const EmailSent = () => {
   return (

@@ -1,10 +1,10 @@
 import styled from "styled-components";
-import url from "../assets/urlBackend";
+import url from "../../assets/urlBackend";
 import { useSelector } from "react-redux";
-import { userSelect } from "../redux/user/slice";
-import { churchSelect } from "../redux/church/slice";
+import { userSelect } from "../../redux/user/slice";
+import { churchSelect } from "../../redux/church/slice";
 import { useEffect, useState } from "react";
-import { NoticesContainer } from "../components/NoticesCard";
+import { NoticesContainer } from "../../components/NoticesCard";
 
 export const Notices = () => {
   const { user_id } = useSelector(userSelect);
