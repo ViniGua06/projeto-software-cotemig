@@ -207,6 +207,14 @@ class UserRepository {
       return [];
     }
   };
+
+  deleteUserById = async(id: number) => {
+    try {
+      await database.delete(id);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 }
 
 export default UserRepository;

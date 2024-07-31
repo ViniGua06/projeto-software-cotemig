@@ -14,6 +14,7 @@ const upload = multer({ storage: storage });
 
 userRouter.get("/getAll", userController.getAllUsers);
 userRouter.get("/user/:id", userController.getUserById);
+userRouter.delete("/user/:id", userController.deleteUserById);
 userRouter.post("/user", userController.createUser);
 userRouter.post("/login", userController.loginUser);
 userRouter.post("/sendEmail", userController.sendEmail);

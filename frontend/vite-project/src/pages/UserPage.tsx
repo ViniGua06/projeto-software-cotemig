@@ -18,9 +18,10 @@ import { ChangePfpForm } from "../components/Form/ChangePfpForm";
 import ApiService from "../services/Api.service";
 import { ChurchesTab } from "../components/ChurchesTab";
 import { UpdateUserForm } from "../components/Form/UpdateUserForm";
+import url from "../assets/urlBackend";
 
 const UserPage = () => {
-  const { user_name, token } = useSelector(userSelect);
+  const { user_id, user_name, token } = useSelector(userSelect);
 
   const api = ApiService();
 
@@ -34,6 +35,26 @@ const UserPage = () => {
     api.fetchUserInfo();
     api.testToken();
   }, [ativo]);
+
+  const deleteAccount = async() => {
+    try {
+      const res = await fetch(`${url}/user/${user_id}`, {method: "DELETE", headers: {
+        "Content-Type": "application/json",
+      }, 
+    })
+
+    const data = await res.json();
+
+    if (res.status == 200) {
+      alert("Conta excluída!");
+      deslogar();
+    } 
+
+    
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   const deslogar = () => {
     navigate("/signIn");
@@ -113,8 +134,16 @@ const UserPage = () => {
               </svg>
             </button>
           </div>
+          <button style={{width: "20%", marginTop: '2rem', paddingBlock: "1rem", backgroundColor: 'red', color: "white"}} onClick={() => {
+            if (confirm("Tem certeza que deseja excluir a conta?")) {
+              deleteAccount();
+            }
+          }}>Deletar Conta</button>
         </div>
+        
+
       </div>
+
 
       {tipo == "Trocar Imagem" ? (
         <>

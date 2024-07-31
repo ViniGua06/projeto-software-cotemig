@@ -168,6 +168,8 @@ export class ChurchRepository {
   updateChurch = async (church_id: number, church: Church) => {
     try {
       await database.update(church_id, church);
+
+      console.log(church_id, church)
     } catch (error) {
       throw error;
     }

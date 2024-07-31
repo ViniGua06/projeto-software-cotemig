@@ -245,6 +245,18 @@ class UserController {
       res.status(500).json({ message: "Erro no servidor", error: error });
     }
   };
+
+  deleteUserById = async(req: Request, res: Response) => {
+    try {
+      const {id} = req.params
+      await repository.deleteUserById(parseInt(id));
+
+      res.status(200).json({message: "Usuário removido!"})
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({message: error})
+    }
+  }
 }
 
 const frontUrl = "http://localhost:5173";
