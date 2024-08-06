@@ -129,22 +129,32 @@ const UpdateForm = styled.form`
 
 const UpdateFormLabel = styled.label`
   color: black;
+  font-weight: 700;
+  font-family: "Montserrat", sans-serif;
 `;
 
 const UpdateFormInput = styled.input`
   padding: 0.6rem;
+  border-radius: 5rem;
   outline: none;
+  font-size: 1rem;
+  font-family: sans-serif;
+  letter-spacing: 0.5px;
   border-inline: none;
   border-top: none;
 `;
 
 const UpdateFormSubmit = styled.input`
   padding: 0.6rem;
-  background: white;
+  background: whitesmoke;
   border: solid rgba(0, 0, 0, 0.3) 1px;
   cursor: pointer;
+  font-weight: 600;
+  font-family: "Montserrat", sans-serif;
+  text-transform: uppercase;
+  border-radius: 5rem;
 
   &:hover {
-    background: #f7dec8;
+    background: lightgrey;
   }
 `;

@@ -85,3 +85,24 @@
   justify-content: center;
   align-items: center;
 }
+
+#img-delete{
+  display: grid;
+  height: 1%;
+  width: 6%;
+}
+
+#btnDelete{
+  border: none;
+  color: red;
+  padding: 0.75rem;
+  display: flex;
+  justify-content: center;
+  margin-top: 10rem;
+  border-radius: 1rem;
+
+  &:hover {
+    background-color: rgb(255, 70, 70);
+    cursor: pointer;
+  }
+}
