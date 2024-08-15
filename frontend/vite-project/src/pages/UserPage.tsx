@@ -134,7 +134,7 @@ const UserPage = () => {
               </svg>
             </button>
           </div>
-          <button style={{width: "20%", marginTop: '2rem', paddingBlock: "1rem", backgroundColor: 'red', color: "white"}} onClick={() => {
+          <button style={{width: "20%", marginTop: '2rem', paddingBlock: "1rem", backgroundColor: 'red', color: "black", fontSize: "1.5rem", fontWeight: "700", fontFamily: "Montserrat, sans-serif", textTransform: "uppercase"}} onClick={() => {
             if (confirm("Tem certeza que deseja excluir a conta?")) {
               deleteAccount();
             }
