@@ -120,9 +120,10 @@ header > ul > li {
 }
 
 #two {
-  max-width: 100%;
+  max-width: 80%;
   color: black;
   height: 0px;
+  border-radius: 1rem;
   background-color: white;
   overflow: hidden;
   margin-inline: 1rem;
@@ -140,7 +141,7 @@ header > ul > li {
   height: 100%;
   flex-direction: column;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: space-between;
   font-size: 2.5rem;
 }
 
@@ -164,7 +165,7 @@ header > ul > li {
 
 /* Responsividade */
 
-@media (max-width: 765px) {
+@media (max-width: 766px) {
   #hamb {
     display: block;
     transform: translate(1.2rem);
@@ -174,13 +175,17 @@ header > ul > li {
     display: none;
   }
 
+  .containerHome{
+    visibility: hidden;
+  }
+
   header {
     margin: 0.3rem;
     padding-inline: 1rem;
   }
 
   #two {
-    margin-inline: 0.3rem;
+    margin-inline: 1rem;
   }
 
   #two > ul {
@@ -192,14 +197,23 @@ header > ul > li {
   }
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1248px){
+  Header{
+    width: 90%;
+  }
 }
 
-@media (max-width: 1360px) {
+@media (max-width: 1439px) {
+  #two {
+    margin-inline: 13.3rem;
+    font-size: 10px;
+  }
+  #two > ul > li > a{
+    font-size: 1.2rem;
+  }
   header > ul {
     width: 100%;
   }
-
   #two > ul {
     font-size: 1.4rem;
   }

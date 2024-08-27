@@ -12,7 +12,7 @@ const MenuHamb = (props: IMenuHamb) => {
     const two = document.getElementById(props.id_element);
     if (!clicado) {
       if (two) {
-        two.style.height = "calc(100vh - 74.8px)";
+        two.style.height = "calc(40vh - 74.8px)";
         document.body.style.overflowY = "hidden";
         setClicado(true);
         console.log("Clicado");
