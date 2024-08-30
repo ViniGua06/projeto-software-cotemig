@@ -176,7 +176,17 @@ header > ul > li {
   }
 
   .containerHome{
-    visibility: hidden;
+    visibility: visible;
+  }
+
+  #welcome-part2{
+    font-size: 2rem;
+  }
+
+  #paragrafh-welcome{
+    text-align: justify;
+    width: 20rem; /* Ajuste conforme necessário */
+    letter-spacing: 0.02em; /* Teste com diferentes valores */
   }
 
   header {
