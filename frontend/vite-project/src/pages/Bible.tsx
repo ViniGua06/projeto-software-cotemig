@@ -4,11 +4,13 @@ import { useEffect, useState } from "react";
 
 export const Bible = () => {
   const [book, setBook] = useState("");
-  const [chapter, setChapter] = useState("");
-  const [verse, setVerse] = useState("");
+  const [chapter, setChapter] = useState(1);
+  const [verse, setVerse] = useState(1);
 
   const [text, setText] = useState("");
   const [reference, setReference] = useState("");
+
+  const [will, setWill] = useState(false);
 
   const fetchApi = async () => {
     const res = await fetch(
@@ -26,10 +28,28 @@ export const Bible = () => {
   };
 
   useEffect(() => {
-    if (book.trim() !== "" && chapter.trim() !== "" && verse.trim() !== "") {
+    if (book.trim() !== "") {
       fetchApi();
     }
-  }, [book, chapter, verse]);
+  }, [book, chapter, verse, will]);
+
+  const increase = () => {
+    setVerse((prev) => prev + 1);
+
+    if (text === "Não achado!") {
+      setVerse(1);
+
+      setChapter((prev) => prev + 1);
+
+      setWill(true);
+    }
+  };
+
+  const decrease = () => {
+    if (verse - 1 > 1 || verse - 1 == 1) {
+      setVerse((prev) => prev - 1);
+    }
+  };
 
   return (
     <>
@@ -114,7 +134,7 @@ export const Bible = () => {
             <Input
               type="number"
               value={chapter}
-              onChange={(e) => setChapter(e.target.value)}
+              onChange={(e) => setChapter(parseInt(e.target.value))}
             ></Input>
           </LabelInputContainer>
           <LabelInputContainer>
@@ -122,7 +142,7 @@ export const Bible = () => {
             <Input
               type="number"
               value={verse}
-              onChange={(e) => setVerse(e.target.value)}
+              onChange={(e) => setVerse(parseInt(e.target.value))}
             ></Input>
           </LabelInputContainer>
         </ChooseContainer>
@@ -130,10 +150,52 @@ export const Bible = () => {
           <Reference>{reference}</Reference>
           <Verse>{text}</Verse>
         </TextContainer>
+        <IncreaseAndDecreaseContainer>
+          <IncreaseButton onClick={increase}>+</IncreaseButton>
+          <DecreaseButton onClick={decrease}>-</DecreaseButton>
+        </IncreaseAndDecreaseContainer>
       </Main>
     </>
   );
 };
+
+const IncreaseAndDecreaseContainer = styled.div`
+  width: 60px;
+  height: 120px;
+  position: absolute;
+  right: 1.1rem;
+  bottom: 3rem;
+`;
+
+const IncreaseButton = styled.div`
+  width: 100%;
+  height: 50%;
+  background-color: green;
+  color: white;
+  display: grid;
+  place-items: center;
+  font-size: 4rem;
+  cursor: pointer;
+
+  &: hover {
+    background-color: rgba(102, 255, 102, 1);
+  }
+`;
+
+const DecreaseButton = styled.div`
+  width: 100%;
+  height: 50%;
+  background-color: red;
+  color: white;
+  display: grid;
+  place-items: center;
+  font-size: 4rem;
+  cursor: pointer;
+
+  &: hover {
+    background-color: rgba(255, 102, 102, 1);
+  }
+`;
 
 const Main = styled.main`
   width: 100%;
@@ -206,7 +268,7 @@ const Reference = styled.div`
 const Verse = styled.div`
   display: flex;
   height: 80%;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
   font-size: 2rem;
   text-align: center;
