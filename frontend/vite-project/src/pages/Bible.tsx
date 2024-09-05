@@ -51,6 +51,20 @@ export const Bible = () => {
     }
   };
 
+  const speak = () => {
+    if ("speechSynthesis" in window) {
+      const utterance = new SpeechSynthesisUtterance(text);
+
+      utterance.lang = "en";
+      utterance.pitch = 1;
+      utterance.rate = 1;
+
+      if (!speechSynthesis.speaking) window.speechSynthesis.speak(utterance);
+    } else {
+      alert("Não é possivel reproduzir o áudio");
+    }
+  };
+
   return (
     <>
       <Header></Header>
@@ -154,10 +168,29 @@ export const Bible = () => {
           <IncreaseButton onClick={increase}>+</IncreaseButton>
           <DecreaseButton onClick={decrease}>-</DecreaseButton>
         </IncreaseAndDecreaseContainer>
+        <Microphone onClick={speak}>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 384 512"
+            height={"100%"}
+            width={"100%"}
+          >
+            <path d="M192 0C139 0 96 43 96 96l0 160c0 53 43 96 96 96s96-43 96-96l0-160c0-53-43-96-96-96zM64 216c0-13.3-10.7-24-24-24s-24 10.7-24 24l0 40c0 89.1 66.2 162.7 152 174.4l0 33.6-48 0c-13.3 0-24 10.7-24 24s10.7 24 24 24l72 0 72 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-48 0 0-33.6c85.8-11.7 152-85.3 152-174.4l0-40c0-13.3-10.7-24-24-24s-24 10.7-24 24l0 40c0 70.7-57.3 128-128 128s-128-57.3-128-128l0-40z" />
+          </svg>
+        </Microphone>
       </Main>
     </>
   );
 };
+
+const Microphone = styled.div`
+  position: absolute;
+  left: 1rem;
+  bottom: 3rem;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+`;
 
 const IncreaseAndDecreaseContainer = styled.div`
   width: 60px;
@@ -251,10 +284,11 @@ const Input = styled.input`
 
 const TextContainer = styled.section`
   width: 100%;
-  height: 100%;
+  height: 60%;
   background: whitesmoke;
   color: black;
   padding-inline: 1.9rem;
+  padding-bottom: 1.9rem;
 `;
 
 const Reference = styled.div`
@@ -269,8 +303,8 @@ const Reference = styled.div`
 const Verse = styled.div`
   display: flex;
   height: 80%;
-  justify-content: center;
-  align-items: center;
+  overflow-y: auto;
+
   font-size: 2rem;
   text-align: center;
 `;
