@@ -39,8 +39,7 @@ export const NoticesContainer = ({
 
   useEffect(() => {
     checkIfIsAlreadyAware();
-  }, [id, userid]); // Dependências para garantir que a função seja chamada corretamente
-
+  }, [id, userid]);
   const setAware = async () => {
     try {
       await fetch(`${url}/notice/setaware/${id}/${userid}`, {
@@ -50,11 +49,9 @@ export const NoticesContainer = ({
         },
       });
 
-      // Atualizar o estado local de aware
       const updatedAware = await getNotices();
       setCurrentAware(updatedAware);
-      
-      // Atualizar o estado de clique
+
       setClicked(true);
     } catch (error) {
       console.log(error);
@@ -109,6 +106,5 @@ interface IAware {
 const Aware = styled.h2<IAware>`
   color: ${(props) => (props.isClicked ? "green" : "red")};
   cursor: ${(props) => (props.isClicked ? "auto" : "pointer")};
-  ${(props) =>
-    !props.isClicked ? "&:hover { color: green; }" : null}
+  ${(props) => (!props.isClicked ? "&:hover { color: green; }" : null)}
 `;

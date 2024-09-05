@@ -162,6 +162,10 @@ export const ChurchPage = () => {
     dispatch(ativar("Update Church"));
   };
 
+  const goToBiblePage = () => {
+    navigate("/church/bible");
+  };
+
   return (
     <>
       <Header></Header>
@@ -295,6 +299,8 @@ export const ChurchPage = () => {
             </Modal>
           </>
         ) : null}
+
+        <button onClick={goToBiblePage}>Biblia Digital</button>
       </Main>
     </>
   );

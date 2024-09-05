@@ -21,6 +21,7 @@ import { EnterChurch } from "./pages/functions/EnterChurch";
 import { ChurchPage } from "./pages/ChurchPage";
 import { Chat } from "./pages/functions/Chat";
 import { Notices } from "./pages/functions/Notices";
+import { Bible } from "./pages/Bible";
 
 interface IGlobal {
   bgColor: string;
@@ -30,7 +31,6 @@ const GlobalStyle = createGlobalStyle`
   body {
     background: ${(props: IGlobal) => props.bgColor};
         height: 100vh;
-
   }
 
   #root {
@@ -78,6 +78,7 @@ function App() {
         <Route path="/user/church" element={<ChurchPage />}></Route>
         <Route path="/church/chat" element={<Chat />}></Route>
         <Route path="church/notices" element={<Notices />}></Route>
+        <Route path="church/bible" element={<Bible />}></Route>
       </Routes>
     </>
   );
