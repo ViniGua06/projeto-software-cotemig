@@ -33,5 +33,7 @@ churchRouter.post("/notice", churchController.createNotice);
 
 churchRouter.put("/integrantrole", churchController.changeUserRole);
 churchRouter.put("/church/:id", churchController.updateChurch);
+churchRouter.patch("/notice/setaware/:notice_id/:user_id", churchController.setAwareNumber);
+churchRouter.get("/notice/checkaware/:notice_id/:user_id", churchController.checkIfIsAlreadyAware);
 
 export default churchRouter;

@@ -13,4 +13,7 @@ export class Notice {
 
   @Column({ nullable: false })
   church_id: number;
+
+  @Column({nullable: false})
+  aware: number;
 }

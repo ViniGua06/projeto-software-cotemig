@@ -22,11 +22,12 @@ export const Notices = () => {
         setNotices(data.reverse());
       }
     } catch (error) {
-      console.log("OLA", error);
+      console.log(error);
     }
   };
 
   useEffect(() => {
+    
     getNotices();
   }, []);
   return (
@@ -44,8 +45,11 @@ export const Notices = () => {
               return (
                 <>
                   <NoticesContainer
+                  id={item.id}
+                  userid={parseInt(user_id)}
                     text={item.text}
                     author={item.user_id}
+                    aware={item.aware}
                   ></NoticesContainer>
                 </>
               );

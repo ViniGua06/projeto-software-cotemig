@@ -1,4 +1,5 @@
 import { AppDataSource } from "../database/data-source";
+import { Aware } from "../database/entity/Aware";
 import { Church } from "../database/entity/Church";
 import { User_Church } from "../database/entity/Integrants";
 import { Notice } from "../database/entity/Notice";
@@ -139,6 +140,7 @@ export class ChurchRepository {
       text: notice.text,
       user_id: notice.user_id,
       church_id: notice.church_id,
+      aware:0,
     });
 
     if (!not.identifiers) {
@@ -174,4 +176,48 @@ export class ChurchRepository {
       throw error;
     }
   };
+
+  getNotice = async(id: number) => {
+    try {
+      const noticeRepo = AppDataSource.getRepository(Notice);
+      const notice = await noticeRepo.findOne({where: {
+        id: id,
+      }})
+
+      return notice.aware;
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  setAware = async(notice_id: number, user_id: number) => {
+    const noticeRepo = AppDataSource.getRepository(Notice);
+    const awareRepo = AppDataSource.getRepository(Aware);
+
+    const awareNumber = await this.getNotice(notice_id);
+
+    await noticeRepo.update(notice_id, {
+      aware: awareNumber + 1,
+    })
+
+    await awareRepo.insert({
+      notice_id: notice_id,
+      user_id: user_id,
+    })
+  }
+
+  checkIfIsAlreadyAware = async(notice_id: number, user_id: number) => {
+    try {
+      const awareRepo = AppDataSource.getRepository(Aware);
+
+      const notice = await awareRepo.findOne({where: {
+        notice_id: notice_id,
+        user_id: user_id,
+      }})
+
+      return notice !== null;
+    } catch (error) {
+      console.log(error)
+    }
+  }
 }

@@ -167,6 +167,8 @@ export class ChurchController {
     try {
       const notice: Notice = req.body;
 
+      notice.aware = 0;
+
       await churchRepository.insertNotice(notice);
 
       res.status(201).json({ message: "Aviso criado!" });
@@ -206,4 +208,30 @@ export class ChurchController {
       res.status(500).json({ message: error.message });
     }
   };
+
+  setAwareNumber = async(req: Request, res: Response) => {
+    try {
+      const {notice_id, user_id} = req.params;
+
+      await churchRepository.setAware(parseInt(notice_id), parseInt(user_id));
+
+      return res.status(200).json({message: "número mudado!"})
+    } catch (error) {
+      console.log(error)
+      res.status(500).json({error: error.message})
+    }
+  }
+
+  checkIfIsAlreadyAware = async(req: Request, res: Response) => {
+    try {
+      const {notice_id, user_id} = req.params;
+
+     const result = await churchRepository.checkIfIsAlreadyAware(parseInt(notice_id), parseInt(user_id));
+
+      res.status(200).json({message: result});
+    } catch (error) {
+      console.log(error)
+      res.status(500).json({error: error.message})  
+    }
+  }
 }
