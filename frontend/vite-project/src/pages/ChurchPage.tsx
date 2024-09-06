@@ -5,7 +5,6 @@ import { churchSelect } from "../redux/church/slice";
 import { useEffect } from "react";
 import ChurchService from "../services/Church.service";
 import styled from "styled-components";
-
 import igreja from "../assets/igreja.svg";
 import { userSelect } from "../redux/user/slice";
 import url from "../assets/urlBackend";
@@ -245,15 +244,23 @@ export const ChurchPage = () => {
           </tbody>
         </Table>
 
-        <button onClick={goToChat}>Chat</button>
-        {role == "admin" ? (
-          <>
-            <button onClick={goToCreateNotice}>Criar Aviso</button>
-            <button onClick={goToUpdateChurchForm}>Editar Igreja</button>
-          </>
-        ) : null}
-        <button onClick={goToNotices}>Avisos</button>
-
+        <ButtonContainer>
+          <Button className="btn-under" onClick={goToChat}>
+            Chat
+          </Button>
+          {role == "admin" ? (
+            <>
+              <button onClick={goToCreateNotice}>Criar Aviso</button>
+              <button onClick={goToUpdateChurchForm}>Editar Igreja</button>
+            </>
+          ) : null}
+          <Button className="btn-under" onClick={goToBiblePage}>
+            Bíblia Digital
+          </Button>
+          <Button className="btn-under" onClick={goToNotices}>
+            Avisos
+          </Button>
+        </ButtonContainer>
         {tipo == "Criar Aviso" ? (
           <>
             <Modal title="Criar Aviso">
@@ -299,12 +306,34 @@ export const ChurchPage = () => {
             </Modal>
           </>
         ) : null}
-
-        <button onClick={goToBiblePage}>Biblia Digital</button>
       </Main>
     </>
   );
 };
+
+const Button = styled.button`
+  border-radius: 1rem;
+  padding: 1rem;
+  width: fit-content;
+  height: 3rem;
+  font-size: 20px;
+  cursor: pointer;
+  font-weight: 900;
+  text-transform: uppercase;
+
+  &:hover {
+    background: lightgrey;
+  }
+`;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-left: 0.5rem;
+  gap: 1rem;
+  margin-top: 2rem;
+  width: 80%;
+`;
 
 const PermitSubmit = styled.button`
   padding: 0.6rem;
@@ -352,21 +381,47 @@ const ChurchPhoto = styled.img`
 const Main = styled.main`
   width: 100%;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   padding: 2rem;
+  text-align: center;
 `;
 
 const Table = styled.table`
-  border-collapse: collapse;
-  margin-top: 1rem;
-  border: solid black 1px;
+  width: 70%;
+  margin-left: 4.4rem;
+  margin-top: 2rem;
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 1px solid black;
+  border-radius: 1rem;
   color: black;
   background: whitesmoke;
+  overflow: hidden;
 
   th,
   td {
     padding: 1rem;
-    border: solid black 1px;
+    border: 1px solid black;
     text-align: center;
+  }
+
+  tr:hover {
+    background-color: lightgrey;
+  }
+
+  thead tr:first-child th:first-child {
+    border-top-left-radius: 15px;
+  }
+  thead tr:first-child th:last-child {
+    border-top-right-radius: 15px;
+  }
+  tbody tr:last-child td:first-child {
+    border-bottom-left-radius: 15px;
+  }
+  tbody tr:last-child td:last-child {
+    border-bottom-right-radius: 15px;
   }
 `;
 
