@@ -169,9 +169,8 @@ export const ChurchPage = () => {
     <>
       <Header></Header>
       <Main>
-        <h1>{church_name}</h1>
-        <ChurchPhoto src={church_photo || igreja}></ChurchPhoto>
-
+          <h1>{church_name}</h1>
+          <ChurchPhoto src={church_photo || igreja}></ChurchPhoto>
         <Table>
           <thead>
             <tr>
@@ -329,7 +328,7 @@ const Button = styled.button`
 const ButtonContainer = styled.div`
   display: flex;
   justify-content: center;
-  margin-left: 0.5rem;
+  margin-left: 1.5rem;
   gap: 1rem;
   margin-top: 2rem;
   width: 80%;
@@ -374,23 +373,24 @@ const Form = styled.form`
 const ChurchPhoto = styled.img`
   margin-top: 1rem;
   border-radius: 50%;
-  height: 140px;
-  width: 140px;
+  height: 120px;
+  margin-right: 0.1rem;
+  width: 120px;
 `;
 
 const Main = styled.main`
-  width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 2rem;
   text-align: center;
+  overflow: auto;
 `;
 
 const Table = styled.table`
   width: 70%;
-  margin-left: 4.4rem;
+  margin-left: 4.8rem;
   margin-top: 2rem;
   border-collapse: separate;
   border-spacing: 0;
@@ -402,9 +402,13 @@ const Table = styled.table`
 
   th,
   td {
-    padding: 1rem;
+    padding: 0.5rem;
     border: 1px solid black;
     text-align: center;
+  }
+
+  tbody {
+    height: 1rem;
   }
 
   tr:hover {
