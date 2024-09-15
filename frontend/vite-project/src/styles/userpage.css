@@ -106,3 +106,20 @@
     cursor: pointer;
   }
 }
+
+#end-account{
+  width: 20%;
+  margin-top: 2rem;
+  cursor: pointer;
+  padding-block: 1rem; 
+  background-color: red; 
+  color: black; 
+  font-size: 1.5rem;
+  font-weight: 700;
+  font-family: 'Montserrat'; 
+  text-transform: uppercase;
+}
+
+#end-account:hover{
+  filter: brightness(85%);
+}
