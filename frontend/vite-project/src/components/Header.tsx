@@ -24,18 +24,19 @@ const Header = () => {
   return (
     <>
       <header>
-        <Link to="/" id="achei">
-          E-Church
-        </Link>
         <ul>
-          <li>
-            <Link to="/churches">Igrejas Afiliadas</Link>
-          </li>
           <li>
             <a onClick={redirect}>Página do Fiel</a>
           </li>
+          <Link to="/" id="achei">
+            <img
+              src="/src/assets/sistema_paroquias.ico"
+              width={"70px"}
+              alt=""
+            />
+          </Link>
           <li>
-            <Link to="/contact">Nos contate</Link>
+            <Link to="/contact">Contate-nos</Link>
           </li>
         </ul>
 

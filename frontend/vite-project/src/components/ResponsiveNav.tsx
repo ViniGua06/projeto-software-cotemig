@@ -1,7 +1,7 @@
 const ResponsiveNav = () => {
   return (
     <>
-      <div id="two">
+      <div id="break">
         <ul>
           <li><a href="/churches">Igrejas Afiliadas</a></li>
           <li><a href="/signIn">Página do Fiel</a></li>

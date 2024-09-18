@@ -2,8 +2,6 @@ import { useEffect, useState } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import "./styles/home.css";
 
-import back from "./assets/background.png";
-
 import { createGlobalStyle } from "styled-components";
 
 import Home from "./pages/aliases/Home";
@@ -42,16 +40,16 @@ const GlobalStyle = createGlobalStyle`
 
 function App() {
   const location = useLocation();
-  const [bg, setBg] = useState(`url("${back}")`);
+  const [bg, setBg] = useState(`url("")`);
 
   useEffect(() => {
     switch (location.pathname) {
       case "/":
-        setBg(`url("${back}")`);
+        setBg("#0460a0");
         break;
 
       default:
-        setBg("#f7dec8");
+        setBg("white");
         break;
     }
   }, [location]);
