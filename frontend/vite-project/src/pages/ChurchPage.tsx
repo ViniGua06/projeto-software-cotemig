@@ -41,7 +41,7 @@ export const ChurchPage = () => {
 
   const dispatch = useDispatch();
 
-  const { user_id, token, user_email } = useSelector(userSelect);
+  const { user_id, token } = useSelector(userSelect);
 
   const churchService = ChurchService();
 
@@ -87,6 +87,7 @@ export const ChurchPage = () => {
 
   useEffect(() => {
     apiService.fetchUserInfo();
+    apiService.testToken();
 
     getInfo();
   }, []);
@@ -169,8 +170,8 @@ export const ChurchPage = () => {
     <>
       <Header></Header>
       <Main>
-          <h1>{church_name}</h1>
-          <ChurchPhoto src={church_photo || igreja}></ChurchPhoto>
+        <h1>{church_name}</h1>
+        <ChurchPhoto src={church_photo || igreja}></ChurchPhoto>
         <Table>
           <thead>
             <tr>

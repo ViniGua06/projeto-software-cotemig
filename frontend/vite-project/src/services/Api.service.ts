@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import url from "../assets/urlBackend";
 import { fetchUser, logout, userSelect } from "../redux/user/slice";
 import { useNavigate } from "react-router-dom";
+import { ativar } from "../redux/modal/slice";
 
 const ApiService = () => {
   const { user_id, token, user_pfp } = useSelector(userSelect);
@@ -21,12 +22,8 @@ const ApiService = () => {
         }),
       });
 
-      const data = await response.json();
-
       if (response.status == 403) {
-        alert("Sessão de usuário expirada!" + data.message);
-        dispatch(logout());
-        navigate("/signIn");
+        dispatch(ativar("Not Allowed"));
       }
     } catch (error) {
       console.log(error);
@@ -65,8 +62,7 @@ const ApiService = () => {
       console.log("DATA", data);
 
       if (response.status == 403) {
-        dispatch(logout());
-        navigate("/signIn");
+        dispatch(ativar("Not Allowed"));
       } else {
         dispatch(
           fetchUser({

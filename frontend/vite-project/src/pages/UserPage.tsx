@@ -18,10 +18,12 @@ import { ChangePfpForm } from "../components/Form/ChangePfpForm";
 import ApiService from "../services/Api.service";
 import { ChurchesTab } from "../components/ChurchesTab";
 import { UpdateUserForm } from "../components/Form/UpdateUserForm";
+
 import url from "../assets/urlBackend";
+import { InformModal } from "../components/InformModal";
 
 const UserPage = () => {
-  const { user_id, user_name, token } = useSelector(userSelect);
+  const { user_id, user_name } = useSelector(userSelect);
 
   const api = ApiService();
 
@@ -36,25 +38,25 @@ const UserPage = () => {
     api.testToken();
   }, [ativo]);
 
-  const deleteAccount = async() => {
+  const deleteAccount = async () => {
     try {
-      const res = await fetch(`${url}/user/${user_id}`, {method: "DELETE", headers: {
-        "Content-Type": "application/json",
-      }, 
-    })
+      const res = await fetch(`${url}/user/${user_id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
-    const data = await res.json();
+      const data = await res.json();
 
-    if (res.status == 200) {
-      alert("Conta excluída!");
-      deslogar();
-    } 
-
-    
+      if (res.status == 200) {
+        alert("Conta excluída!");
+        deslogar();
+      }
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   const deslogar = () => {
     navigate("/signIn");
@@ -134,16 +136,18 @@ const UserPage = () => {
               </svg>
             </button>
           </div>
-          <button id="end-account" onClick={() => {
-            if (confirm("Tem certeza que deseja excluir a conta?")) {
-              deleteAccount();
-            }
-          }}>Deletar Conta</button>
+          <button
+            id="end-account"
+            onClick={() => {
+              if (confirm("Tem certeza que deseja excluir a conta?")) {
+                deleteAccount();
+              }
+            }}
+          >
+            Deletar Conta
+          </button>
         </div>
-        
-
       </div>
-
 
       {tipo == "Trocar Imagem" ? (
         <>
@@ -156,6 +160,10 @@ const UserPage = () => {
           <Modal title="Editar Perfil">
             <UpdateUserForm></UpdateUserForm>
           </Modal>
+        </>
+      ) : tipo == "Not Allowed" ? (
+        <>
+          <InformModal></InformModal>
         </>
       ) : null}
     </>

@@ -29,7 +29,7 @@ app.use(Express.json());
 app.use(Express.urlencoded({ extended: true }));
 
 app.use(userRouter);
-// app.use(verifyToken);
+app.use(verifyToken);
 app.use(churchRouter);
 app.use(messageRouter);
 

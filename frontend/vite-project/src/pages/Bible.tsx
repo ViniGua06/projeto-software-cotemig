@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import Header from "../components/Header";
 import { useEffect, useState } from "react";
+import ApiService from "../services/Api.service";
 
 export const Bible = () => {
   const [book, setBook] = useState("");
@@ -12,9 +13,16 @@ export const Bible = () => {
 
   const [will, setWill] = useState(false);
 
+  const api = ApiService();
+
+  useEffect(() => {
+    api.fetchUserInfo();
+    api.testToken();
+  }, []);
+
   const fetchApi = async () => {
     const res = await fetch(
-      `https://bible-api.com/${book}+${chapter}:${verse}`
+      `https://bible-api.com/${book}+${chapter}:${verse}?translation=almeida`
     );
 
     const data = await res.json();
@@ -55,7 +63,7 @@ export const Bible = () => {
     if ("speechSynthesis" in window) {
       const utterance = new SpeechSynthesisUtterance(text);
 
-      utterance.lang = "en";
+      utterance.lang = "pt-br";
       utterance.pitch = 1;
       utterance.rate = 1;
 

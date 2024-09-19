@@ -38,19 +38,18 @@ const Header = () => {
           <li>
             <Link to="/contact">Contate-nos</Link>
           </li>
+          {isLogged ? (
+            <>
+              <Gear
+                onClick={() => {
+                  setDrop(!drop);
+                }}
+              >
+                <DropDown display={drop} setDisplay={setDrop}></DropDown>
+              </Gear>
+            </>
+          ) : null}
         </ul>
-
-        {isLogged ? (
-          <>
-            <Gear
-              onClick={() => {
-                setDrop(!drop);
-              }}
-            >
-              <DropDown display={drop} setDisplay={setDrop}></DropDown>
-            </Gear>
-          </>
-        ) : null}
 
         <MenuHamb id="hamb" id_element="two"></MenuHamb>
       </header>

@@ -41,6 +41,7 @@ const Drop = styled.div<IDropDown>`
   height: ;
   background: whitesmoke;
   position: absolute;
+  right: 40rem;
   display: ${(props) => (props.display ? "block" : "none")};
 `;
 
