@@ -124,7 +124,7 @@ const UpdateForm = styled.form`
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  gap: 2rem;
 `;
 
 const UpdateFormLabel = styled.label`

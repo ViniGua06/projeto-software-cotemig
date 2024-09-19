@@ -39,10 +39,10 @@ const BackgroundModal = styled.div<IModal>`
 
 const ContentModal = styled.div`
   display: flex;
-  width: 70%;
+  width: 50%;
   border-radius: 2rem;
-  height: 100%;
-  background-color: #f7dec8;
+  height: 70%;
+  background-color: #f0f0f0;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -58,7 +58,7 @@ const HeaderModal = styled.div`
   align-items: center;
   background-color: whitesmoke;
   padding-inline: 2rem;
-  border-bottom: solid rgba(0, 0, 0, 0.6);
+  border-bottom: solid #0460a0;
 `;
 
 const MainModel = styled.div`
@@ -66,7 +66,7 @@ const MainModel = styled.div`
   width: 80%;
   padding-inline: 2rem;
   padding-block: 1rem;
-  border-bottom: solid rgba(0, 0, 0, 0.6);
+  border-bottom: solid #0460a0;
   overflow-y: auto;
 `;
 
