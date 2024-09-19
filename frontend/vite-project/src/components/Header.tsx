@@ -6,6 +6,9 @@ import { userSelect } from "../redux/user/slice";
 import { Gear } from "../sub-components/Gear";
 import { DropDown } from "../sub-components/DropDown";
 import { useState } from "react";
+import icon from "../assets/sistema_paroquias.svg";
+
+const Icon = icon;
 
 const Header = () => {
   const { isLogged } = useSelector(userSelect);
@@ -30,7 +33,7 @@ const Header = () => {
           </li>
           <Link to="/" id="achei">
             <img
-              src="/src/assets/sistema_paroquias.ico"
+              src={Icon}
               width={"70px"}
               alt=""
             />
