@@ -21,6 +21,7 @@ import { UpdateUserForm } from "../components/Form/UpdateUserForm";
 
 import url from "../assets/urlBackend";
 import { InformModal } from "../components/InformModal";
+import { CalendarComponent } from "../components/Calendar";
 
 const UserPage = () => {
   const { user_id, user_name } = useSelector(userSelect);
@@ -91,6 +92,9 @@ const UserPage = () => {
 
           <div>
             <ChurchesTab></ChurchesTab>
+            <br />
+            <CalendarComponent></CalendarComponent>
+
             <button
               className="CadastrarChurchButton"
               onClick={goToCreateChurch}
@@ -136,6 +140,7 @@ const UserPage = () => {
               </svg>
             </button>
           </div>
+
           <button
             id="end-account"
             onClick={() => {

@@ -166,6 +166,10 @@ export const ChurchPage = () => {
     navigate("/church/bible");
   };
 
+  const goToCreateEvent = () => {
+    navigate("/user/events/create");
+  };
+
   return (
     <>
       <Header></Header>
@@ -260,6 +264,13 @@ export const ChurchPage = () => {
           <Button className="btn-under" onClick={goToNotices}>
             Avisos
           </Button>
+          {role == "admin" ? (
+            <>
+              <Button className="btn-under" onClick={goToCreateEvent}>
+                Criar Evento
+              </Button>
+            </>
+          ) : null}{" "}
         </ButtonContainer>
         {tipo == "Criar Aviso" ? (
           <>

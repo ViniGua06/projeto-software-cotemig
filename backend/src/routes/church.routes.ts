@@ -33,7 +33,16 @@ churchRouter.post("/notice", churchController.createNotice);
 
 churchRouter.put("/integrantrole", churchController.changeUserRole);
 churchRouter.put("/church/:id", churchController.updateChurch);
-churchRouter.patch("/notice/setaware/:notice_id/:user_id", churchController.setAwareNumber);
-churchRouter.get("/notice/checkaware/:notice_id/:user_id", churchController.checkIfIsAlreadyAware);
+churchRouter.patch(
+  "/notice/setaware/:notice_id/:user_id",
+  churchController.setAwareNumber
+);
+churchRouter.get(
+  "/notice/checkaware/:notice_id/:user_id",
+  churchController.checkIfIsAlreadyAware
+);
+churchRouter.post("/events/create", churchController.createEvent);
+churchRouter.post("/eventsbychurches", churchController.getEventsByChurches);
+churchRouter.get("/events", churchController.getEvents);
 
 export default churchRouter;

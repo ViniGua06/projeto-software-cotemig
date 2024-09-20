@@ -5,6 +5,8 @@ import { User_Church } from "../database/entity/Integrants";
 import { Notice } from "../database/entity/Notice";
 import { User } from "../database/entity/User";
 
+import { Event as Evento } from "../database/entity/Event";
+
 const database = AppDataSource.getRepository(Church);
 const integrants = AppDataSource.getRepository(User_Church);
 const user = AppDataSource.getRepository(User);
@@ -140,7 +142,7 @@ export class ChurchRepository {
       text: notice.text,
       user_id: notice.user_id,
       church_id: notice.church_id,
-      aware:0,
+      aware: 0,
     });
 
     if (!not.identifiers) {
@@ -171,26 +173,28 @@ export class ChurchRepository {
     try {
       await database.update(church_id, church);
 
-      console.log(church_id, church)
+      console.log(church_id, church);
     } catch (error) {
       throw error;
     }
   };
 
-  getNotice = async(id: number) => {
+  getNotice = async (id: number) => {
     try {
       const noticeRepo = AppDataSource.getRepository(Notice);
-      const notice = await noticeRepo.findOne({where: {
-        id: id,
-      }})
+      const notice = await noticeRepo.findOne({
+        where: {
+          id: id,
+        },
+      });
 
       return notice.aware;
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
-  setAware = async(notice_id: number, user_id: number) => {
+  setAware = async (notice_id: number, user_id: number) => {
     const noticeRepo = AppDataSource.getRepository(Notice);
     const awareRepo = AppDataSource.getRepository(Aware);
 
@@ -198,26 +202,69 @@ export class ChurchRepository {
 
     await noticeRepo.update(notice_id, {
       aware: awareNumber + 1,
-    })
+    });
 
     await awareRepo.insert({
       notice_id: notice_id,
       user_id: user_id,
-    })
-  }
+    });
+  };
 
-  checkIfIsAlreadyAware = async(notice_id: number, user_id: number) => {
+  checkIfIsAlreadyAware = async (notice_id: number, user_id: number) => {
     try {
       const awareRepo = AppDataSource.getRepository(Aware);
 
-      const notice = await awareRepo.findOne({where: {
-        notice_id: notice_id,
-        user_id: user_id,
-      }})
+      const notice = await awareRepo.findOne({
+        where: {
+          notice_id: notice_id,
+          user_id: user_id,
+        },
+      });
 
       return notice !== null;
     } catch (error) {
-      console.log(error)
+      console.log(error);
+      throw error;
     }
-  }
+  };
+
+  getEvents = async () => {
+    const eventRepo = AppDataSource.getRepository(Evento);
+
+    return await eventRepo.find();
+  };
+
+  getEventsByChurches = async (church_ids: string[]) => {
+    try {
+      const eventRepo = AppDataSource.getRepository(Evento);
+
+      if (!Array.isArray(church_ids)) {
+        throw new Error("Expected an array of church IDs");
+      }
+
+      const events = await Promise.all(
+        church_ids.map(async (item) => {
+          return await eventRepo.find({
+            where: { church_id: item },
+          });
+        })
+      );
+
+      return events.flat();
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  createEvent = async (event: Evento) => {
+    try {
+      const eventRepo = AppDataSource.getRepository(Evento);
+
+      const insertedEvent = await eventRepo.insert(event);
+
+      return insertedEvent.identifiers[0].id;
+    } catch (error) {
+      throw error;
+    }
+  };
 }

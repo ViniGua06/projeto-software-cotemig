@@ -29,7 +29,7 @@ app.use(Express.json());
 app.use(Express.urlencoded({ extended: true }));
 
 app.use(userRouter);
-app.use(verifyToken);
+// app.use(verifyToken);
 app.use(churchRouter);
 app.use(messageRouter);
 
@@ -39,7 +39,7 @@ AppDataSource.initialize()
       cors: {
         origin: "*",
         methods: ["GET", "POST"],
-        allowedHeaders: ["Content-Type", "Authorization"],
+        allowedHeaders: ["Content-Type", "Authorization", "x-access-token"],
         credentials: true,
       },
     });

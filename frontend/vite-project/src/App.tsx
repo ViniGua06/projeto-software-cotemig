@@ -20,6 +20,7 @@ import { ChurchPage } from "./pages/ChurchPage";
 import { Chat } from "./pages/functions/Chat";
 import { Notices } from "./pages/functions/Notices";
 import { Bible } from "./pages/Bible";
+import { CreateEvent } from "./pages/CreateEvent";
 
 interface IGlobal {
   bgColor: string;
@@ -75,8 +76,9 @@ function App() {
         <Route path="/enterchurch" element={<EnterChurch />}></Route>
         <Route path="/user/church" element={<ChurchPage />}></Route>
         <Route path="/church/chat" element={<Chat />}></Route>
-        <Route path="church/notices" element={<Notices />}></Route>
-        <Route path="church/bible" element={<Bible />}></Route>
+        <Route path="/church/notices" element={<Notices />}></Route>
+        <Route path="/church/bible" element={<Bible />}></Route>
+        <Route path="/user/events/create" element={<CreateEvent />}></Route>
       </Routes>
     </>
   );

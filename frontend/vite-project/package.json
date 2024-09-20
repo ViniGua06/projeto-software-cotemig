@@ -11,6 +11,10 @@
   },
   "dependencies": {
     "@fortawesome/react-fontawesome": "^0.2.2",
+    "@fullcalendar/daygrid": "^6.1.15",
+    "@fullcalendar/interaction": "^6.1.15",
+    "@fullcalendar/react": "^6.1.15",
+    "@fullcalendar/timegrid": "^6.1.15",
     "@reduxjs/toolkit": "^2.2.6",
     "axios": "^1.7.2",
     "browser-image-compression": "^2.0.2",
@@ -38,6 +42,6 @@
     "eslint-plugin-react-hooks": "^4.6.2",
     "eslint-plugin-react-refresh": "^0.4.9",
     "typescript": "^5.5.4",
-    "vite": "^5.3.4"
+    "vite": "^5.4.6"
   }
 }

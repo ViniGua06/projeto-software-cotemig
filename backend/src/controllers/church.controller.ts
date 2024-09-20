@@ -5,6 +5,8 @@ import UserRepository from "../repositories/user.repository";
 import path from "path";
 import { Notice } from "../database/entity/Notice";
 
+import { Event as Evento } from "../database/entity/Event";
+
 const churchRepository = new ChurchRepository();
 const userRepository = new UserRepository();
 
@@ -110,8 +112,6 @@ export class ChurchController {
         parseInt(id)
       );
 
-      console.log(integrants, "INIBOUIDB");
-
       res.status(200).json(integrants);
     } catch (error) {
       console.log(error);
@@ -209,29 +209,63 @@ export class ChurchController {
     }
   };
 
-  setAwareNumber = async(req: Request, res: Response) => {
+  setAwareNumber = async (req: Request, res: Response) => {
     try {
-      const {notice_id, user_id} = req.params;
+      const { notice_id, user_id } = req.params;
 
       await churchRepository.setAware(parseInt(notice_id), parseInt(user_id));
 
-      return res.status(200).json({message: "número mudado!"})
+      return res.status(200).json({ message: "número mudado!" });
     } catch (error) {
-      console.log(error)
-      res.status(500).json({error: error.message})
+      console.log(error);
+      res.status(500).json({ error: error.message });
     }
-  }
+  };
 
-  checkIfIsAlreadyAware = async(req: Request, res: Response) => {
+  checkIfIsAlreadyAware = async (req: Request, res: Response) => {
     try {
-      const {notice_id, user_id} = req.params;
+      const { notice_id, user_id } = req.params;
 
-     const result = await churchRepository.checkIfIsAlreadyAware(parseInt(notice_id), parseInt(user_id));
+      const result = await churchRepository.checkIfIsAlreadyAware(
+        parseInt(notice_id),
+        parseInt(user_id)
+      );
 
-      res.status(200).json({message: result});
+      res.status(200).json({ message: result });
     } catch (error) {
-      console.log(error)
-      res.status(500).json({error: error.message})  
+      console.log(error);
+      res.status(500).json({ error: error.message });
     }
-  }
+  };
+
+  getEvents = async (req: Request, res: Response) => {
+    res.status(200).json(await churchRepository.getEvents());
+  };
+
+  createEvent = async (req: Request, res: Response) => {
+    try {
+      const event: Evento = req.body;
+
+      const insertedEvent = await churchRepository.createEvent(event);
+
+      res
+        .status(201)
+        .json({ message: `O evento ${insertedEvent} foi criado!` });
+    } catch (error) {
+      res.status(400).json({ error: error.message });
+    }
+  };
+
+  getEventsByChurches = async (req: Request, res: Response) => {
+    try {
+      const { churches } = req.body;
+
+      const events = await churchRepository.getEventsByChurches(churches);
+
+      res.status(200).json(events);
+    } catch (error) {
+      console.log(error.message);
+      res.status(400).json({ error: error });
+    }
+  };
 }

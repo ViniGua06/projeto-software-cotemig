@@ -51,10 +51,10 @@ export const ChurchesTab = () => {
         {churches.length > 0 ? (
           <>
             <ChurchesList>
-              {churches.map((item: IChurch) => {
+              {churches.map((item: IChurch, key) => {
                 return (
                   <>
-                    <ChurchLi key={item.id} onClick={() => goToChurch(item.id)}>
+                    <ChurchLi key={key} onClick={() => goToChurch(item.id)}>
                       <ChurchPhoto src={item.photo} alt="foto"></ChurchPhoto>
                       <h2>{item.name}</h2>
                       <div>Cargo: {item.role}</div>

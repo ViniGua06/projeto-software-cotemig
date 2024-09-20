@@ -59,8 +59,6 @@ const ApiService = () => {
 
       const photo = await fetchProfilePhoto();
 
-      console.log("DATA", data);
-
       if (response.status == 403) {
         dispatch(ativar("Not Allowed"));
       } else {
