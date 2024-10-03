@@ -7,6 +7,7 @@ import { Message } from "./entity/Message";
 import { Notice } from "./entity/Notice";
 import { Aware } from "./entity/Aware";
 import { Event } from "./entity/Event";
+import { ChurchAccount } from "./entity/ChurchAccount";
 
 export const AppDataSource = new DataSource({
   type: "postgres",
@@ -17,7 +18,16 @@ export const AppDataSource = new DataSource({
   database: "qcezcnow",
   synchronize: false,
   logging: false,
-  entities: [Church, User_Church, User, Message, Notice, Aware, Event],
+  entities: [
+    Church,
+    User_Church,
+    User,
+    Message,
+    Notice,
+    Aware,
+    Event,
+    ChurchAccount,
+  ],
   migrations: [__dirname + "/migration/*.ts"],
   subscribers: [],
 });
