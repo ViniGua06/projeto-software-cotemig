@@ -45,4 +45,10 @@ churchRouter.post("/events/create", churchController.createEvent);
 churchRouter.post("/eventsbychurches", churchController.getEventsByChurches);
 churchRouter.get("/events", churchController.getEvents);
 
+churchRouter.get("/church/:church_id/verse", churchController.getDailyVerse);
+churchRouter.post(
+  "/church/:church_id/setverse",
+  churchController.setDailyVerse
+);
+
 export default churchRouter;

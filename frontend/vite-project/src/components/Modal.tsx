@@ -39,9 +39,9 @@ const BackgroundModal = styled.div<IModal>`
 
 const ContentModal = styled.div`
   display: flex;
-  width: 50%;
+  width: 100%;
   border-radius: 2rem;
-  height: 70%;
+  height: 100%;
   background-color: #f0f0f0;
   flex-direction: column;
   justify-content: center;
@@ -65,7 +65,7 @@ const MainModel = styled.div`
   height: 100%;
   width: 80%;
   padding-inline: 2rem;
-  padding-block: 1rem;
+  padding-block: 2rem;
   border-bottom: solid #0460a0;
   overflow-y: auto;
 `;

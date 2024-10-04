@@ -16,6 +16,7 @@ import { ativar, desativar, modalSelect } from "../redux/modal/slice";
 import { Modal } from "../components/Modal";
 import { UpdateUserForm } from "../components/Form/UpdateUserForm";
 import { UpdateChurchForm } from "../components/Form/UpdateChurchForm";
+import { SetDailyVerseForm } from "../components/Form/SetDailyVerseForm";
 
 interface IIntegrants {
   id: string;
@@ -170,12 +171,30 @@ export const ChurchPage = () => {
     navigate("/user/events/create");
   };
 
+  const [dailyVerse, setDailyVerse] = useState("");
+
+  const getDailyVerse = async () => {
+    try {
+      const res = await fetch(`${url}/church/${church_id}/verse`);
+      const data = await res.json();
+
+      if (res.status == 200) setDailyVerse(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getDailyVerse();
+  }, []);
+
   return (
     <>
       <Header></Header>
       <Main>
         <h1>{church_name}</h1>
         <ChurchPhoto src={church_photo || igreja}></ChurchPhoto>
+        <h1 style={{ marginTop: "1rem" }}>{dailyVerse}</h1>
         <Table>
           <thead>
             <tr>
@@ -254,8 +273,11 @@ export const ChurchPage = () => {
           </Button>
           {role == "admin" ? (
             <>
-              <button onClick={goToCreateNotice}>Criar Aviso</button>
-              <button onClick={goToUpdateChurchForm}>Editar Igreja</button>
+              <Button onClick={goToCreateNotice}>Criar Aviso</Button>
+              <Button onClick={goToUpdateChurchForm}>Editar Igreja</Button>
+              <Button onClick={() => dispatch(ativar("Setar Versículo"))}>
+                Colocar versículo do dia
+              </Button>
             </>
           ) : null}
           <Button className="btn-under" onClick={goToBiblePage}>
@@ -316,6 +338,12 @@ export const ChurchPage = () => {
               <UpdateChurchForm></UpdateChurchForm>
             </Modal>
           </>
+        ) : tipo == "Setar Versículo" ? (
+          <>
+            <Modal title="Atualizar versículo do dia">
+              <SetDailyVerseForm></SetDailyVerseForm>
+            </Modal>
+          </>
         ) : null}
       </Main>
     </>
@@ -327,7 +355,7 @@ const Button = styled.button`
   padding: 1rem;
   width: fit-content;
   height: 3rem;
-  font-size: 20px;
+  font-size: 15px;
   cursor: pointer;
   font-weight: 900;
   text-transform: uppercase;

@@ -46,6 +46,7 @@ export class ChurchController {
         name: name,
         photo: photo,
         code: code,
+        daily_verse: "",
       });
 
       console.log(typeof churhcInserted, "7yausvdbio");
@@ -267,5 +268,22 @@ export class ChurchController {
       console.log(error.message);
       res.status(400).json({ error: error });
     }
+  };
+
+  getDailyVerse = async (req: Request, res: Response) => {
+    const { church_id } = req.params;
+
+    const verse = await churchRepository.getDailyVerse(parseInt(church_id));
+
+    res.status(200).json(verse);
+  };
+
+  setDailyVerse = async (req: Request, res: Response) => {
+    const { church_id } = req.params;
+    const { verse } = req.body;
+
+    await churchRepository.addDailyVerse(parseInt(church_id), verse);
+
+    res.status(200).json({ message: "Versículo atualizado!" });
   };
 }

@@ -13,4 +13,7 @@ export class Church {
 
   @Column({ nullable: true })
   code: string;
+
+  @Column({nullable: true})
+  daily_verse: string;
 }

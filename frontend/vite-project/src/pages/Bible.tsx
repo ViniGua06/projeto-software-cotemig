@@ -271,7 +271,7 @@ const Label = styled.h2`
   color: black;
 `;
 
-const Select = styled.select`
+export const Select = styled.select`
   height: 50%;
   width: 100%;
   border-inline: none;
@@ -280,7 +280,7 @@ const Select = styled.select`
   background: transparent;
 `;
 
-const Input = styled.input`
+export const Input = styled.input`
   height: 50%;
   width: 100%;
   border-inline: none;

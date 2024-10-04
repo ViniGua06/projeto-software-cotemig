@@ -267,4 +267,20 @@ export class ChurchRepository {
       throw error;
     }
   };
+
+  getDailyVerse = async (church_id: number) => {
+    const verse = await database.findOne({
+      where: {
+        id: church_id,
+      },
+    });
+
+    return verse.daily_verse;
+  };
+
+  addDailyVerse = async (church_id: number, verse: string) => {
+    await database.update(church_id, {
+      daily_verse: verse,
+    });
+  };
 }
