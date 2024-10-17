@@ -180,7 +180,7 @@ class UserController {
         return res.status(400).json({ message: "Credenciais erradas!" });
       }
 
-      const token = await jwtService.createToken(user.id.toString());
+      const token = jwtService.createToken(user.id.toString());
 
       return res
         .status(200)

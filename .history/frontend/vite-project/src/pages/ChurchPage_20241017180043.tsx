@@ -202,7 +202,7 @@ export const ChurchPage = () => {
     const data = await res.json();
 
     const tokenToRoute = data;
-    const inviteLink = `http://www.localhost:5173/invite/${tokenToRoute}`;
+    const inviteLink = `http://localhost:5173/invite/${tokenToRoute}`;
     const message = `Se junte a ${church_name} ${inviteLink}`;
 
     window.open(
