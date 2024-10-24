@@ -26,10 +26,6 @@ import { CalendarComponent } from "../components/Calendar";
 const UserPage = () => {
   const { user_id, user_name, token } = useSelector(userSelect);
 
-  useEffect(() => {
-    alert(token);
-  });
-
   const api = ApiService();
 
   const { ativo } = useSelector(modalSelect);

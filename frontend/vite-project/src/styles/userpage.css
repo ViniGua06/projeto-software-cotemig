@@ -33,7 +33,7 @@
   border-radius: 1rem;
 
   &:hover {
-    background-color: rgb(255, 70, 70);
+    filter: brightness(85%);
     cursor: pointer;
   }
 }
@@ -46,9 +46,7 @@
 }
 
 .CadastrarChurchButton:hover {
-  font-weight: 900;
-  background-color: rgba(76, 175, 79, 0.600);
-  cursor: pointer;
+  filter: brightness(85%);
 }
 
 .EnterChurchButton {
