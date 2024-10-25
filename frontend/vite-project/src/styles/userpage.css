@@ -13,7 +13,12 @@
 }
 
 #enter {
-  width: 10%;
+  width: 50%;
+  height: auto;
+}
+
+#del{
+  width: 70%;
   height: auto;
 }
 
@@ -27,6 +32,7 @@
   color: white;
   padding: 0.75rem;
   width: 5rem;
+  background-color: #0460a0;
   display: flex;
   justify-content: center;
   margin-top: 10rem;
@@ -40,9 +46,14 @@
 .CadastrarChurchButton {
   background-color: rgb(76, 175, 80);
   border: none;
+  width: 8rem;
+  height: 4rem;
   padding: 1rem 1.5rem;
   margin-top: 1rem;
   border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .CadastrarChurchButton:hover {
@@ -52,13 +63,15 @@
 .EnterChurchButton {
   background-color: rgb(33, 150, 243);
   border: none;
+  width: 8rem;
+  height: 4rem;
   padding: 1rem 1.5rem;
   margin-top: 1rem;
   border-radius: 1rem;
 }
 
 .EnterChurchButton:hover {
-  background-color: rgb(33, 150, 243, 0.600);
+  filter: brightness(85%);
   font-weight: 900;
   cursor: pointer;
 }
@@ -106,7 +119,11 @@
 }
 
 #end-account{
-  width: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 4rem;
+  width: 7rem;
   margin-top: 2rem;
   cursor: pointer;
   padding-block: 1rem; 

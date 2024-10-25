@@ -119,16 +119,12 @@ header > ul > li {
 }
 
 button {
-  background-color: #0460a0;
+  background-color: #012f52;
   color: white;
   border: none;
   padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
-}
-
-button:hover {
-  background-color: #054d85;
 }
 
 #btn-wel {

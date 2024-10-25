@@ -383,7 +383,7 @@ const Button = styled.button`
   text-transform: uppercase;
 
   &:hover {
-    background: lightgrey;
+    filter: brightness(50%);
   }
 `;
 

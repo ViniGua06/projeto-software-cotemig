@@ -23,6 +23,10 @@ import url from "../assets/urlBackend";
 import { InformModal } from "../components/InformModal";
 import { CalendarComponent } from "../components/Calendar";
 
+import delicon from "../assets/d-account.png";
+
+const DelIcon = delicon;
+
 const UserPage = () => {
   const { user_id, user_name, token } = useSelector(userSelect);
 
@@ -134,7 +138,7 @@ const UserPage = () => {
               }
             }}
           >
-            Deletar Conta
+            <img src={DelIcon} id="del" alt="icon delete account" />
           </button>
         </div>
       </div>

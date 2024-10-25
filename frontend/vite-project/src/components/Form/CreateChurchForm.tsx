@@ -151,9 +151,10 @@ const SendForm = styled.input`
 `;
 
 const ChurchForm = styled.form`
-  height: 100%;
-  width: 100%;
-  background-color: whitesmoke;
+  height: 80%;
+  width: 70%;
+  border-radius: 2rem;
+  background-color: #e8edfc;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -163,6 +164,8 @@ const ChurchForm = styled.form`
 
 const FormTitle = styled.h2`
   color: black;
+  font-weight: 800;
+  text-transform: uppercase;
 `;
 
 const FormLabel = styled.label`
