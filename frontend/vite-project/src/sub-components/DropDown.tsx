@@ -38,7 +38,6 @@ export const DropDown = (props: IDropDown) => {
 const Drop = styled.div<IDropDown>`
   width: 170px;
   margin-top: 75px;
-  height: ;
   background: whitesmoke;
   position: absolute;
   right: 40rem;

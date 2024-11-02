@@ -15,7 +15,7 @@ export const HomeMain = () => {
               Nossa plataforma digital facilita as operações administrativas e de comunicação, proporcionando uma 
               experiência integrada e eficiente para líderes religiosos e membros da comunidade.
             </p><br></br>
-            <button id="btn-wel"><a href="/signUp">Saiba mais</a></button>
+            <button id="btn-wel"><a href="/signUp">Crie sua conta</a></button>
           </div>
           <div className="img-wel">
             <img src={Angel} alt="angel" />

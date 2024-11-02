@@ -133,7 +133,7 @@ const UserPage = () => {
           <button
             id="end-account"
             onClick={() => {
-              if (confirm("Tem certeza que deseja excluir a conta?")) {
+              if (confirm("Tem certeza que deseja excluir sua conta?")) {
                 deleteAccount();
               }
             }}

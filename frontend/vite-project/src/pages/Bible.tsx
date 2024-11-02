@@ -217,7 +217,7 @@ const IncreaseButton = styled.div`
   font-size: 4rem;
   cursor: pointer;
 
-  &: hover {
+  &:hover {
     background-color: rgba(102, 255, 102, 1);
   }
 `;
@@ -232,7 +232,7 @@ const DecreaseButton = styled.div`
   font-size: 4rem;
   cursor: pointer;
 
-  &: hover {
+  &:hover {
     background-color: rgba(255, 102, 102, 1);
   }
 `;

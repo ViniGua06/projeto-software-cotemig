@@ -47,7 +47,6 @@ export const ChurchesTab = () => {
   return (
     <>
       <ChurchesContainer>
-        <h1>Instituições que participa - ({quantidade})</h1>
         {churches.length > 0 ? (
           <>
             <ChurchesList>
@@ -66,7 +65,6 @@ export const ChurchesTab = () => {
           </>
         ) : (
           <>
-            <h2>Não é membro de nenhuma Instituição</h2>
           </>
         )}
       </ChurchesContainer>
