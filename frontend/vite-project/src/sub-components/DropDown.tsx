@@ -55,7 +55,7 @@ const ConfigList = styled.ul`
     font-size: 1rem;
   }
 
-  &>li: hover {
+  &>li:hover {
     background: rgba(0, 0, 0, 0.1);
     cursor: pointer;
   }

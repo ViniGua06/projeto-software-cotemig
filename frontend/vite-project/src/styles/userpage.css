@@ -44,7 +44,7 @@
   }
 }
 .CadastrarChurchButton {
-  background-color: rgb(76, 175, 80);
+  background-color: rgb(230, 230, 230);
   border: none;
   width: 8rem;
   height: 4rem;
@@ -60,14 +60,21 @@
   filter: brightness(85%);
 }
 
+#userActionsContainer{
+  gap: 0.5rem;
+}
+
 .EnterChurchButton {
-  background-color: rgb(33, 150, 243);
+  background-color: rgb(230, 230, 230);
   border: none;
   width: 8rem;
   height: 4rem;
   padding: 1rem 1.5rem;
   margin-top: 1rem;
   border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .EnterChurchButton:hover {
@@ -92,7 +99,7 @@
 
 #FirstSection > div {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
 }
