@@ -120,12 +120,8 @@ header > ul > li {
 }
 
 button {
-  background-color: #012f52;
-  color: white;
   border: none;
   padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
 }
 
 #btn-wel {

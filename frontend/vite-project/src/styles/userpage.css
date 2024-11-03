@@ -39,7 +39,7 @@
   border-radius: 1rem;
 
   &:hover {
-    filter: brightness(85%);
+    filter: brightness(80%);
     cursor: pointer;
   }
 }
@@ -118,11 +118,10 @@
   justify-content: center;
   margin-top: 10rem;
   border-radius: 1rem;
+}
 
-  &:hover {
-    background-color: rgb(255, 70, 70);
+#btnDelete:hover {
     cursor: pointer;
-  }
 }
 
 #end-account{
@@ -143,5 +142,5 @@
 }
 
 #end-account:hover{
-  filter: brightness(85%);
+  filter: brightness(70%);
 }

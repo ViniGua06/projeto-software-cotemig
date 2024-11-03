@@ -142,8 +142,16 @@ const UserPage = () => {
             </button>
           </div>
 
-          <button className="SairButton" onClick={deslogar}>
+          <button
+            className="SairButton"
+            onClick={() => {
+              if (confirm("Tem certeza que deseja sair?")) {
+                deslogar();
+              }
+            }}
+          >
             <svg
+              fill="#fff"
               id="logout"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 512 512"
@@ -156,7 +164,9 @@ const UserPage = () => {
             id="end-account"
             onClick={() => {
               if (confirm("Tem certeza que deseja excluir sua conta?")) {
-                deleteAccount();
+                if (confirm("Absoluta?")) {
+                  deleteAccount();
+                }
               }
             }}
           >
