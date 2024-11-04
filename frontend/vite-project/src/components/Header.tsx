@@ -25,12 +25,16 @@ const Header = () => {
   return (
     <>
       <header>
+        {isLogged ? <ul>
+          <li className="headerList">
+            <Link to={"/"} id="userPage-header">Página do usuário</Link>
+          </li>
+        </ul>: null}
         <Link to="/">
           <img src={Icon} width={"70px"} alt="" />
         </Link>
         <MenuHamb id="hamb" id_element="two"></MenuHamb>
       </header>
-      <div id="headerBreak"></div>
     </>
   );
 };
