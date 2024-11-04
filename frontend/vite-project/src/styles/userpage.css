@@ -18,8 +18,17 @@
 }
 
 #del{
-  width: 70%;
+  width: 90%;
   height: auto;
+}
+
+#welcome-user{
+  color: #000000;
+}
+
+#user-name{
+  color: #0460a0;
+  text-transform: uppercase;
 }
 
 #signImg {
@@ -35,7 +44,7 @@
   background-color: #0460a0;
   display: flex;
   justify-content: center;
-  margin-top: 7rem;
+  margin-top: 5rem;
   border-radius: 1rem;
 
   &:hover {
@@ -44,10 +53,11 @@
   }
 }
 .CadastrarChurchButton {
-  background-color: rgb(230, 230, 230);
+  background-color: rgb(255, 255, 255);
   border: none;
   width: 8rem;
   height: 4rem;
+  cursor: pointer;
   padding: 1rem 1.5rem;
   margin-top: 1rem;
   border-radius: 1rem;
@@ -65,7 +75,7 @@
 }
 
 .EnterChurchButton {
-  background-color: rgb(230, 230, 230);
+  background-color: white;
   border: none;
   width: 8rem;
   height: 4rem;
@@ -84,22 +94,29 @@
 }
 
 #MainUserPage {
-  padding: 3rem;
+  padding: 4rem;
+  width: 60%;
+  border-radius: 1rem;
   display: flex;
+  justify-content: center;
+  align-items: center;
   flex-direction: column;
+  background-color: rgb(230, 243, 255);
+  border: 5px solid #0460a0;
+  margin: 0 auto;
+  margin-top: 2rem;
 }
 
 #FirstSection {
   display: flex;
   justify-content: center;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  width: 100%;
 }
 
 #FirstSection > div {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
@@ -128,9 +145,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 4rem;
-  width: 7rem;
+  height: 3.5rem;
+  width: 6rem;
   margin-top: 2rem;
+  border-radius: 0.4rem;
   cursor: pointer;
   padding-block: 1rem; 
   background-color: red; 

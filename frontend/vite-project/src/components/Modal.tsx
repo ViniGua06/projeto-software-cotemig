@@ -40,9 +40,9 @@ const BackgroundModal = styled.div<IModal>`
 const ContentModal = styled.div`
   display: flex;
   width: 100%;
-  border-radius: 2rem;
+  border-radius: 1rem;
   height: 100%;
-  background-color: #f0f0f0;
+  background-color: aliceblue;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -56,7 +56,7 @@ const HeaderModal = styled.div`
   height: 10%;
   justify-content: space-between;
   align-items: center;
-  background-color: whitesmoke;
+  background-color: aliceblue;
   padding-inline: 2rem;
   border-bottom: solid #0460a0;
 `;
