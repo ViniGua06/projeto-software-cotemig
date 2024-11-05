@@ -1,5 +1,4 @@
-
-import delicon from "../assets/d-account.png";
+import Header from "../components/Header"
 
 const UserSettings = () => {
 

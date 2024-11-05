@@ -22,6 +22,7 @@ import { Notices } from "./pages/functions/Notices";
 import { Bible } from "./pages/Bible";
 import { CreateEvent } from "./pages/CreateEvent";
 import { Invite } from "./pages/Invite";
+import UserSettings from "./pages/UserSettings";
 
 interface IGlobal {
   bgColor: string;
@@ -72,6 +73,7 @@ function App() {
           element={<ForgotPassword />}
         ></Route>
         <Route path="/user" element={<UserPage />}></Route>
+        <Route path="/usersettings" element={<UserSettings/>}></Route>
         <Route path="/user/notallowed" element={<NotAllowed />} />
         <Route path="/church/create" element={<CreateChurch />}></Route>
         <Route path="/enterchurch" element={<EnterChurch />}></Route>

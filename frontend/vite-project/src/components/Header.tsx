@@ -27,7 +27,7 @@ const Header = () => {
       <header>
         {isLogged ? <ul>
           <li className="headerList">
-            <Link to={"/"} id="userPage-header">Página do usuário</Link>
+            <Link to={"/usersettings"} id="userPage-header">Página do usuário</Link>
           </li>
         </ul>: null}
         <Link to="/">
