@@ -12,6 +12,19 @@
   height: auto;
 }
 
+#return{
+  background-color: aliceblue;
+  color: #000000;
+  border-radius: 0.3rem;
+  width: 6rem;
+  height: 4rem;
+  cursor: pointer;
+}
+
+#return:hover{
+  filter: brightness(50%);
+}
+
 #enter {
   width: 50%;
   height: auto;

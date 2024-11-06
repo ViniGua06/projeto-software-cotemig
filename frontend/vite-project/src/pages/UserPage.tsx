@@ -23,9 +23,7 @@ import url from "../assets/urlBackend";
 import { InformModal } from "../components/InformModal";
 import { CalendarComponent } from "../components/Calendar";
 
-import delicon from "../assets/d-account.png";
 
-const DelIcon = delicon;
 
 const UserPage = () => {
   const { user_id, user_name, token } = useSelector(userSelect);
@@ -42,26 +40,6 @@ const UserPage = () => {
     api.fetchUserInfo();
     api.testToken();
   }, [ativo]);
-
-  const deleteAccount = async () => {
-    try {
-      const res = await fetch(`${url}/user/${user_id}`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-
-      const data = await res.json();
-
-      if (res.status == 200) {
-        alert("Conta excluída!");
-        deslogar();
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   const deslogar = () => {
     navigate("/signIn");
@@ -95,18 +73,6 @@ const UserPage = () => {
               {" "}
               Olá, <span id="user-name">{user_name}</span>
             </h1>
-            <button
-              id="end-account"
-              onClick={() => {
-                if (confirm("Tem certeza que deseja excluir sua conta?")) {
-                  if (confirm("Absoluta?")) {
-                    deleteAccount();
-                  }
-                }
-              }}
-            >
-              <img src={DelIcon} id="del" alt="icon delete account" />
-            </button>
           </div>
 
           <ChurchesTab></ChurchesTab>

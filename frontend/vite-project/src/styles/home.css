@@ -52,27 +52,48 @@ a {
 }
 
 header {
-  height: 70px;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  margin: 0;
   background-color: aliceblue;
-  padding: 0;
   position: sticky;
+  padding: 10px 20px;
   top: 0;
+  margin: 0;
+  left: 0;
+  right: 0;
   border-bottom: 0.2rem solid #0460a0;
-  z-index: 9;
+  z-index: 1000;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+}
+
+.logo img {
+  max-width: 100%;
+  height: auto;
 }
 
 #userPage-header{
   color: #0460a0;
-  font-size: 20px;
-
+  font-size: 16px;
+  text-decoration: none;
 }
 
-.headerList{
+#userPage-header:hover {
+  color: #007BFF;
+}
+
+.header-links {
   list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.header-links li {
+  margin-left: 15px;
 }
 
 #ola {

@@ -25,14 +25,20 @@ const Header = () => {
   return (
     <>
       <header>
-        {isLogged ? <ul>
-          <li className="headerList">
-            <Link to={"/usersettings"} id="userPage-header">Página do usuário</Link>
-          </li>
-        </ul>: null}
-        <Link to="/">
-          <img src={Icon} width={"70px"} alt="" />
-        </Link>
+        <div className="header-content">
+          <Link to="/" className="logo">
+            <img src={Icon} width="70px" alt="Ícone" />
+          </Link>
+          {isLogged ? (
+            <ul className="header-links">
+              <li>
+                <Link to="/usersettings" id="userPage-header">
+                  Página do usuário
+                </Link>
+              </li>
+            </ul>
+          ) : null}
+        </div>
         <MenuHamb id="hamb" id_element="two"></MenuHamb>
       </header>
     </>

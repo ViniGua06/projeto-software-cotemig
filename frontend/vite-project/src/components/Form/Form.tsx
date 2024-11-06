@@ -155,7 +155,6 @@ const Form = (opt: IForm) => {
         );
 
         navigate("/user");
-        window.location.reload();
       }
     } catch (error) {
       console.log(error);
