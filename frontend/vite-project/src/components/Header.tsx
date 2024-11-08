@@ -32,8 +32,13 @@ const Header = () => {
           {isLogged ? (
             <ul className="header-links">
               <li>
-                <Link to="/usersettings" id="userPage-header">
+                <Link to="/user" className="headerLink">
                   Página do usuário
+                </Link>
+              </li>
+              <li>
+                <Link to="/usersettings" className="headerLink">
+                  Configurações
                 </Link>
               </li>
             </ul>

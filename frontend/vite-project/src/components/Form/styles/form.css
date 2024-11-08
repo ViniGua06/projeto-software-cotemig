@@ -75,7 +75,7 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background-color: #efefef;
+  background-color: #e7edff;
   height: 60%;
   width: 50%;
   border: 5px solid #0460a0;
@@ -83,7 +83,9 @@
 }
 
 .title {
-  color: #264143;
+  color: #000000;
+  text-decoration: underline;
+  margin-bottom: 1rem;
   font-weight: 900;
   font-size: 1.5em;
   user-select: none;

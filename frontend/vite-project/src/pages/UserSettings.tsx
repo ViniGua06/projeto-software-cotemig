@@ -1,14 +1,15 @@
 import Header from "../components/Header"
 import url from "../assets/urlBackend";
 import { userSelect } from "../redux/user/slice";
-import delicon from "../assets/d-account.png";
-import { modalSelect } from "../redux/modal/slice";
+import { ativar, modalSelect } from "../redux/modal/slice";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../redux/user/slice";
+import { Modal } from "../components/Modal";
+import { UpdateUserForm } from "../components/Form/UpdateUserForm";
+import { Settings, Undo2, UserRoundMinus } from "lucide-react";
 
-const DelIcon = delicon;
 const UserSettings = () => {
   const deslogar = () => {
     navigate("/signIn");
@@ -46,8 +47,26 @@ const UserSettings = () => {
   return (
     <>
       <Header></Header>
-
       <button
+        id="return"
+        onClick={() => {
+          navigate("/user");
+        }}
+      >
+        <Undo2 size={50}></Undo2>
+      </button>
+      <div className="container">
+        <div className="form_area">
+          <p className="title">CONFIGURAÇÕES</p>
+          <br></br>
+          <div className="form-group">
+            <button id="editprofile" onClick={() => dispatch(ativar("Editar"))}>
+              <Settings></Settings> Editar Perfil
+            </button>
+            <Modal title="Editar Perfil">
+              <UpdateUserForm />
+            </Modal>
+            <div
               id="end-account"
               onClick={() => {
                 if (confirm("Tem certeza que deseja excluir sua conta?")) {
@@ -57,12 +76,12 @@ const UserSettings = () => {
                 }
               }}
             >
-              <img src={DelIcon} id="del" alt="icon delete account" />
-      </button>
-      <button id="return" onClick={() => {
-            navigate("/user")
-            }}>Retornar
-        </button>
+              <UserRoundMinus></UserRoundMinus>
+              EXCLUIR CONTA
+            </div>
+          </div>
+        </div>
+      </div>
     </>
   );
 };

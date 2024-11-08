@@ -13,11 +13,12 @@
 }
 
 #return{
-  background-color: aliceblue;
   color: #000000;
+  background-color: transparent;
   border-radius: 0.3rem;
-  width: 6rem;
-  height: 4rem;
+  position: fixed;
+  left: 1rem;
+  top: 7rem;
   cursor: pointer;
 }
 
@@ -31,7 +32,7 @@
 }
 
 #del{
-  width: 90%;
+  width: 20%;
   height: auto;
 }
 
@@ -114,7 +115,7 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background-color: rgb(230, 243, 255);
+  background-color: rgb(214, 233, 251);
   border: 5px solid #0460a0;
   margin: 0 auto;
   margin-top: 2rem;
@@ -140,6 +141,27 @@
   width: 6%;
 }
 
+#editprofile{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+  justify-content: center;
+  border-radius: 0.4rem;
+  cursor: pointer;
+  padding-block: 1rem; 
+  background-color: rgb(255, 255, 255); 
+  color: black; 
+  font-size: 1rem;
+  font-weight: 700;
+  font-family: 'Montserrat'; 
+  text-transform: uppercase;
+}
+
+#editprofile:hover{
+  filter: brightness(70%);
+}
+
 #btnDelete{
   border: none;
   color: red;
@@ -154,22 +176,29 @@
     cursor: pointer;
 }
 
+#end-title{
+  font-size: 1.2rem;
+  font-weight: 900;
+  margin-top: 1rem;
+  color: #000;
+}
+
 #end-account{
   display: flex;
+  flex-direction: row;
   align-items: center;
+  gap: 0.5rem;
   justify-content: center;
-  height: 3.5rem;
-  width: 6rem;
-  margin-top: 2rem;
   border-radius: 0.4rem;
   cursor: pointer;
   padding-block: 1rem; 
-  background-color: red; 
+  background-color: rgb(255, 74, 74); 
   color: black; 
-  font-size: 1.5rem;
+  font-size: 1rem;
   font-weight: 700;
   font-family: 'Montserrat'; 
   text-transform: uppercase;
+  padding: 10px;
 }
 
 #end-account:hover{

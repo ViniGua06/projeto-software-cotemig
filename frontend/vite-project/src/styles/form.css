@@ -56,3 +56,10 @@
   #formSenhas h3 {
     color: red;
   }
+
+.form-group{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
