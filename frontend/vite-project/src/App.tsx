@@ -23,6 +23,7 @@ import { Bible } from "./pages/Bible";
 import { CreateEvent } from "./pages/CreateEvent";
 import { Invite } from "./pages/Invite";
 import UserSettings from "./pages/UserSettings";
+import UserEvents from "./pages/UserEvents";
 
 interface IGlobal {
   bgColor: string;
@@ -74,6 +75,7 @@ function App() {
         ></Route>
         <Route path="/user" element={<UserPage />}></Route>
         <Route path="/usersettings" element={<UserSettings/>}></Route>
+        <Route path="/userevents" element={<UserEvents/>}></Route>
         <Route path="/user/notallowed" element={<NotAllowed />} />
         <Route path="/church/create" element={<CreateChurch />}></Route>
         <Route path="/enterchurch" element={<EnterChurch />}></Route>

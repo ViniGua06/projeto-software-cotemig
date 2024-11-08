@@ -2,8 +2,11 @@ import styled from "styled-components";
 
 import ChurchService from "../../services/Church.service";
 import { useState } from "react";
+import { Undo2 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 export const EnterChurch = () => {
+  const navigate = useNavigate();
   const churchService = ChurchService();
 
   const [code, setCode] = useState("");
@@ -18,6 +21,14 @@ export const EnterChurch = () => {
   };
   return (
     <>
+      <button
+        id="return"
+        onClick={() => {
+          navigate("/user");
+        }}
+      >
+        <Undo2 size={80}></Undo2>
+      </button>
       <FormContainer onSubmit={enterChurchByCode}>
         <Form>
           <h1>Entrar na Instituição</h1>
