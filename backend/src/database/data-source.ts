@@ -32,4 +32,8 @@ export const AppDataSource = new DataSource({
   ],
   migrations: [__dirname + "/migration/*.ts"],
   subscribers: [],
+  extra: {
+    max: 2000, // Limite máximo de conexões simultâneas
+    idleTimeoutMillis: 30000, // Tempo de inatividade antes de fechar conexões (em ms)
+  },
 });
