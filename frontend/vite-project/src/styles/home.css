@@ -9,11 +9,17 @@
 
 body {
   background-color: #f0f0f0;
-  color: #333; /* cor antiga: #f7dec8 */
+  color: #333;
+}
+
+html {
+  scrollbar-color: #0460a0 transparent;
+  scrollbar-width: auto;
+  -webkit-font-smoothing: antialiased;
 }
 
 a {
-  color: white; /*cor antiga #362720 */
+  color: white;
   outline: none;
   text-decoration: none;
 }
@@ -76,14 +82,14 @@ header {
   height: auto;
 }
 
-.headerLink{
+.headerLink {
   color: #0460a0;
   font-size: 20px;
   text-decoration: none;
 }
 
 #headerLink:hover {
-  color: #007BFF;
+  color: #007bff;
 }
 
 .header-links {
@@ -154,15 +160,15 @@ button {
     display: none;
   }
 
-  .containerHome{
+  .containerHome {
     visibility: visible;
   }
 
-  #welcome-part2{
+  #welcome-part2 {
     font-size: 2rem;
   }
 
-  #paragrafh-welcome{
+  #paragrafh-welcome {
     text-align: justify;
     width: 20rem;
     letter-spacing: 0.02em;
@@ -187,11 +193,10 @@ button {
 }
 
 @media (max-width: 1439px) {
-  
-  #break > ul > li > a{
+  #break > ul > li > a {
     font-size: 1.2rem;
   }
-  
+
   #break > ul {
     font-size: 1.4rem;
   }

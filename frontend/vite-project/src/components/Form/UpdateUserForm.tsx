@@ -123,21 +123,25 @@ const UpdateForm = styled.form`
   width: 100%;
   height: 100%;
   display: flex;
+  align-items: center;
   flex-direction: column;
   gap: 1.4rem;
 `;
 
 const UpdateFormLabel = styled.label`
   color: black;
+  font-size: 1.2rem;
   font-weight: 700;
   font-family: "Montserrat", sans-serif;
 `;
 
 const UpdateFormInput = styled.input`
   padding: 0.6rem;
-  border-radius: 5rem;
+  border-radius: 0.2rem;
   outline: none;
   font-size: 1rem;
+  width: 100%;
+  text-align: center;
   font-family: sans-serif;
   letter-spacing: 0.5px;
   border-inline: none;
@@ -149,10 +153,12 @@ const UpdateFormSubmit = styled.input`
   background: whitesmoke;
   border: solid rgba(0, 0, 0, 0.3) 1px;
   cursor: pointer;
+  width: 30%;
+  font-size: 1rem;
   font-weight: 600;
   font-family: "Montserrat", sans-serif;
   text-transform: uppercase;
-  border-radius: 5rem;
+  border-radius: 0.3rem;
 
   &:hover {
     background: lightgrey;

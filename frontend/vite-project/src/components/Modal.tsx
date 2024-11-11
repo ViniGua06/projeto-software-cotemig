@@ -39,8 +39,8 @@ const BackgroundModal = styled.div<IModal>`
 
 const ContentModal = styled.div`
   display: flex;
-  width: 100%;
-  border-radius: 1rem;
+  width: 80%;
+  border-radius: 0.5rem;
   height: 100%;
   background-color: aliceblue;
   flex-direction: column;
@@ -52,13 +52,13 @@ const ContentModal = styled.div`
 const HeaderModal = styled.div`
   display: flex;
   width: 100%;
-  border-radius: 1rem;
+  border-radius: 0.5rem;
   height: 10%;
   justify-content: space-between;
   align-items: center;
   background-color: aliceblue;
   padding-inline: 2rem;
-  border-bottom: solid #0460a0;
+  border-bottom: solid #000;
 `;
 
 const MainModel = styled.div`

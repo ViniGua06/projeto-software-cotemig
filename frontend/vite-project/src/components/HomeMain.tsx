@@ -1,9 +1,12 @@
 import "../styles/home.css";
 import angel from "../assets/angel.png";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { userSelect } from "../redux/user/slice";
 
 const Angel = angel;
 export const HomeMain = () => {
+  const { isLogged } = useSelector(userSelect);
   return (
     <>
       <main>
@@ -18,9 +21,15 @@ export const HomeMain = () => {
               eficiente para líderes religiosos e membros da comunidade.
             </p>
             <br></br>
-            <Link to={"/signUp"}>
-              <button id="btn-wel">Crie sua conta</button>
-            </Link>
+            {isLogged ? (
+              <Link to={"/user"}>
+                <button id="btn-wel">Minha Página</button>
+              </Link>
+            ) : (
+              <Link to={"/signUp"}>
+                <button id="btn-wel">Crie sua conta</button>
+              </Link>
+            )}
           </div>
           <div className="img-wel">
             <img src={Angel} alt="angel" />

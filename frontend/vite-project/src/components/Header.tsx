@@ -43,7 +43,7 @@ const Header = () => {
               </li>
               <li>
                 <Link to="/user" className="headerLink">
-                  Minha Conta
+                  Minha Página
                 </Link>
               </li>
             </ul>
