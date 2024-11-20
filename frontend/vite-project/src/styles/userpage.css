@@ -224,3 +224,11 @@
 #end-account:hover{
   filter: brightness(70%);
 }
+
+.btn-under{
+  margin-left: 66rem;
+  background-color: transparent;
+  width: 1rem;
+  height: auto;
+  cursor: pointer;
+}

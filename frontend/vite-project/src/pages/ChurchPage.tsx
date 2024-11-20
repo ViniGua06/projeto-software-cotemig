@@ -17,6 +17,7 @@ import { Modal } from "../components/Modal";
 import { UpdateUserForm } from "../components/Form/UpdateUserForm";
 import { UpdateChurchForm } from "../components/Form/UpdateChurchForm";
 import { SetDailyVerseForm } from "../components/Form/SetDailyVerseForm";
+import { BookOpenText, CalendarDays, Megaphone, MessageSquareText } from "lucide-react";
 
 interface IIntegrants {
   id: string;
@@ -167,10 +168,6 @@ export const ChurchPage = () => {
     navigate("/church/bible");
   };
 
-  const goToCreateEvent = () => {
-    navigate("/user/events/create");
-  };
-
   const [dailyVerse, setDailyVerse] = useState("");
 
   const getDailyVerse = async () => {
@@ -293,20 +290,17 @@ export const ChurchPage = () => {
 
         <ButtonContainer>
           <Button className="btn-under" onClick={goToChat}>
-            Chat
+            <MessageSquareText /> CHAT
           </Button>
           <Button className="btn-under" onClick={goToBiblePage}>
+            <BookOpenText />
             Bíblia Digital
           </Button>
           <Button className="btn-under" onClick={goToNotices}>
-            Avisos
+            <Megaphone /> AVISOS
           </Button>
           {role == "admin" ? (
             <>
-              <Button className="btn-under" onClick={goToCreateEvent}>
-                Criar Evento
-              </Button>
-
               <Button onClick={goToCreateNotice}>Criar Aviso</Button>
               <Button onClick={goToUpdateChurchForm}>Editar Igreja</Button>
               <Button onClick={() => dispatch(ativar("Setar Versículo"))}>
@@ -375,8 +369,11 @@ export const ChurchPage = () => {
 const Button = styled.button`
   border-radius: 1rem;
   padding: 1rem;
-  width: fit-content;
-  height: 3rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: auto;
+  height: auto;
   font-size: 15px;
   cursor: pointer;
   font-weight: 900;

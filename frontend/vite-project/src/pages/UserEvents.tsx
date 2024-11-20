@@ -6,10 +6,17 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../redux/user/slice";
-import { Settings, Undo2, UserRoundMinus } from "lucide-react";
+import { Settings, Undo2, UserRoundMinus, CalendarDays, Plus } from "lucide-react";
 import { CalendarComponent } from "../components/Calendar";
+import { churchSelect } from "../redux/church/slice";
+import "../styles/userpage.css"
 
 const UserEvents = () => {
+  const { role } = useSelector(churchSelect);
+
+  const goToCreateEvent = () => {
+    navigate("/user/events/create");
+  };
   const deslogar = () => {
     navigate("/signIn");
     dispatch(logout());
@@ -56,10 +63,17 @@ const UserEvents = () => {
       </button>
       <div className="container">
         <div className="eventContainer">
+          {role == "admin" ? (
+            <>
+              <button className="btn-under" onClick={goToCreateEvent}>
+                <Plus size={40} />
+              </button>
+            </>
+          ) : null}
           <p className="title">EVENTOS</p>
-            <CalendarComponent></CalendarComponent>
-          </div>
+          <CalendarComponent></CalendarComponent>
         </div>
+      </div>
     </>
   );
 };
