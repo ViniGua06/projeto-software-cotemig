@@ -1,10 +1,11 @@
 import "../styles/home.css";
-import angel from "../assets/angel.png";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { userSelect } from "../redux/user/slice";
+import { Church } from "lucide-react";
+import icon from ".././assets/sistema_paroquias.svg";
 
-const Angel = angel;
+const Icon = icon;
 export const HomeMain = () => {
   const { isLogged } = useSelector(userSelect);
   return (
@@ -32,10 +33,13 @@ export const HomeMain = () => {
             )}
           </div>
           <div className="img-wel">
-            <img src={Angel} alt="angel" />
+            <img src={Icon} alt="Ícone" />
           </div>
         </div>
       </main>
+      <footer className="footer">
+        <p>E-Church©2024</p>
+      </footer>
     </>
   );
 };

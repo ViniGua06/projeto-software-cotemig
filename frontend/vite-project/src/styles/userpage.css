@@ -104,7 +104,7 @@
 }
 
 #MainUserPage {
-  padding: 4rem;
+  padding: 2rem;
   width: 70%;
   height: 85%;
   border-radius: 1rem;
@@ -223,12 +223,4 @@
 
 #end-account:hover{
   filter: brightness(70%);
-}
-
-.btn-under{
-  margin-left: 66rem;
-  background-color: transparent;
-  width: 1rem;
-  height: auto;
-  cursor: pointer;
 }

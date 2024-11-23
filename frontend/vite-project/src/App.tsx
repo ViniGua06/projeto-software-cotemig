@@ -25,13 +25,8 @@ import { Invite } from "./pages/Invite";
 import UserSettings from "./pages/UserSettings";
 import UserEvents from "./pages/UserEvents";
 
-interface IGlobal {
-  bgColor: string;
-}
-
 const GlobalStyle = createGlobalStyle`
   body {
-    background: ${(props: IGlobal) => props.bgColor};
         height: 100vh;
   }
 
@@ -59,7 +54,6 @@ function App() {
   }, [location]);
   return (
     <>
-      <GlobalStyle bgColor={bg}></GlobalStyle>
 
       <Routes>
         <Route path="/" element={<Home />} />

@@ -17,7 +17,7 @@ import { Modal } from "../components/Modal";
 import { UpdateUserForm } from "../components/Form/UpdateUserForm";
 import { UpdateChurchForm } from "../components/Form/UpdateChurchForm";
 import { SetDailyVerseForm } from "../components/Form/SetDailyVerseForm";
-import { BookOpenText, CalendarDays, Megaphone, MessageSquareText } from "lucide-react";
+import { BookOpenText, CalendarDays, Edit, Megaphone, MessageSquareText, Plus, Send } from "lucide-react";
 
 interface IIntegrants {
   id: string;
@@ -289,24 +289,34 @@ export const ChurchPage = () => {
         </Table>
 
         <ButtonContainer>
-          <Button className="btn-under" onClick={goToChat}>
+          <Button onClick={goToChat}>
             <MessageSquareText /> CHAT
           </Button>
-          <Button className="btn-under" onClick={goToBiblePage}>
+          <Button onClick={goToBiblePage}>
             <BookOpenText />
             Bíblia Digital
           </Button>
-          <Button className="btn-under" onClick={goToNotices}>
+          <Button onClick={goToNotices}>
             <Megaphone /> AVISOS
           </Button>
           {role == "admin" ? (
             <>
-              <Button onClick={goToCreateNotice}>Criar Aviso</Button>
-              <Button onClick={goToUpdateChurchForm}>Editar Igreja</Button>
+              <Button onClick={goToCreateNotice}>
+                {" "}
+                <Plus />
+                Criar Aviso
+              </Button>
+              <Button onClick={goToUpdateChurchForm}>
+                <Edit />
+                Editar Igreja
+              </Button>
               <Button onClick={() => dispatch(ativar("Setar Versículo"))}>
                 Colocar versículo do dia
               </Button>
-              <Button onClick={invitePerson}>Convidar membro</Button>
+              <Button onClick={invitePerson}>
+                <Send />
+                Convidar membro
+              </Button>
             </>
           ) : null}
         </ButtonContainer>
@@ -372,7 +382,6 @@ const Button = styled.button`
   display: flex;
   flex-direction: row;
   align-items: center;
-  width: auto;
   height: auto;
   font-size: 15px;
   cursor: pointer;
@@ -380,14 +389,14 @@ const Button = styled.button`
   text-transform: uppercase;
 
   &:hover {
-    filter: brightness(50%);
+    filter: brightness(80%);
   }
 `;
 
 const ButtonContainer = styled.div`
   display: flex;
   justify-content: center;
-  margin-left: 1.5rem;
+  margin-left: 6rem;
   gap: 1rem;
   margin-top: 2rem;
   width: 80%;
