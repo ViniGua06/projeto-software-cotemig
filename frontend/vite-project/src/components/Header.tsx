@@ -7,8 +7,12 @@ import icon from "../assets/sistema_paroquias.svg"
 import "../styles/home.css"
 
 const Icon = icon;
+interface HeaderProps {
+  toggleMenu: () => void;
+  isMenuOpen: boolean;
+}
 
-const Header = () => {
+const Header = ({ toggleMenu, isMenuOpen }: HeaderProps) => {
   const { isLogged } = useSelector(userSelect);
   const navigate = useNavigate();
 
@@ -30,7 +34,7 @@ const Header = () => {
             <img src={Icon} width="70px" alt="Ícone" />
           </Link>
           {isLogged ? (
-            <ul className="header-links">
+            <ul className={`header-links ${isMenuOpen ? "open" : ""}`}>
               <li>
                 <Link to="/userevents" className="headerLink">
                   Eventos
@@ -49,7 +53,9 @@ const Header = () => {
             </ul>
           ) : null}
         </div>
-        <MenuHamb id="hamb" id_element="two"></MenuHamb>
+        <button id="hamb" onClick={toggleMenu}>
+          &#9776; {}
+        </button>
       </header>
     </>
   );

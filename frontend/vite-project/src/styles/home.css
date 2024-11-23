@@ -62,6 +62,7 @@ a {
   justify-content: space-evenly;
   min-height: 65vh;
   margin-bottom: 2rem;
+  flex-wrap: wrap;
 }
 
 .img-wel {
@@ -103,6 +104,8 @@ header {
   color: #0460a0;
   font-size: 20px;
   text-decoration: none;
+  visibility: visible;
+  transition: opacity 0.3s ease;
 }
 
 #headerLink:hover {
@@ -115,12 +118,12 @@ header {
   flex-direction: row-reverse;
   margin: 0;
   padding: 0;
+  visibility: visible;
 }
 
 .header-links li {
   margin-left: 5rem;
 }
-
 #ola {
   color: red;
 }
@@ -128,6 +131,9 @@ header {
 #hamb {
   height: 50%;
   display: none;
+  cursor: pointer;
+  font-size: 2rem;
+  z-index: 100;
 }
 
 button {
@@ -167,27 +173,67 @@ button {
 
 /* Responsividade */
 
-@media (max-width: 766px) {
+@media (max-width: 768px) {
+
+  /*Menu hamburguer*/
   #hamb {
     display: block;
-    transform: translate(1.2rem);
+    cursor: pointer;
+    font-size: 2rem;
+    background: transparent;
+    border: none;
+    z-index: 100;
   }
 
+  .header-links {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    top: 80px;
+    left: 0;
+    right: 0;
+    background-color: #fff;
+    border-top: 2px solid #0460a0;
+    z-index: 99;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    visibility: hidden; 
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .header-links.open {
+    visibility: visible;
+    opacity: 1;
+    display: flex;
+  }
+  .header-links li {
+    margin: 0.5rem 0; 
+    font-size: 1.5rem;
+  }
+  header {
+    padding: 1rem;
+  }
   header > ul {
     display: none;
   }
 
   .containerHome {
     visibility: visible;
+    flex-direction: column;
+    padding-inline: 1rem;
+    padding-top:3rem ;
   }
 
   #welcome-part2 {
-    font-size: 2rem;
+    font-size: 2.5rem;
+    padding-top: 1.5rem;
   }
 
   #paragrafh-welcome {
     text-align: justify;
-    width: 20rem;
+    width: 100%;
+    font-size: 1.2rem;
     letter-spacing: 0.02em;
   }
 
@@ -207,14 +253,23 @@ button {
   #achei {
     font-size: 23px;
   }
-}
 
-@media (max-width: 1439px) {
-  #break > ul > li > a {
-    font-size: 1.2rem;
+  .logo img {
+    width: 20%; 
   }
 
-  #break > ul {
-    font-size: 1.4rem;
+  #btn-wel {
+    width: 100%;  
+    font-size: 1.5rem; 
+  }
+
+  .img-wel {
+    max-width: 80%; 
+    margin: 0 auto;  
+  }
+}
+@media (max-width: 480px) {
+  .header-links li {
+    font-size: 1.3rem; 
   }
 }
