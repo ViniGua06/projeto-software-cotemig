@@ -63,14 +63,14 @@ const UserEvents = () => {
       </button>
       <div className="container">
         <div className="eventContainer">
+          <p className="title">EVENTOS</p>
           {role == "admin" ? (
             <>
               <button className="btn-under" onClick={goToCreateEvent}>
-                <Plus size={40} />
+                <Plus size={50} />
               </button>
             </>
           ) : null}
-          <p className="title">EVENTOS</p>
           <CalendarComponent></CalendarComponent>
         </div>
       </div>

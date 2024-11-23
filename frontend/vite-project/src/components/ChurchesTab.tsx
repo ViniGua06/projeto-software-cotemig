@@ -41,7 +41,7 @@ export const ChurchesTab = () => {
   const goToChurch = async (church_id: any) => {
     await service.changeChurchService(church_id);
     console.log(church_id, "INGREJA");
-    navigate("/user/church");
+    navigate("/church");
   };
 
   return (
