@@ -24,10 +24,6 @@ interface IIntegrants {
   photo: string;
   role: string;
 }
-const [isMenuOpen, setIsMenuOpen] = useState(false);
-const toggleMenu = () => {
-  setIsMenuOpen((prev) => !prev); 
-};
 export const ChurchPage = () => {
   const {
     church_name,
@@ -213,7 +209,10 @@ export const ChurchPage = () => {
       "noopener,noreferrer"
     );
   };
-
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const toggleMenu = () => {
+    setIsMenuOpen((prev) => !prev); 
+  };
   return (
     <>
       <Header toggleMenu={toggleMenu} isMenuOpen={isMenuOpen}></Header>
