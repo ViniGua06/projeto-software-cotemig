@@ -44,6 +44,21 @@ const Header = ({ toggleMenu, isMenuOpen }: HeaderProps) => {
                 <Link to="/usersettings" className="headerLink">
                   Configurações
                 </Link>
+                </li>
+                <li>
+                <Link to="/contact" className="headerLink">
+                  Contato
+                </Link>
+                </li>
+                <li>
+                <Link to="/chat" className="headerLink">
+                  Chat
+                </Link>
+                </li>
+                <li>
+                <Link to="/bible" className="headerLink">
+                  Bíblia
+                </Link>
               </li>
               <li>
                 <Link to="/user" className="headerLink">
