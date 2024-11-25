@@ -2,8 +2,10 @@ import styled from "styled-components";
 import url from "../../assets/urlBackend";
 import { useSelector } from "react-redux";
 import { userSelect } from "../../redux/user/slice";
+import { useNavigate } from "react-router-dom";
 import { churchSelect } from "../../redux/church/slice";
 import { useState } from "react";
+import { Undo2 } from "lucide-react";
 
 export const CreateEventForm = () => {
   const { token } = useSelector(userSelect);
@@ -13,6 +15,7 @@ export const CreateEventForm = () => {
   const [details, setDetails] = useState("");
   const [start, setStart] = useState("");
   const [end, setEnd] = useState("");
+  const navigate = useNavigate();
 
   const submit = async (e: any) => {
     try {
@@ -20,6 +23,7 @@ export const CreateEventForm = () => {
 
       const startDate = new Date(start);
       const endDate = new Date(end);
+      
 
       const atualDate = new Date();
 
@@ -60,57 +64,126 @@ export const CreateEventForm = () => {
   };
   return (
     <>
-      <Form onSubmit={submit}>
-        <label>Event Name:</label>
-        <Input
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          type="text"
-          name="eventName"
-          required
-        />
-        <label>Detalhes do Evento</label>
-        <TextArea
-          value={details}
-          onChange={(e) => setDetails(e.target.value)}
-          name="eventName"
-          required
-        />
-        <label>Data de início: </label>
-        <Input
-          value={start}
-          onChange={(e) => setStart(e.target.value)}
-          type="date"
-          required
-        />
-        <label>Data de término: </label>
-        <Input
-          value={end}
-          onChange={(e) => setEnd(e.target.value)}
-          type="date"
-          required
-        />
-        <SubmitInput type="submit">Enviar</SubmitInput>
-      </Form>
+      <button
+        id="return"
+        onClick={() => {
+          navigate("/userevents");
+        }}
+      >
+        <Undo2 size={60}></Undo2>
+      </button>
+      <CreateEventContainer>
+        <Title>Criar Evento</Title>
+        <Form onSubmit={submit}>
+          <Label>Nome do Evento:</Label>
+          <Input
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            type="text"
+            name="eventName"
+            required
+          />
+          <Label>Detalhes do Evento:</Label>
+          <TextArea
+            value={details}
+            onChange={(e) => setDetails(e.target.value)}
+            name="eventName"
+            required
+          />
+          <Label>Data de início: </Label>
+          <Input
+            value={start}
+            onChange={(e) => setStart(e.target.value)}
+            type="date"
+            required
+          />
+          <Label>Data de término: </Label>
+          <Input
+            value={end}
+            onChange={(e) => setEnd(e.target.value)}
+            type="date"
+            required
+          />
+          <SubmitInput type="submit">CRIAR</SubmitInput>
+        </Form>
+      </CreateEventContainer>
     </>
   );
 };
 
+const Title = styled.h1`
+  color: black;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 1.5rem;
+  text-decoration: underline;
+`;
+
+const CreateEventContainer = styled.div`
+  padding: 2rem;
+  width: 65%;
+  height: auto;
+  border-radius: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: rgb(214, 233, 251);
+  border: 5px solid #0460a0;
+  margin: 0 auto;
+  margin-top: 2rem;
+`;
+
 const Form = styled.form`
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  width: 70%;
+  gap: 1.5rem;
+`;
+
+const Label = styled.label`
+font-size: 1.2rem;
+color: black;
+
+
 `;
 
 const Input = styled.input`
   outline: none;
-  padding: 1rem;
+  padding: 0.7rem;
+  font-family: "Montserrat";
+  font-size: 1rem;
+  border-radius: 0.3rem;
+
+  &[type="date"] {
+    cursor: text;
+  }
 `;
 
 const SubmitInput = styled.button`
-  padding: 0.7rem 0.4rem;
+  padding: 0.7rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+  border-radius: 1rem;
+  font-weight: 800;
+  text-align: center;
+  border: 3px solid #0460a0;
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  width: 40%;
+
+  &:hover {
+    filter: brightness(80%);
+  }
 `;
 
 const TextArea = styled.textarea`
   outline: none;
+  padding: 0.2rem;
+  border-radius: 0.3rem;
+  border: solid 0.13rem black;
+  font-family: "Montserrat";
+  font-size: 1rem;
+  resize: vertical;
 `;

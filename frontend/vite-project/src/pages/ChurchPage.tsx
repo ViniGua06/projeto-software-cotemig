@@ -9,8 +9,6 @@ import igreja from "../assets/igreja.svg";
 import { userSelect } from "../redux/user/slice";
 import url from "../assets/urlBackend";
 import { useNavigate } from "react-router-dom";
-
-import default_ from "../assets/images.png";
 import ApiService from "../services/Api.service";
 import { ativar, desativar, modalSelect } from "../redux/modal/slice";
 import { Modal } from "../components/Modal";
@@ -82,6 +80,10 @@ export const ChurchPage = () => {
   const goToNotices = () => {
     navigate("/church/notices");
   };
+
+  const goToMembers = () => {
+    navigate("/church/members")
+  }
 
   const goToCreateNotice = () => {
     dispatch(ativar("Criar Aviso"));
@@ -212,169 +214,120 @@ export const ChurchPage = () => {
   return (
     <>
       <Header></Header>
-      <Main>
-        <h1>{church_name}</h1>
-        <ChurchPhoto src={church_photo || igreja}></ChurchPhoto>
-        <h1 style={{ marginTop: "1rem" }}>{dailyVerse}</h1>
-        <Table>
-          <thead>
-            <tr>
-              <th>Foto</th>
-              <th>Nome</th>
-              <th>Permissão</th>
-              {role == "admin" ? (
-                <>
-                  <th>Editar</th>
-                  <th>Remover</th>
-                </>
-              ) : null}
-            </tr>
-          </thead>
-
-          <tbody>
-            {integrants && integrants?.length > 0 ? (
-              integrants.map((item: IIntegrants, index: number) => {
-                const handleImageError = () => {
-                  setPhotoSrcs((prevPhotoSrcs) => {
-                    prevPhotoSrcs[index] = default_;
-                    return [...prevPhotoSrcs];
-                  });
-                };
-                return (
-                  <>
-                    <tr key={item.id}>
-                      <td>
-                        <img
-                          src={photoSrcs[index] || item.photo}
-                          alt="imagem"
-                          height={"60px"}
-                          width={"60px"}
-                          style={{ borderRadius: "50%" }}
-                          onError={handleImageError}
-                        />
-                      </td>
-                      <td>{item.name}</td>
-                      <td>{item.role}</td>
-                      {role == "admin" ? (
-                        <>
-                          {user_id != item.id ? (
-                            <>
-                              <RemoveTd
-                                onClick={() => {
-                                  editar();
-                                  setId(parseInt(item.id));
-                                }}
-                              >
-                                Editar
-                              </RemoveTd>
-                              <RemoveTd
-                                onClick={() => remove(parseInt(item.id))}
-                              >
-                                Remover
-                              </RemoveTd>
-                            </>
-                          ) : null}
-                        </>
-                      ) : null}
-                    </tr>
-                  </>
-                );
-              })
-            ) : (
-              <tr>
-                <td colSpan={4}>Nenhum integrante encontrado</td>
-              </tr>
-            )}
-          </tbody>
-        </Table>
-
-        <ButtonContainer>
-          <Button onClick={goToChat}>
-            <MessageSquareText /> CHAT
-          </Button>
-          <Button onClick={goToBiblePage}>
-            <BookOpenText />
-            Bíblia Digital
-          </Button>
-          <Button onClick={goToNotices}>
-            <Megaphone /> AVISOS
-          </Button>
-          {role == "admin" ? (
+      <div id="MainChurchPage">
+        <Main>
+          <h1>{church_name}</h1>
+          <ChurchPhoto src={church_photo || igreja}></ChurchPhoto>
+          <h1 style={{ marginTop: "1rem" }}>{dailyVerse}</h1>
+          <ButtonP onClick={goToMembers}>Gerenciar Membros</ButtonP>
+          <ButtonContainer>
+            <Button onClick={goToChat}>
+              <MessageSquareText /> CHAT
+            </Button>
+            <Button onClick={goToBiblePage}>
+              <BookOpenText />
+              Bíblia
+            </Button>
+            <Button onClick={goToNotices}>
+              <Megaphone /> AVISOS
+            </Button>
+            {role == "admin" ? (
+              <>
+                <Button onClick={goToCreateNotice}>
+                  {" "}
+                  <Plus />
+                  Criar Aviso
+                </Button>
+                <Button onClick={goToUpdateChurchForm}>
+                  <Edit />
+                  Editar Igreja
+                </Button>
+                <Button onClick={() => dispatch(ativar("Setar Versículo"))}>
+                  <Plus />
+                  Versículo do dia
+                </Button>
+                <Button onClick={invitePerson}>
+                  <Send />
+                  Convidar membro
+                </Button>
+              </>
+            ) : null}
+          </ButtonContainer>
+          {tipo == "Criar Aviso" ? (
             <>
-              <Button onClick={goToCreateNotice}>
-                {" "}
-                <Plus />
-                Criar Aviso
-              </Button>
-              <Button onClick={goToUpdateChurchForm}>
-                <Edit />
-                Editar Igreja
-              </Button>
-              <Button onClick={() => dispatch(ativar("Setar Versículo"))}>
-                Colocar versículo do dia
-              </Button>
-              <Button onClick={invitePerson}>
-                <Send />
-                Convidar membro
-              </Button>
+              <Modal title="Criar Aviso">
+                <Form onSubmit={createNotice}>
+                  <label>Aviso</label>
+                  <textarea
+                    value={text}
+                    onChange={(e) => setText(e.target.value)}
+                    required
+                  ></textarea>
+                  <button type="submit">Enviar</button>
+                </Form>
+              </Modal>
+            </>
+          ) : tipo == "Mudar Permissões" ? (
+            <>
+              <Modal title="Mudar Permissões">
+                <form onSubmit={changePermission}>
+                  <Select
+                    value={roleUpds}
+                    onChange={(e) => setRoleUpds(e.target.value)}
+                    required
+                  >
+                    <option value="">Selecione uma opção</option>
+                    <option value="admin">Admin</option>
+                    <option value="normal">Normal</option>
+                  </Select>
+
+                  <PermitSubmit type="submit">Enviar</PermitSubmit>
+                </form>
+              </Modal>
+            </>
+          ) : tipo == "Editar Perfil" ? (
+            <>
+              <Modal title={"Editar Perfil"}>
+                <UpdateUserForm></UpdateUserForm>
+              </Modal>
+            </>
+          ) : tipo == "Update Church" ? (
+            <>
+              <Modal title="Atualizar igreja">
+                <UpdateChurchForm></UpdateChurchForm>
+              </Modal>
+            </>
+          ) : tipo == "Setar Versículo" ? (
+            <>
+              <Modal title="Atualizar versículo do dia">
+                <SetDailyVerseForm></SetDailyVerseForm>
+              </Modal>
             </>
           ) : null}
-        </ButtonContainer>
-        {tipo == "Criar Aviso" ? (
-          <>
-            <Modal title="Criar Aviso">
-              <Form onSubmit={createNotice}>
-                <label>Aviso</label>
-                <textarea
-                  value={text}
-                  onChange={(e) => setText(e.target.value)}
-                  required
-                ></textarea>
-                <button type="submit">Enviar</button>
-              </Form>
-            </Modal>
-          </>
-        ) : tipo == "Mudar Permissões" ? (
-          <>
-            <Modal title="Mudar Permissões">
-              <form onSubmit={changePermission}>
-                <Select
-                  value={roleUpds}
-                  onChange={(e) => setRoleUpds(e.target.value)}
-                  required
-                >
-                  <option value="">Selecione uma opção</option>
-                  <option value="admin">Admin</option>
-                  <option value="normal">Normal</option>
-                </Select>
-
-                <PermitSubmit type="submit">Enviar</PermitSubmit>
-              </form>
-            </Modal>
-          </>
-        ) : tipo == "Editar Perfil" ? (
-          <>
-            <Modal title={"Editar Perfil"}>
-              <UpdateUserForm></UpdateUserForm>
-            </Modal>
-          </>
-        ) : tipo == "Update Church" ? (
-          <>
-            <Modal title="Atualizar igreja">
-              <UpdateChurchForm></UpdateChurchForm>
-            </Modal>
-          </>
-        ) : tipo == "Setar Versículo" ? (
-          <>
-            <Modal title="Atualizar versículo do dia">
-              <SetDailyVerseForm></SetDailyVerseForm>
-            </Modal>
-          </>
-        ) : null}
-      </Main>
+        </Main>
+      </div>
     </>
   );
 };
+
+const ButtonP = styled.button`
+  border-radius: 1rem;
+  padding: 1.2rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: auto;
+  color: #fff;
+  font-size: 1.4rem;
+  background: #0460a0;
+  cursor: pointer;
+  font-weight: 500;
+  text-transform: uppercase;
+
+  &:hover {
+    filter: brightness(80%);
+  }
+`;
 
 const Button = styled.button`
   border-radius: 1rem;
@@ -396,10 +349,9 @@ const Button = styled.button`
 const ButtonContainer = styled.div`
   display: flex;
   justify-content: center;
-  margin-left: 6rem;
   gap: 1rem;
   margin-top: 2rem;
-  width: 80%;
+  width: 100%;
 `;
 
 const PermitSubmit = styled.button`
@@ -454,54 +406,4 @@ const Main = styled.main`
   padding: 2rem;
   text-align: center;
   overflow: auto;
-`;
-
-const Table = styled.table`
-  width: 70%;
-  margin-left: 4.8rem;
-  margin-top: 2rem;
-  border-collapse: separate;
-  border-spacing: 0;
-  border: 1px solid black;
-  border-radius: 1rem;
-  color: black;
-  background: whitesmoke;
-  overflow: hidden;
-
-  th,
-  td {
-    padding: 0.5rem;
-    border: 1px solid black;
-    text-align: center;
-  }
-
-  tbody {
-    height: 1rem;
-  }
-
-  tr:hover {
-    background-color: lightgrey;
-  }
-
-  thead tr:first-child th:first-child {
-    border-top-left-radius: 15px;
-  }
-  thead tr:first-child th:last-child {
-    border-top-right-radius: 15px;
-  }
-  tbody tr:last-child td:first-child {
-    border-bottom-left-radius: 15px;
-  }
-  tbody tr:last-child td:last-child {
-    border-bottom-right-radius: 15px;
-  }
-`;
-
-const RemoveTd = styled.td`
-  cursor: pointer;
-
-  &:hover {
-    color: whitesmoke;
-    background: red;
-  }
 `;

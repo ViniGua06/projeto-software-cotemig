@@ -2,7 +2,6 @@ import "../styles/home.css";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { userSelect } from "../redux/user/slice";
-import { Church } from "lucide-react";
 import icon from ".././assets/sistema_paroquias.svg";
 
 const Icon = icon;
@@ -17,15 +16,12 @@ export const HomeMain = () => {
               Esteja por dentro da<br></br> sua igreja!
             </h3>
             <p id="paragrafh-welcome">
-              Nossa plataforma digital facilita as operações administrativas e
-              de comunicação, proporcionando uma experiência integrada e
-              eficiente para líderes religiosos e membros da comunidade.
+              Simplifique a administração e a comunicação da sua comunidade com
+              nossa plataforma digital, eficiente e intuitiva.
             </p>
             <br></br>
             {isLogged ? (
-              <Link to={"/user"}>
-                <button id="btn-wel">Minha Página</button>
-              </Link>
+              <button id="btnLogged"></button>
             ) : (
               <Link to={"/signUp"}>
                 <button id="btn-wel">Crie sua conta</button>

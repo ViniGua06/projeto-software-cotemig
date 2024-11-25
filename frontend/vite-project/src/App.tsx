@@ -1,14 +1,10 @@
 import { useEffect, useState } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
-import "./styles/home.css";
-
 import { createGlobalStyle } from "styled-components";
-
 import Home from "./pages/aliases/Home";
 import Contact from "./pages/aliases/Contact";
 import SignIn from "./pages/aliases/SignIn";
 import ForgotPassword from "./pages/functions/ForgotPassword";
-import Churches from "./pages/Churches";
 import InputEmail from "./pages/aliases/InputEmail";
 import EmailSent from "./pages/functions/EmailSent";
 import SignUp from "./pages/aliases/SignUp";
@@ -24,6 +20,8 @@ import { CreateEvent } from "./pages/CreateEvent";
 import { Invite } from "./pages/Invite";
 import UserSettings from "./pages/UserSettings";
 import UserEvents from "./pages/UserEvents";
+import { ChurchMembers } from "./pages/ChurchMembers";
+import "./styles/home.css";
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -54,26 +52,25 @@ function App() {
   }, [location]);
   return (
     <>
-
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/churches" element={<Churches />}></Route>
         <Route path="/contact" element={<Contact />}></Route>
         <Route path="/signIn" element={<SignIn />}></Route>
         <Route path="/recover" element={<InputEmail />}></Route>
         <Route path="/recover/sent" element={<EmailSent />}></Route>
+        <Route path="/church/members" element={<ChurchMembers />}></Route>
         <Route path="/signUp" element={<SignUp />}></Route>
         <Route
           path="/forgotPassword/:token/:email"
           element={<ForgotPassword />}
         ></Route>
         <Route path="/user" element={<UserPage />}></Route>
-        <Route path="/usersettings" element={<UserSettings/>}></Route>
-        <Route path="/userevents" element={<UserEvents/>}></Route>
+        <Route path="/usersettings" element={<UserSettings />}></Route>
+        <Route path="/userevents" element={<UserEvents />}></Route>
         <Route path="/user/notallowed" element={<NotAllowed />} />
         <Route path="/church/create" element={<CreateChurch />}></Route>
         <Route path="/enterchurch" element={<EnterChurch />}></Route>
-        <Route path="/user/church" element={<ChurchPage />}></Route>
+        <Route path="/church" element={<ChurchPage />}></Route>
         <Route path="/church/chat" element={<Chat />}></Route>
         <Route path="/church/notices" element={<Notices />}></Route>
         <Route path="/church/bible" element={<Bible />}></Route>

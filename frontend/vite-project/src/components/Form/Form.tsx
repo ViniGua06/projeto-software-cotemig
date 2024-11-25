@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { changeUser } from "../../redux/user/slice";
 import url from "../../assets/urlBackend";
 import "../Form/styles/form.css";
 import { useDispatch } from "react-redux";
+import { Undo2 } from "lucide-react";
 
 interface IForm {
   opt: "logar" | "cadastrar" | "contato" | "inputEmail";
@@ -286,20 +287,26 @@ const Form = (opt: IForm) => {
       </>
     );
   } else if (opt.opt === "inputEmail") {
+  const emailInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    emailInputRef.current?.focus();
+  }, []);
     return (
       <>
         <form className="formEmail" onSubmit={enviarEmail}>
           <h1>Recuperar Senha</h1>
-          <h2>Digite o email que você cadastrou sua conta</h2>
+          <h3>Digite o email que você cadastrou abaixo:</h3>
           <input
             type="email"
             value={emailRecover}
             onChange={(e) => setEmailRecover(e.target.value)}
             required
+            ref={emailInputRef}
           />
           <input className="btn-send" type="submit" value="Enviar" />
           <button type="button" onClick={back}>
-            Voltar
+            <Undo2 />
           </button>
         </form>
       </>

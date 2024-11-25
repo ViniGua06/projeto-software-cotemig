@@ -42,9 +42,14 @@ a {
 
 #paragrafh-welcome {
   padding-top: 2rem;
-  max-width: 52rem;
+  line-height: 2rem;
+  max-width: 50rem;
   text-align: justify;
   font-size: 1.5rem;
+}
+
+#btnLogged{
+  visibility: hidden;
 }
 
 #welcome-part2 {
@@ -155,7 +160,7 @@ button {
 }
 
 #btn-wel:hover {
-  background-color: #054d85; /* Cor mais escura ao passar o mouse */
+  background-color: #054d85;
 }
 
 .text-wel {
