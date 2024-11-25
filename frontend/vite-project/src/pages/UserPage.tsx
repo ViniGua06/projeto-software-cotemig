@@ -55,10 +55,13 @@ const UserPage = () => {
   };
 
   const { tipo } = useSelector(modalSelect);
-
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const toggleMenu = () => {
+    setIsMenuOpen((prev) => !prev); 
+  };
   return (
     <>
-      <Header></Header>
+<Header toggleMenu={toggleMenu} isMenuOpen={isMenuOpen}></Header>
 
       <div id="MainUserPage">
         <div id="FirstSection">

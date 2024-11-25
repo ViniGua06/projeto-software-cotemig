@@ -49,10 +49,13 @@ const UserEvents = () => {
       console.log(error);
     }
   };
-
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const toggleMenu = () => {
+    setIsMenuOpen((prev) => !prev); 
+  };
   return (
     <>
-      <Header></Header>
+      <Header toggleMenu={toggleMenu} isMenuOpen={isMenuOpen}></Header>
       <button
         id="return"
         onClick={() => {

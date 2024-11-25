@@ -24,7 +24,10 @@ interface IIntegrants {
   photo: string;
   role: string;
 }
-
+const [isMenuOpen, setIsMenuOpen] = useState(false);
+const toggleMenu = () => {
+  setIsMenuOpen((prev) => !prev); 
+};
 export const ChurchPage = () => {
   const {
     church_name,
@@ -213,7 +216,7 @@ export const ChurchPage = () => {
 
   return (
     <>
-      <Header></Header>
+      <Header toggleMenu={toggleMenu} isMenuOpen={isMenuOpen}></Header>
       <div id="MainChurchPage">
         <Main>
           <h1>{church_name}</h1>

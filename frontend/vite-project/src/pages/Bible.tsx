@@ -15,6 +15,11 @@ export const Bible = () => {
 
   const api = ApiService();
 
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const toggleMenu = () => {
+    setIsMenuOpen((prev) => !prev); 
+  };
+
   useEffect(() => {
     api.fetchUserInfo();
     api.testToken();
@@ -75,7 +80,7 @@ export const Bible = () => {
 
   return (
     <>
-      <Header></Header>
+      <Header toggleMenu={toggleMenu} isMenuOpen={isMenuOpen}></Header>
       <Main>
         <ChooseContainer>
           <LabelInputContainer>
