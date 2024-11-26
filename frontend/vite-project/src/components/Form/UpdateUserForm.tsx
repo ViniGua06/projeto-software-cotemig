@@ -121,11 +121,23 @@ const ErrorMessage = styled.h3`
 
 const UpdateForm = styled.form`
   width: 100%;
-  height: 100%;
+  max-width: 500px;
+  height: auto;
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   display: flex;
   align-items: center;
   flex-direction: column;
   gap: 1.4rem;
+  
+  /* Responsividade */
+  @media (max-width: 768px) {
+    padding: 15px;
+    gap: 1rem;
+    width: 100%;
+  }
 `;
 
 const UpdateFormLabel = styled.label`
@@ -133,6 +145,11 @@ const UpdateFormLabel = styled.label`
   font-size: 1.2rem;
   font-weight: 700;
   font-family: "Montserrat", sans-serif;
+
+  /* Responsividade */
+  @media (max-width: 768px) {
+    font-size: 1rem;
+  }
 `;
 
 const UpdateFormInput = styled.input`
@@ -146,6 +163,12 @@ const UpdateFormInput = styled.input`
   letter-spacing: 0.5px;
   border-inline: none;
   border-top: none;
+
+  /* Responsividade */
+  @media (max-width: 768px) {
+    padding: 0.5rem;
+    font-size: 0.9rem;
+  }
 `;
 
 const UpdateFormSubmit = styled.input`
@@ -162,5 +185,11 @@ const UpdateFormSubmit = styled.input`
 
   &:hover {
     background: lightgrey;
+  }
+
+  /* Responsividade */
+  @media (max-width: 768px) {
+    width: 60%;
+    font-size: 0.9rem;
   }
 `;

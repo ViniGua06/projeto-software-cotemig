@@ -35,6 +35,10 @@ const BackgroundModal = styled.div<IModal>`
   padding-inline: 19rem;
   padding-block: 2rem;
   z-index: 99;
+
+  @media (max-width: 768px) {
+    padding-inline: 1rem; 
+  }
 `;
 
 const ContentModal = styled.div`
@@ -47,6 +51,10 @@ const ContentModal = styled.div`
   justify-content: center;
   align-items: center;
   animation: ${ModalAnimation} 0.3s linear;
+
+  @media (max-width: 768px) {
+    width: 90%;
+  }
 `;
 
 const HeaderModal = styled.div`
@@ -59,6 +67,10 @@ const HeaderModal = styled.div`
   background-color: aliceblue;
   padding-inline: 2rem;
   border-bottom: solid #000;
+
+  @media (max-width: 768px) {
+    padding-inline: 1rem;
+  }
 `;
 
 const MainModel = styled.div`
@@ -68,6 +80,11 @@ const MainModel = styled.div`
   padding-block: 2rem;
   border-bottom: solid #0460a0;
   overflow-y: auto;
+
+  @media (max-width: 768px) {
+    padding-inline: 1rem; 
+    padding-block: 1rem; 
+  }
 `;
 
 const CloseModalX = styled.h2`
