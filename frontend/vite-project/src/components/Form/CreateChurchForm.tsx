@@ -11,16 +11,33 @@ import url from "../../assets/urlBackend";
 import { useSelector } from "react-redux";
 import { userSelect } from "../../redux/user/slice";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 export const CreateChurchForm = () => {
   const [codigo, setCodigo] = useState("");
   const [permitido, setPermitido] = useState(false);
   const [imagem, setImagem] = useState<any>("");
   const [nomeIgreja, setNomeIgreja] = useState("");
+  const [isMobile, setIsMobile] = useState(false);
 
   const { user_id, token } = useSelector(userSelect);
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 768) {
+        setIsMobile(true);
+      } else {
+        setIsMobile(false); 
+      }
+    };
+    window.addEventListener("resize", handleResize);
+    handleResize();
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   const submit = async (e: any) => {
     try {
