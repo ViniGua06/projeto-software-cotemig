@@ -75,7 +75,7 @@ const ChurchesContainer = styled.div`
   border-radius: 10px;
   background-color: #f5f5f5;
   color: #333;
-  margin: 2rem auto;
+  margin: 1rem auto;
   padding: 1.5rem;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 

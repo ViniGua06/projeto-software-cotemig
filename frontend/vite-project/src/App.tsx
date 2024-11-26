@@ -73,7 +73,7 @@ function App() {
         <Route path="/church" element={<ChurchPage />}></Route>
         <Route path="/church/chat" element={<Chat />}></Route>
         <Route path="/church/notices" element={<Notices />}></Route>
-        <Route path="/church/bible" element={<Bible />}></Route>
+        <Route path="/bible" element={<Bible />}></Route>
         <Route path="/user/events/create" element={<CreateEvent />}></Route>
         <Route path="/invite/:token" element={<Invite />}></Route>
       </Routes>

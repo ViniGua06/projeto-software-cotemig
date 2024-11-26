@@ -6,7 +6,7 @@ import { userSelect } from "../redux/user/slice";
 import { modalSelect } from "../redux/modal/slice";
 
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { logout } from "../redux/user/slice";
 
@@ -22,6 +22,7 @@ import { UpdateUserForm } from "../components/Form/UpdateUserForm";
 import url from "../assets/urlBackend";
 import { InformModal } from "../components/InformModal";
 import { CalendarComponent } from "../components/Calendar";
+import { Settings } from "lucide-react";
 
 
 
@@ -61,13 +62,13 @@ const UserPage = () => {
   };
   return (
     <>
-<Header toggleMenu={toggleMenu} isMenuOpen={isMenuOpen}></Header>
+      <Header toggleMenu={toggleMenu} isMenuOpen={isMenuOpen}></Header>
 
       <div id="MainUserPage">
         <div id="FirstSection">
-          <div id="user-info">
+          <div>
             <ProphilePhoto
-              margin="0 0 2rem 0"
+              margin="1rem 0 2rem 0"
               onClick={() => {
                 dispatch(ativar("Trocar Imagem"));
               }}
@@ -76,6 +77,11 @@ const UserPage = () => {
               {" "}
               Olá, <span id="user-name">{user_name}</span>
             </h1>
+            <li id="user-settings-li">
+              <Link to="/usersettings">
+                <Settings id="user-settings-icon" size={60} />
+              </Link>
+            </li>
           </div>
 
           <ChurchesTab></ChurchesTab>

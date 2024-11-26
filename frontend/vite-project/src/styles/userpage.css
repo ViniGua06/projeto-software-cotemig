@@ -45,6 +45,15 @@
   text-transform: uppercase;
 }
 
+#user-settings-li{
+  margin-left: 2rem;
+  list-style: none;
+}
+
+#user-settings-icon{
+  color: #000;
+}
+
 #signImg {
   width: 5%;
   height: auto;
@@ -58,7 +67,7 @@
   background-color: #0460a0;
   display: flex;
   justify-content: center;
-  margin-top: 5rem;
+  margin-top: 4rem;
   border-radius: 1rem;
 
   &:hover {
@@ -106,7 +115,7 @@
 #MainUserPage {
   padding: 2rem;
   width: 80%;
-  height: 85%;
+  height: auto;
   border-radius: 1rem;
   display: flex;
   justify-content: center;

@@ -226,10 +226,6 @@ export const ChurchPage = () => {
             <Button onClick={goToChat}>
               <MessageSquareText /> CHAT
             </Button>
-            <Button onClick={goToBiblePage}>
-              <BookOpenText />
-              Bíblia
-            </Button>
             <Button onClick={goToNotices}>
               <Megaphone /> AVISOS
             </Button>

@@ -36,33 +36,30 @@ const Header = ({ toggleMenu, isMenuOpen }: HeaderProps) => {
           {isLogged ? (
             <ul className={`header-links ${isMenuOpen ? "open" : ""}`}>
               <li>
+                <Link to="/user" className="headerLink">
+                  Minha Página
+                </Link>
+              </li>
+              {/*
+              <li>
                 <Link to="/userevents" className="headerLink">
                   Eventos
                 </Link>
               </li>
               <li>
-                <Link to="/usersettings" className="headerLink">
-                  Configurações
-                </Link>
-                </li>
-                <li>
-                <Link to="/contact" className="headerLink">
-                  Contato
-                </Link>
-                </li>
-                <li>
                 <Link to="/chat" className="headerLink">
                   Chat
                 </Link>
-                </li>
-                <li>
+              </li>
+              */}
+              <li>
                 <Link to="/bible" className="headerLink">
                   Bíblia
                 </Link>
               </li>
               <li>
-                <Link to="/user" className="headerLink">
-                  Minha Página
+                <Link to="/contact" className="headerLink">
+                  Contato
                 </Link>
               </li>
             </ul>
