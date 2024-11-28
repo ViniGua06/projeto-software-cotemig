@@ -23,7 +23,6 @@ export const CreateEventForm = () => {
 
       const startDate = new Date(start);
       const endDate = new Date(end);
-      
 
       const atualDate = new Date();
 
@@ -64,14 +63,6 @@ export const CreateEventForm = () => {
   };
   return (
     <>
-      <button
-        id="return"
-        onClick={() => {
-          navigate("/userevents");
-        }}
-      >
-        <Undo2 size={60}></Undo2>
-      </button>
       <CreateEventContainer>
         <Title>Criar Evento</Title>
         <Form onSubmit={submit}>
@@ -142,10 +133,8 @@ const Form = styled.form`
 `;
 
 const Label = styled.label`
-font-size: 1.2rem;
-color: black;
-
-
+  font-size: 1.2rem;
+  color: black;
 `;
 
 const Input = styled.input`

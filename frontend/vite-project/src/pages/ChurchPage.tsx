@@ -165,6 +165,14 @@ export const ChurchPage = () => {
     dispatch(ativar("Update Church"));
   };
 
+  const goToCreateEvent = () => {
+    navigate("/church/events/create");
+  };
+
+  const goToEvents = () => {
+    navigate("/userevents")
+  }
+
   const goToBiblePage = () => {
     navigate("/church/bible");
   };
@@ -220,7 +228,6 @@ export const ChurchPage = () => {
         <Main>
           <h1>{church_name}</h1>
           <ChurchPhoto src={church_photo || igreja}></ChurchPhoto>
-          <h1 style={{ marginTop: "1rem" }}>{dailyVerse}</h1>
           <ButtonP onClick={goToMembers}>Gerenciar Membros</ButtonP>
           <ButtonContainer>
             <Button onClick={goToChat}>
@@ -229,12 +236,20 @@ export const ChurchPage = () => {
             <Button onClick={goToNotices}>
               <Megaphone /> AVISOS
             </Button>
+            <Button onClick={goToEvents}>
+              <CalendarDays /> Eventos
+            </Button>
             {role == "admin" ? (
               <>
                 <Button onClick={goToCreateNotice}>
                   {" "}
                   <Plus />
-                  Criar Aviso
+                  Aviso
+                </Button>
+                <Button onClick={goToCreateEvent}>
+                  {" "}
+                  <Plus />
+                  Evento
                 </Button>
                 <Button onClick={goToUpdateChurchForm}>
                   <Edit />
@@ -253,15 +268,15 @@ export const ChurchPage = () => {
           </ButtonContainer>
           {tipo == "Criar Aviso" ? (
             <>
-              <Modal title="Criar Aviso">
+              <Modal title="Criar Evento">
                 <Form onSubmit={createNotice}>
-                  <label>Aviso</label>
-                  <textarea
+                  <Label>Aviso:</Label>
+                  <TextArea
                     value={text}
                     onChange={(e) => setText(e.target.value)}
                     required
-                  ></textarea>
-                  <button type="submit">Enviar</button>
+                  />
+                  <SubmitButton type="submit">CRIAR</SubmitButton>
                 </Form>
               </Modal>
             </>
@@ -303,6 +318,9 @@ export const ChurchPage = () => {
             </>
           ) : null}
         </Main>
+
+        <h2>Versículo do dia:</h2>
+        <h3 style={{ marginTop: "1rem" }}>{dailyVerse}</h3>
       </div>
     </>
   );
@@ -330,6 +348,7 @@ const ButtonP = styled.button`
 const Button = styled.button`
   border-radius: 1rem;
   padding: 1rem;
+  user-select: none;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -404,4 +423,37 @@ const Main = styled.main`
   padding: 2rem;
   text-align: center;
   overflow: auto;
+`;
+
+const Label = styled.label`
+font-size: 2rem;
+color: black;
+`;
+
+const SubmitButton = styled.button`
+  padding: 0.7rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+  border-radius: 1rem;
+  font-weight: 800;
+  text-align: center;
+  border: 3px solid #0460a0;
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  width: 40%;
+
+  &:hover {
+    filter: brightness(80%);
+  }
+`;
+
+const TextArea = styled.textarea`
+  outline: none;
+  padding: 0.2rem;
+  border-radius: 0.3rem;
+  border: solid 0.13rem black;
+  font-family: "Montserrat";
+  font-size: 1rem;
+  resize: vertical;
 `;

@@ -63,7 +63,8 @@ const UserSettings = () => {
           <p className="title">CONFIGURAÇÕES</p>
           <br></br>
           <div className="form-group">
-            <button id="editprofile" onClick={() => dispatch(ativar("Editar"))}>
+            <button id="editprofile" onClick={() => dispatch(ativar("Editar"))
+            }>
               <Settings></Settings> Editar Perfil
             </button>
             <Modal title="Editar Perfil">
@@ -75,6 +76,7 @@ const UserSettings = () => {
                 if (confirm("Tem certeza que deseja excluir sua conta?")) {
                   if (confirm("Absoluta?")) {
                     deleteAccount();
+                    navigate("/user");
                   }
                 }
               }}

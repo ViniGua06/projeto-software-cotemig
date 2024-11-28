@@ -11,7 +11,6 @@ import SignUp from "./pages/aliases/SignUp";
 import UserPage from "./pages/UserPage";
 import { NotAllowed } from "./pages/functions/NotAllowed";
 import { CreateChurch } from "./pages/CreateChurch";
-import { EnterChurch } from "./pages/functions/EnterChurch";
 import { ChurchPage } from "./pages/ChurchPage";
 import { Chat } from "./pages/functions/Chat";
 import { Notices } from "./pages/functions/Notices";
@@ -69,12 +68,11 @@ function App() {
         <Route path="/userevents" element={<UserEvents />}></Route>
         <Route path="/user/notallowed" element={<NotAllowed />} />
         <Route path="/church/create" element={<CreateChurch />}></Route>
-        <Route path="/enterchurch" element={<EnterChurch />}></Route>
         <Route path="/church" element={<ChurchPage />}></Route>
         <Route path="/church/chat" element={<Chat />}></Route>
         <Route path="/church/notices" element={<Notices />}></Route>
         <Route path="/bible" element={<Bible />}></Route>
-        <Route path="/user/events/create" element={<CreateEvent />}></Route>
+        <Route path="/church/events/create" element={<CreateEvent />}></Route>
         <Route path="/invite/:token" element={<Invite />}></Route>
       </Routes>
     </>

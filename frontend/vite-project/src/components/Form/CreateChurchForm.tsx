@@ -14,7 +14,6 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
 export const CreateChurchForm = () => {
-  const [codigo, setCodigo] = useState("");
   const [permitido, setPermitido] = useState(false);
   const [imagem, setImagem] = useState<any>("");
   const [nomeIgreja, setNomeIgreja] = useState("");
@@ -29,7 +28,7 @@ export const CreateChurchForm = () => {
       if (window.innerWidth <= 768) {
         setIsMobile(true);
       } else {
-        setIsMobile(false); 
+        setIsMobile(false);
       }
     };
     window.addEventListener("resize", handleResize);
@@ -57,7 +56,6 @@ export const CreateChurchForm = () => {
 
       formData.append("photo", compressedImage, "image.jpg");
       formData.append("name", nomeIgreja);
-      formData.append("code", codigo);
 
       const response = await fetch(`${url}/church/${user_id}`, {
         method: "POST",
@@ -80,11 +78,12 @@ export const CreateChurchForm = () => {
     <>
       <ChurchForm onSubmit={submit}>
         <FormTitle>Cadastro de Igreja</FormTitle>
-        <FormLabel>Nome da Igreja</FormLabel>
+        <FormLabel>Nome da Igreja (máximo de 20 caracteres)</FormLabel>
         <FormInputText
           value={nomeIgreja}
           onChange={(e) => setNomeIgreja(e.target.value)}
           required
+          maxLength={19}
         ></FormInputText>
         <FormLabel>Imagem de Perfil da Igreja</FormLabel>
 
@@ -120,49 +119,24 @@ export const CreateChurchForm = () => {
             />
           </LabelAddFile>
         </FormAddFile>
-
-        <FormLabel>Código(será usado para convidar membros)</FormLabel>
-        <FormLabel>Poderá ser mudado posteriormente</FormLabel>
-        <FormInputText
-          value={codigo}
-          onChange={(e) => {
-            setCodigo(e.target.value);
-            codigo.length == 11 ? setPermitido(true) : setPermitido(false);
-          }}
-          maxLength={12}
-          required
-        ></FormInputText>
-
-        {!permitido ? (
-          <>
-            <ErrorMessage>Minimo 12 caracteres</ErrorMessage>
-          </>
-        ) : null}
-
-        {permitido ? (
-          <>
-            <SendForm type={"submit"} value={"Cadastrar"}></SendForm>
-          </>
-        ) : (
-          <>
-            <SendForm type={"submit"} value={"Cadastrar"} disabled></SendForm>
-          </>
-        )}
+        <SendForm type={"submit"} value={"Cadastrar"}></SendForm>
       </ChurchForm>
     </>
   );
 };
 
 const SendForm = styled.input`
-  background-color: rgb(76, 175, 80);
+  background-color: #3495db;
   color: white;
   outline: none;
   border: none;
   padding: 1rem;
+  text-transform: uppercase;
+  font-weight: 800;
   border-radius: 1rem;
 
   &:not([disabled]):hover {
-    background-color: green;
+    background-color: #0460a0;
     cursor: pointer;
   }
 `;
@@ -186,6 +160,7 @@ const FormTitle = styled.h2`
 `;
 
 const FormLabel = styled.label`
+  font-size: 1.2rem;
   color: rgba(0, 0, 0, 0.7);
 `;
 
@@ -193,12 +168,10 @@ const FormInputText = styled.input`
   border-inline: none;
   border-top: none;
   outline: none;
-  background: transparent;
+  border-radius: 1rem;
   display: flex;
+  height: 3rem;
+  width: 31%;
   text-align: center;
-  font-size: 1.1rem;
-`;
-
-const ErrorMessage = styled.h2`
-  color: red;
+  font-size: 1.5rem;
 `;

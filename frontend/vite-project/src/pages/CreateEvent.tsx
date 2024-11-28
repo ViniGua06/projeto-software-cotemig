@@ -6,7 +6,7 @@ import React, { useState } from "react";
 export const CreateEvent = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const toggleMenu = () => {
-    setIsMenuOpen((prev) => !prev); 
+    setIsMenuOpen((prev) => !prev);
   };
   return (
     <>

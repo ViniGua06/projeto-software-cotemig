@@ -280,6 +280,7 @@ export const Select = styled.select`
   height: 50%;
   width: 100%;
   border-inline: none;
+  font-size: 1rem;
   border-top: none;
   outline: none;
   background: transparent;
@@ -298,6 +299,9 @@ const TextContainer = styled.section`
   width: 100%;
   height: 60%;
   background: whitesmoke;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
   color: black;
   padding-inline: 1.9rem;
   padding-bottom: 1.9rem;
@@ -308,6 +312,7 @@ const Reference = styled.div`
   justify-content: center;
   align-items: center;
   height: 20%;
+  margin-top: 1rem;
   width: 100%;
   font-size: 1.3rem;
 `;
@@ -315,8 +320,8 @@ const Reference = styled.div`
 const Verse = styled.div`
   display: flex;
   height: 80%;
+  margin-top: 1rem;
   overflow-y: auto;
-
   font-size: 2rem;
-  text-align: center;
+  text-align: justify;
 `;

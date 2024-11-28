@@ -57,7 +57,7 @@ export const SetDailyVerseForm = () => {
   return (
     <>
       <DailyVerseForm onSubmit={setDailyVerse}>
-        <label>Livro</label>
+        <Label>Livro</Label>
         <Select value={book} onChange={(e) => setBook(e.target.value)}>
           <option value="">Selecione um livro</option>
           <option value="Gênesis">Gênesis</option>
@@ -127,12 +127,12 @@ export const SetDailyVerseForm = () => {
           <option value="Judas">Judas</option>
           <option value="Apocalipse">Apocalipse</option>
         </Select>
-        <label>Capítulo</label>
+        <Label>Capítulo</Label>
         <Input
           type="number"
           onChange={(e) => setChapter(e.target.value)}
         ></Input>
-        <label>Versículo</label>
+        <Label>Versículo</Label>
         <Input type="number" onChange={(e) => setVerse(e.target.value)}></Input>
         <Verse>{verseFromApi}</Verse>
         <SubmitButton type="submit">Enviar</SubmitButton>
@@ -150,18 +150,50 @@ const DailyVerseForm = styled.form`
   gap: 1rem;
 `;
 
+const Label = styled.label`
+  font-size: 1.5rem;
+  display: flex;
+  color: black;
+`;
+
 const Input = styled.input`
-  padding: 0.6rem;
   outline: none;
+  padding: 0.5rem;
+  border-radius: 0.3rem;
+  border: solid 0.13rem black;
+  font-family: "Montserrat";
+  font-size: 1rem;
+  resize: vertical;
 `;
 
 const Select = styled.select`
   padding: 0.6rem;
+  outline: none;
+  padding: 0.5rem;
+  border-radius: 0.3rem;
+  border: solid 0.13rem black;
+  font-family: "Montserrat";
+  font-size: 1rem;
+  resize: vertical;
 `;
 
 const SubmitButton = styled.button`
-  padding: 1rem;
-  width: 30%;
+  padding: 0.7rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+  border-radius: 1rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  text-align: center;
+  border: 3px solid #000000;
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  width: 40%;
+
+  &:hover {
+    filter: brightness(80%);
+  }
 `;
 
 const Verse = styled.h3`

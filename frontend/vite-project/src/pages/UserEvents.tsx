@@ -56,24 +56,9 @@ const UserEvents = () => {
   return (
     <>
       <Header toggleMenu={toggleMenu} isMenuOpen={isMenuOpen}></Header>
-      <button
-        id="return"
-        onClick={() => {
-          navigate("/user");
-        }}
-      >
-        <Undo2 size={50}></Undo2>
-      </button>
       <div className="container">
         <div className="eventContainer">
           <p className="title">EVENTOS</p>
-          {role == "admin" ? (
-            <>
-              <button className="btn-under" onClick={goToCreateEvent}>
-                <Plus size={50} />
-              </button>
-            </>
-          ) : null}
           <CalendarComponent></CalendarComponent>
         </div>
       </div>

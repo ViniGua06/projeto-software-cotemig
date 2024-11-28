@@ -9,34 +9,31 @@ import styled from "styled-components";
 import ApiService from "../../services/Api.service";
 import React from "react";
 import ChurchService from "../../services/Church.service";
+import Header from "../../components/Header";
 
-const checkImageURL = (url: string): Promise<boolean> => {
-  return new Promise((resolve) => {
-    const img = new Image();
-    img.onload = () => resolve(true);
-    img.onerror = () => resolve(false);
-    img.src = url;
-  });
-};
+// Interface para as propriedades de MessageItem
+interface MessageItemProps {
+  isCurrentUser: boolean;
+}
 
 const defaultImage =
   "https://t4.ftcdn.net/jpg/05/89/93/27/360_F_589932782_vQAEAZhHnq1QCGu5ikwrYaQD0Mmurm0N.webp";
 
+// Componente principal
 export const Chat = () => {
   const { church_id } = useSelector(churchSelect);
-  const { user_id, token, user_email, user_name } = useSelector(userSelect);
+  const { user_id, token, user_name } = useSelector(userSelect);
 
   const socketRef = useRef<Socket | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const [mensagem, setMensagem] = useState("");
   const [mensagens, setMensagens] = useState<any[]>([]);
+
   const service = ApiService();
-
-  const [count, setCount] = useState(0);
-
   const churchServices = ChurchService();
 
+  // Função para buscar mensagens
   const getMessages = async () => {
     try {
       const res = await fetch(`${url}/messages/${church_id}`, {
@@ -46,87 +43,41 @@ export const Chat = () => {
       });
       const data = await res.json();
 
-      console.log(data);
-
-      const updatedMessages = await Promise.all(
-        data.map(async (obj: any) => {
-          try {
-            const resPhoto = await fetch(`${url}/photo/${obj.user_id}`);
-            const photoBlob = await resPhoto.blob();
-
-            const res = await fetch(`${url}/user/${obj.user_id}`);
-
-            const data = await res.json();
-
-            const rightDate = new Date(obj.created_at).toLocaleString("pt-BR", {
-              day: "2-digit",
-              month: "2-digit",
-              year: "2-digit",
-              hour: "2-digit",
-              minute: "2-digit",
-            });
-
-            obj.name = data.user.name;
-
-            const photoURL = URL.createObjectURL(photoBlob);
-            const isValid = await checkImageURL(photoURL);
-            obj.photo = isValid ? photoURL : defaultImage;
-
-            obj.created_at = rightDate;
-          } catch (photoError) {
-            console.error(
-              `Error fetching photo for user ${obj.user_id}:`,
-              photoError
-            );
-            obj.photo = defaultImage;
-          }
-          return obj;
-        })
-      );
+      const updatedMessages = data.map((msg: any) => ({
+        ...msg,
+        created_at: new Date(msg.created_at).toLocaleString("pt-BR", {
+          day: "2-digit",
+          month: "2-digit",
+          year: "2-digit",
+          hour: "2-digit",
+          minute: "2-digit",
+        }),
+        photo: msg.photo || defaultImage,
+      }));
 
       setMensagens(updatedMessages);
     } catch (error) {
-      console.log(error);
+      console.error("Erro ao buscar mensagens:", error);
     }
   };
 
   useEffect(() => {
     getMessages();
-  }, []);
 
-  useEffect(() => {
     const newSocket = io(url);
 
-    console.log(mensagens);
-
     newSocket.on("connect", () => {
-      console.log("Conectado");
       newSocket.emit("room", church_id);
     });
 
-    newSocket.emit("room", church_id);
-
-    newSocket.on("conectou", (message) => {
-      console.log(message);
-    });
-
-    newSocket.on("mess", async ({ mensagem, data, user_id, user_name }) => {
-      setCount(count + 1);
-      const rightDate = new Date(data).toLocaleString("pt-BR");
-
-      const res = await fetch(`${url}/photo/${user_id}`);
-      const blob = await res.blob();
-
-      const imageUrl = URL.createObjectURL(blob);
-      const isValid = await checkImageURL(imageUrl);
-
-      setMensagens((current: any) => [
+    newSocket.on("mess", ({ mensagem, data, user_id, user_name }: any) => {
+      setMensagens((current) => [
         ...current,
         {
           text: mensagem,
-          created_at: rightDate,
-          user_id: user_id,
-          photo: isValid ? imageUrl : defaultImage,
+          created_at: new Date(data).toLocaleString("pt-BR"),
+          user_id,
+          photo: defaultImage, // Ajuste para imagem padrão
           name: user_name,
         },
       ]);
@@ -141,124 +92,72 @@ export const Chat = () => {
     };
   }, [church_id]);
 
-  useEffect(() => {
-    fetchInfo();
-    churchServices.changeChurchService(church_id);
-  }, []);
-
-  useEffect(() => {
-    if (
-      mensagens.length > 0 &&
-      mensagens[mensagens.length - 1].user_id === user_id &&
-      count != 0
-    ) {
-      scrollToBottom("smooth");
-    } else {
-      scrollToBottom("instant");
-    }
-  }, [mensagens, user_id]);
-
-  const fetchInfo = async () => {
-    await service.fetchUserInfo();
-  };
-
   const enviarMensagem = (e: React.FormEvent) => {
-    try {
-      e.preventDefault();
+    e.preventDefault();
+    if (!mensagem.trim()) return;
 
-      if (socketRef.current) {
-        socketRef.current.emit("message", {
-          mensagem,
-          user_id,
-          church_id,
-          user_name,
-        });
-
-        setMensagem("");
-        scrollToBottom("smooth");
-      }
-    } catch (error) {
-      console.log(error);
+    if (socketRef.current) {
+      socketRef.current.emit("message", {
+        mensagem,
+        user_id,
+        church_id,
+        user_name,
+      });
+      setMensagem("");
     }
   };
 
-  const scrollToBottom = (behavior: "smooth" | "instant") => {
-    if (messagesEndRef.current) {
-      messagesEndRef.current.scrollIntoView({ behavior });
-    }
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
+  useEffect(() => {
+    scrollToBottom();
+  }, [mensagens]);
+
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const toggleMenu = () => {
+    setIsMenuOpen((prev) => !prev);
+  };
   return (
     <>
+      <Header toggleMenu={toggleMenu} isMenuOpen={isMenuOpen}></Header>
       <Main>
         <ChatContainer>
-          <MessageContainer
-            style={{ backgroundImage: "url(" + imageBack + ")" }}
-          >
+          <MessageContainer>
             {mensagens.map((item, index) => (
-              <React.Fragment key={index}>
-                <div
-                  style={{
-                    width: "fit-content",
-                    height: "fit-content",
-                    padding: ".8rem",
-                    color: "black",
-                    fontWeight: 900,
-                    fontSize: "1.3rem",
-                    background: "white",
-                    alignSelf:
-                      user_id == item.user_id ? "flex-end" : "flex-start",
-                  }}
-                >
-                  {item.name}
-                </div>
-                <MessageItem iscurrentuser={item.user_id === user_id}>
-                  {item.user_id === user_id ? (
-                    <>
-                      <TextMessage>
-                        <h1>{item.text}</h1>
-                        <h3>{item.created_at}</h3>
-                      </TextMessage>
-                      <ImageMessage>
-                        <img
-                          src={item.photo}
-                          height={"40px"}
-                          width={"40px"}
-                          alt=""
-                        />
-                      </ImageMessage>
-                    </>
-                  ) : (
-                    <>
-                      <ImageMessage>
-                        <img
-                          src={item.photo}
-                          height={"40px"}
-                          width={"40px"}
-                          alt=""
-                        />
-                      </ImageMessage>
-                      <TextMessage style={{ paddingLeft: "1rem" }}>
-                        <h1>{item.text}</h1>
-                        <h3>{item.created_at}</h3>
-                      </TextMessage>
-                    </>
-                  )}
-                </MessageItem>
-              </React.Fragment>
+              <MessageItem key={index} isCurrentUser={item.user_id === user_id}>
+                {item.user_id !== user_id && (
+                  <ProfileImage>
+                    <img src={item.photo} alt="" />
+                  </ProfileImage>
+                )}
+                <MessageContent>
+                  <UserName>
+                    {item.user_id !== user_id ? item.name : "Você"}
+                  </UserName>
+                  <TextMessage>{item.text}</TextMessage>
+                  <Timestamp>{item.created_at}</Timestamp>
+                </MessageContent>
+                {item.user_id === user_id && (
+                  <ProfileImage>
+                    <img src={item.photo} alt="" />
+                  </ProfileImage>
+                )}
+              </MessageItem>
             ))}
             <div ref={messagesEndRef} />
           </MessageContainer>
 
           <FormContainer>
             <Form onSubmit={enviarMensagem}>
-              <input
+              <MessageInput
                 type="text"
-                required
+                placeholder="Digite uma mensagem..."
                 value={mensagem}
                 onChange={(e) => setMensagem(e.target.value)}
               />
-              <button type="submit">aperte</button>
+              <SendButton type="submit">Enviar</SendButton>
             </Form>
           </FormContainer>
         </ChatContainer>
@@ -267,75 +166,130 @@ export const Chat = () => {
   );
 };
 
-const ImageMessage = styled.div`
-  width: 20%;
-  display: grid;
-  place-items: center;
-
-  & > img {
-    border-radius: 50%;
-  }
-`;
-
-const TextMessage = styled.div`
-  width: 80%;
-  height: 100%;
-
-  & > h1 {
-    color: whitesmoke;
-  }
-
-  & > h3 {
-    color: black;
-  }
-`;
-
+// Estilização
 const Main = styled.main`
-  width: 100vw;
-  height: 100vh;
-  padding: 2rem;
+  width: 100%;
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const ChatContainer = styled.div`
-  max-width: 100%;
-  height: 100%;
-  background: white;
-`;
-
-const MessageContainer = styled.div`
   width: 100%;
-  height: 80%;
-  border: solid black 1px;
-  background-image: ${imageBack};
-  overflow-y: auto;
-  padding: 2rem;
+  max-width: 1200px;
+  height: 80vh;
+  background: #f0f0f0;
+  border-radius: 1rem;
   display: flex;
   flex-direction: column;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+`;
+const MessageContainer = styled.div`
+  flex: 1;
+  background: url(${imageBack});
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  overflow-y: auto;
+`;
+
+const MessageItem = styled.div<MessageItemProps>`
+  display: flex;
+  align-self: ${({ isCurrentUser }) =>
+    isCurrentUser ? "flex-end" : "flex-start"};
+  flex-direction: ${({ isCurrentUser }) =>
+    isCurrentUser ? "row-reverse" : "row"};
+  background: ${({ isCurrentUser }) => (isCurrentUser ? "#74c3fb" : "#ffffff")};
+  padding: 1rem;
+  border-radius: 1rem;
+  max-width: 70%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 0.5rem;
+`;
+
+const ProfileImage = styled.div`
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+`;
+
+const MessageContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+`;
+
+const UserName = styled.h1`
+  font-size: 0.875rem;
+  color: #000;
+  margin: 0;
+  font-weight: bold;
+`;
+
+const TextMessage = styled.p`
+  font-size: 1rem;
+  width: auto;
+  margin: 0;
+`;
+
+const Timestamp = styled.span`
+  font-size: 0.75rem;
+  color: gray;
+  align-self: flex-end;
 `;
 
 const FormContainer = styled.div`
-  width: 100%;
-  height: 20%;
-  border: solid black 1px;
+  padding: 1rem;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-top: 1px solid #e0e0e0;
 `;
 
 const Form = styled.form`
+  display: flex;
   width: 100%;
-  height: 100%;
+  align-items: center;
+  gap: 0.5rem;
 `;
 
-const MessageItem = styled.div<{ iscurrentuser: boolean }>`
-  display: flex;
-  align-self: ${(props) => (props.iscurrentuser ? "flex-end" : "flex-start")};
-  margin-bottom: 1rem;
-  flex-direction: row;
-  border-radius: 1rem;
-  background: ${(props) => (props.iscurrentuser ? "green" : "brown")};
-  max-width: 50%;
-  padding: 1rem;
-  word-wrap: break-word;
+const MessageInput = styled.input`
+  flex: 1;
+  padding: 0.5rem 1rem;
+  border-radius: 1.5rem;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  background: #f9f9f9;
 
-  & > h1 {
-    color: whitesmoke;
+  &:focus {
+    background: #ffffff;
   }
 `;
+
+const SendButton = styled.button`
+  padding: 0.75rem 2rem;
+  border: none;
+  border-radius: 2rem;
+  background: #0460a0;
+  color: #ffffff;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.3s;
+
+  &:hover {
+    background: #44a9f1;
+  }
+`;
+
+export default Chat;

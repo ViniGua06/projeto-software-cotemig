@@ -31,7 +31,7 @@ const Form = (opt: IForm) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          to: "viniguarnierisouza@gmail.com",
+          to: "hugobolopes@gmail.com",
           subject: nome + " - " + assunto,
           text: mensagem,
         }),
@@ -322,7 +322,7 @@ const Form = (opt: IForm) => {
             <div className="form_group">
               <label className="sub_title">Nome</label>
               <input
-                value={nomeCad}
+                value={nome}
                 onChange={(e) => setNome(e.target.value)}
                 required
                 placeholder="Digite seu nome e sobrenome"
@@ -333,7 +333,7 @@ const Form = (opt: IForm) => {
             <div className="form_group">
               <label className="sub_title">Assunto</label>
               <input
-                value={emailCad}
+                value={assunto}
                 onChange={(e) => setAssunto(e.target.value)}
                 required
                 placeholder="Digite o assunto"
@@ -344,6 +344,7 @@ const Form = (opt: IForm) => {
             <div className="form_group">
               <label className="sub_title">Descrição</label>
               <input
+              value={mensagem}
                 onChange={(e) => setMensagem(e.target.value)}
                 required
                 placeholder="Digite a descrição"

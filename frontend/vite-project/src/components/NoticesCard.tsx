@@ -83,17 +83,29 @@ export const NoticesContainer = ({
 
 const CardContainer = styled.div`
   width: 100%;
-  height: fit-content;
-  border: solid black 1px;
+  max-width: 600px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-block: 1rem;
+  padding: 1.5rem;
   gap: 1rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+  }
 `;
 
 const Text = styled.p`
-  color: black;
+  color: #333;
+  font-size: 1rem;
+  line-height: 1.5;
+  text-align: center;
   word-break: break-word;
   width: 100%;
   padding-inline: 1rem;
@@ -104,7 +116,17 @@ interface IAware {
 }
 
 const Aware = styled.h2<IAware>`
-  color: ${(props) => (props.isClicked ? "green" : "red")};
-  cursor: ${(props) => (props.isClicked ? "auto" : "pointer")};
-  ${(props) => (!props.isClicked ? "&:hover { color: green; }" : null)}
+  color: ${(props) =>
+    props.isClicked ? "#28a745" : "#dc3545"};
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: ${(props) => (props.isClicked ? "default" : "pointer")};
+  transition: color 0.2s;
+
+  &:hover {
+    color: ${(props) =>
+      !props.isClicked
+        ? "#28a745"
+        : null};
+  }
 `;

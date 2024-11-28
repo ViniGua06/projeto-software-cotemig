@@ -3,15 +3,17 @@ import { userSelect } from "../../redux/user/slice";
 import styled from "styled-components";
 import { useState } from "react";
 import url from "../../assets/urlBackend";
-
+import { useNavigate } from "react-router-dom";
 import { FormEvent } from "react";
 
 export const UpdateUserForm = () => {
   const { user_name, user_email, user_id, token, user_password } =
     useSelector(userSelect);
 
-  const [senha1, setSenha1] = useState(user_password);
+  const [senha1, setSenha1] = useState("");
   const [senha2, setSenha2] = useState("");
+
+  const navigate = useNavigate();
 
   const [nome, setNome] = useState(user_name);
   const [email, setEmail] = useState(user_email);
@@ -38,7 +40,7 @@ export const UpdateUserForm = () => {
         if (data.error) {
           alert(data.error);
         } else {
-          location.reload();
+          navigate("/user");
         }
       } else {
         const res = await fetch(`${url}/user/${user_id}`, {
@@ -58,7 +60,7 @@ export const UpdateUserForm = () => {
         if (data.error) {
           alert(data.error);
         } else {
-          location.reload();
+          navigate("/user");
         }
       }
     } catch (error) {
@@ -90,7 +92,6 @@ export const UpdateUserForm = () => {
           value={senha1}
           onChange={(e) => setSenha1(e.target.value)}
           minLength={5}
-          required
         />
         <UpdateFormLabel>
           Confirmar Senha (caso queira trocar a senha)
@@ -99,20 +100,21 @@ export const UpdateUserForm = () => {
           type="password"
           onChange={(e) => setSenha2(e.target.value)}
           minLength={5}
+          placeholder="Confirme a nova senha"
         />
 
-        {((senha1 != senha2 || senha1 == "" || senha2 == "") &&
-          senha1 != user_password) ||
-        senha2 != "" ? (
-          <>
-            <ErrorMessage>Senhas não conferem</ErrorMessage>
-          </>
+        {senha1 !== senha2 && senha2 !== "" ? (
+          <ErrorMessage>Senhas não conferem</ErrorMessage>
         ) : null}
 
-        <UpdateFormSubmit type="submit" />
+        <UpdateFormSubmit
+          type="submit"
+          disabled={senha1 !== senha2 && senha2 !== ""}
+        />
       </UpdateForm>
     </>
   );
+
 };
 
 const ErrorMessage = styled.h3`
@@ -121,14 +123,13 @@ const ErrorMessage = styled.h3`
 
 const UpdateForm = styled.form`
   width: 100%;
-  max-width: 500px;
   height: auto;
   background-color: white;
   padding: 20px;
-  border-radius: 8px;
+  border-radius: 1rem;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   flex-direction: column;
   gap: 1.4rem;
   
@@ -177,6 +178,7 @@ const UpdateFormSubmit = styled.input`
   border: solid rgba(0, 0, 0, 0.3) 1px;
   cursor: pointer;
   width: 30%;
+  align-self: center;
   font-size: 1rem;
   font-weight: 600;
   font-family: "Montserrat", sans-serif;

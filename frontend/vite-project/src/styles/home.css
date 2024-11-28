@@ -62,6 +62,7 @@ a {
 .containerHome {
   display: flex;
   padding-top: 10em;
+  height: auto;
   padding-inline: 7em;
   align-items: center;
   background-color: #fff;

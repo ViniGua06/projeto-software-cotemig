@@ -1,5 +1,6 @@
 import nodemailer from "nodemailer";
 import { IEmail } from "../models/email.model";
+require("dotenv").config();
 
 class sendEmailService {
   handle = (email: IEmail): Promise<boolean | null> => {
@@ -7,13 +8,13 @@ class sendEmailService {
       const trasnporter = nodemailer.createTransport({
         service: "gmail",
         auth: {
-          user: "22200460@aluno.cotemig.com.br",
+          user: "22200886@aluno.cotemig.com.br",
           pass: process.env.GMAIL_PASSWORD,
         },
       });
 
       const mailOptions = {
-        from: "22200460@aluno.cotemig.com.br",
+        from: "22200886@aluno.cotemig.com.br",
         to: email.to,
         subject: email.subject,
         text: email.text,

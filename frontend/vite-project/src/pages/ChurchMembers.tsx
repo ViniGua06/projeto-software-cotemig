@@ -123,23 +123,6 @@ export const ChurchMembers = () => {
       }
     };
     const [photoSrcs, setPhotoSrcs] = useState(integrants?.map(() => "") || []);
-
-    const [dailyVerse, setDailyVerse] = useState("");
-
-    const getDailyVerse = async () => {
-      try {
-        const res = await fetch(`${url}/church/${church_id}/verse`);
-        const data = await res.json();
-
-        if (res.status == 200) setDailyVerse(data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    useEffect(() => {
-      getDailyVerse();
-    }, []);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const toggleMenu = () => {
       setIsMenuOpen((prev) => !prev); 
@@ -157,7 +140,6 @@ export const ChurchMembers = () => {
         <Main>
           <h1>{church_name}</h1>
           <ChurchPhoto src={church_photo || igreja}></ChurchPhoto>
-          <h1 style={{ marginTop: "1rem" }}>{dailyVerse}</h1>
           <Table>
             <thead>
               <tr>

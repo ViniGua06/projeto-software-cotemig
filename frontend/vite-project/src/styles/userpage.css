@@ -159,13 +159,15 @@
 
 .eventContainer{
   display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
   background-color: #e7edff;
-  width: auto;
+  margin: 10rem auto;
+  width: 70%;
+  height: auto;
   border: 5px solid #0460a0;
   border-radius: 20px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 
 #FirstSection {
@@ -262,8 +264,8 @@
   border-radius: 0.4rem;
   cursor: pointer;
   padding-block: 1rem; 
-  background-color: rgb(255, 74, 74); 
-  color: black; 
+  background-color: rgb(255, 0, 0); 
+  color: rgb(255, 255, 255); 
   font-size: 1rem;
   font-weight: 700;
   font-family: 'Montserrat'; 

@@ -132,11 +132,11 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   width: 70%;
-  height: 80%;
+  height: auto;
   gap: 2rem;
-  padding: 1.5rem;
+  padding: 1rem;
   max-width: 800px;
-  margin: auto;
+  margin: 2rem auto;
   background-color: #f9f9f9;
   border-radius: 1rem;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
