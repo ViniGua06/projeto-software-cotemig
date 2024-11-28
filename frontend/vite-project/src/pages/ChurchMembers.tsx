@@ -12,9 +12,7 @@ import { useNavigate } from "react-router-dom";
 import default_ from "../assets/images.png";
 import ApiService from "../services/Api.service";
 import { ativar, desativar, modalSelect } from "../redux/modal/slice";
-import {
-  Undo2,
-} from "lucide-react";
+import { Modal } from "../components/Modal";
 
 interface IIntegrants {
   id: string;
@@ -48,7 +46,12 @@ export const ChurchMembers = () => {
     const navigate = useNavigate();
 
     const getInfo = async () => {
+      try{
       await churchService.changeChurchService(church_id);
+      console.log("Dados atualizados:", integrants); // Adicione este log
+  } catch (error) {
+    console.error("Erro ao carregar informações da igreja:", error);
+  }
     };
 
     const remove = async (user_id: number) => {
@@ -130,12 +133,6 @@ export const ChurchMembers = () => {
   return (
     <>
       <Header toggleMenu={toggleMenu} isMenuOpen={isMenuOpen}></Header>
-      <button
-        id="return"
-        onClick={goBack}
-      >
-        <Undo2 size={50}></Undo2>
-      </button>
       <div id="MainChurchMembersPage">
         <Main>
           <h1>{church_name}</h1>
@@ -212,6 +209,25 @@ export const ChurchMembers = () => {
             </tbody>
           </Table>
         </Main>
+        {tipo == "Mudar Permissões" ? (
+          <>
+            <Modal title="Mudar Permissões">
+              <form onSubmit={changePermission}>
+                <Select
+                  value={roleUpds}
+                  onChange={(e) => setRoleUpds(e.target.value)}
+                  required
+                >
+                  <option value="">Selecione uma opção</option>
+                  <option value="admin">Admin</option>
+                  <option value="normal">Normal</option>
+                </Select>
+
+                <PermitSubmit type="submit">Enviar</PermitSubmit>
+              </form>
+            </Modal>
+          </>
+        ) : null}
       </div>
     </>
   );
@@ -224,6 +240,18 @@ const ChurchPhoto = styled.img`
   height: 120px;
   margin-right: 0.1rem;
   width: 120px;
+`;
+
+const Select = styled.select`
+  outline: none;
+  font-size: 1rem;
+  padding: 0.5rem;
+`;
+
+const PermitSubmit = styled.button`
+  padding: 0.6rem;
+  cursor: pointer;
+  font-size: 1.5rem;
 `;
 
 const Main = styled.main`

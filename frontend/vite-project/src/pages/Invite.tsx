@@ -59,16 +59,43 @@ export const Invite = () => {
   }, [token, user_id, decoded]);
   return (
     <Main>
-      <h1>Você está sendo convidado para a Instituição {church?.name}</h1>
+      <H1>Você foi convidado para a Instituição:</H1> 
+      <H2>{church?.name}</H2>
       <Button onClick={enterChurch}>Aceitar Convite</Button>
     </Main>
   );
 };
 
+const H1 = styled.h1`
+font-size: 3rem;
+text-align: center;
+`;
+
+const H2 = styled.div`
+  font-size: 2.5rem;
+  margin-top: -2rem;
+  text-decoration: underline;
+  margin-bottom: 2rem;
+  text-align: center;
+`;
+
 const Main = styled.main`
   padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4rem;
 `;
 
 const Button = styled.button`
   padding: 1rem;
+  width: 30%;
+  font-size: 1.5rem;
+  cursor: pointer;
+  user-select: none;
+  border-radius: 2rem;
+
+  &:hover{
+    filter: brightness(80%)
+  }
 `;

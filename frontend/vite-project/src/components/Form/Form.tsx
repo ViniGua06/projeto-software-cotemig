@@ -212,13 +212,6 @@ const Form = (opt: IForm) => {
                   </a>
                 </p>
               </div>
-              <div>
-                <p id="pass-loc">
-                  <Link className="link-pass" to="/recover">
-                    Esqueci minha senha
-                  </Link>
-                </p>
-              </div>
             </form>
           </div>
         </div>

@@ -268,7 +268,7 @@ export const ChurchPage = () => {
           </ButtonContainer>
           {tipo == "Criar Aviso" ? (
             <>
-              <Modal title="Criar Evento">
+              <Modal title="Criar Aviso">
                 <Form onSubmit={createNotice}>
                   <Label>Aviso:</Label>
                   <TextArea
@@ -278,24 +278,6 @@ export const ChurchPage = () => {
                   />
                   <SubmitButton type="submit">CRIAR</SubmitButton>
                 </Form>
-              </Modal>
-            </>
-          ) : tipo == "Mudar Permissões" ? (
-            <>
-              <Modal title="Mudar Permissões">
-                <form onSubmit={changePermission}>
-                  <Select
-                    value={roleUpds}
-                    onChange={(e) => setRoleUpds(e.target.value)}
-                    required
-                  >
-                    <option value="">Selecione uma opção</option>
-                    <option value="admin">Admin</option>
-                    <option value="normal">Normal</option>
-                  </Select>
-
-                  <PermitSubmit type="submit">Enviar</PermitSubmit>
-                </form>
               </Modal>
             </>
           ) : tipo == "Editar Perfil" ? (
