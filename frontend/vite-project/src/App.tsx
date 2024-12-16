@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
-import { createGlobalStyle } from "styled-components";
 import Home from "./pages/aliases/Home";
 import Contact from "./pages/aliases/Contact";
 import SignIn from "./pages/aliases/SignIn";
@@ -20,23 +19,11 @@ import { Invite } from "./pages/Invite";
 import UserSettings from "./pages/UserSettings";
 import UserEvents from "./pages/UserEvents";
 import { ChurchMembers } from "./pages/ChurchMembers";
-import "./styles/home.css";
 
-const GlobalStyle = createGlobalStyle`
-  body {
-        height: 100vh;
-  }
-
-  #root {
-    height: 100vh;
-  }
-
-
-`;
 
 function App() {
   const location = useLocation();
-  const [bg, setBg] = useState(`url("")`);
+  const [, setBg] = useState(`url("")`);
 
   useEffect(() => {
     switch (location.pathname) {

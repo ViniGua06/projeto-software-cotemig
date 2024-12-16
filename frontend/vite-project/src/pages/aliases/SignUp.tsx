@@ -1,6 +1,6 @@
 import Form from "../../components/Form/Form";
 import Header from "../../components/Header";
-import React, { useState } from "react";
+import { useState } from "react";
 
 const SignUp = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

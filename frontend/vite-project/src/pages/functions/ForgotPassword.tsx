@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-
 import url from "../../assets/urlBackend";
 import UpdatePasswordForm from "../../components/Form/UpdatePasswordForm";
 

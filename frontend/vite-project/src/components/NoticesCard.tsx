@@ -18,7 +18,7 @@ export const NoticesContainer = ({
   id: number;
   userid: number;
 }) => {
-  const { user_id } = useSelector(userSelect);
+  useSelector(userSelect);
   const { church_id } = useSelector(churchSelect);
 
   const [isClicked, setClicked] = useState(false);

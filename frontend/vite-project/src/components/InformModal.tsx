@@ -3,7 +3,7 @@ import styled from "styled-components";
 import "../styles/home.css";
 import { useDispatch } from "react-redux";
 
-import { ativar, desativar } from "../redux/modal/slice";
+import { desativar } from "../redux/modal/slice";
 import { useNavigate } from "react-router-dom";
 
 import illustrate from "../assets/illustrate.jpg";
@@ -28,6 +28,20 @@ const ModalContainer = styled.div`
   align-items: center;
 `;
 
+const Image = styled.img`
+width: 480px;
+height: 480px;
+`;
+
+const H1 = styled.h1`
+  color: "#0460a0";
+`;
+
+const H1Sign = styled.h1`
+color: "#0460a0"; 
+cursor: pointer;
+`;
+
 export const InformModal = () => {
   const dispatch = useDispatch();
 
@@ -42,14 +56,13 @@ export const InformModal = () => {
     <>
       <BackgroundModal>
         <ModalContainer>
-          <h1 style={{ color: "#0460a0" }}>Sessão Expirada!</h1>
-          <img src={illustrate} width={"480px"} height={"480px"} />
-          <h1
-            style={{ color: "#0460a0", cursor: "pointer" }}
+          <H1>Sessão Expirada!</H1>
+          <Image src={illustrate} />
+          <H1Sign
             onClick={() => goToSignIn()}
           >
             Login
-          </h1>
+          </H1Sign>
         </ModalContainer>
       </BackgroundModal>
     </>

@@ -81,28 +81,6 @@
   filter: brightness(80%);
 }
 
-.form_area {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  background-color: #e7edff;
-  height: 60%;
-  width: 50%;
-  border: 5px solid #0460a0;
-  border-radius: 20px;
-}
-
-.title {
-  color: #000000;
-  text-decoration: underline;
-  margin-bottom: 1rem;
-  font-weight: 900;
-  font-size: 1.5em;
-  user-select: none;
-  margin-top: 20px;
-}
-
 .sub_title {
   font-weight: 600;
   margin: 5px 0;

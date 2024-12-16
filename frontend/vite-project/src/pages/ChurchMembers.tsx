@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import React, { FormEvent, useCallback, useState } from "react";
+import { FormEvent, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Header from "../components/Header";
 import { churchSelect } from "../redux/church/slice";
@@ -8,7 +8,6 @@ import ChurchService from "../services/Church.service";
 import igreja from "../assets/igreja.svg";
 import { userSelect } from "../redux/user/slice";
 import url from "../assets/urlBackend";
-import { useNavigate } from "react-router-dom";
 import default_ from "../assets/images.png";
 import ApiService from "../services/Api.service";
 import { ativar, desativar, modalSelect } from "../redux/modal/slice";
@@ -26,7 +25,6 @@ interface IIntegrants {
 export const ChurchMembers = () => {
     const {
       church_name,
-      church_code,
       church_photo,
       integrants,
       church_id,
@@ -43,7 +41,6 @@ export const ChurchMembers = () => {
 
     const churchService = ChurchService();
 
-    const navigate = useNavigate();
 
     const getInfo = async () => {
       try{
@@ -76,9 +73,6 @@ export const ChurchMembers = () => {
       }
     };
 
-    const goBack = () => {
-      navigate("/church");
-    };
 
     useEffect(() => {
       apiService.fetchUserInfo();
@@ -284,7 +278,7 @@ const Table = styled.table`
   th {
     color: #0460a0;
     text-transform: uppercase;
-    text-weight: 700;
+    font-weight: 700;
   }
 
   tbody {

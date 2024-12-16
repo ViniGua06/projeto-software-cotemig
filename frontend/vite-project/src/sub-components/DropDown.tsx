@@ -1,8 +1,7 @@
 import { useEffect, useRef } from "react";
 import styled from "styled-components";
-import { Modal } from "../components/Modal";
-import { useDispatch, useSelector } from "react-redux";
-import { ativar, modalSelect } from "../redux/modal/slice";
+import { useDispatch } from "react-redux";
+import { ativar } from "../redux/modal/slice";
 
 interface IDropDown {
   display: boolean;

@@ -1,14 +1,12 @@
 import { useDispatch, useSelector } from "react-redux";
 import url from "../assets/urlBackend";
-import { fetchUser, logout, userSelect } from "../redux/user/slice";
-import { useNavigate } from "react-router-dom";
+import { fetchUser, userSelect } from "../redux/user/slice";
 import { ativar } from "../redux/modal/slice";
 
 const ApiService = () => {
-  const { user_id, token, user_pfp } = useSelector(userSelect);
+  const { user_id, token } = useSelector(userSelect);
 
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const testToken = async () => {
     try {

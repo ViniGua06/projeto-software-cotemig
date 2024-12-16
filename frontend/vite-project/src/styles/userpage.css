@@ -12,20 +12,6 @@
   height: auto;
 }
 
-#return{
-  color: #000000;
-  background-color: transparent;
-  border-radius: 0.3rem;
-  position: fixed;
-  left: 1rem;
-  top: 5.5rem;
-  cursor: pointer;
-}
-
-#return:hover{
-  filter: brightness(50%);
-}
-
 #enter {
   width: 50%;
   height: auto;
@@ -59,74 +45,6 @@
   height: auto;
 }
 
-.SairButton {
-  border: none;
-  color: white;
-  padding: 0.75rem;
-  width: 5rem;
-  background-color: #0460a0;
-  display: flex;
-  justify-content: center;
-  margin-top: 4rem;
-  border-radius: 1rem;
-
-  &:hover {
-    filter: brightness(80%);
-    cursor: pointer;
-  }
-}
-.CadastrarChurchButton {
-  background-color: rgb(255, 255, 255);
-  border: none;
-  width: 8rem;
-  height: 4rem;
-  cursor: pointer;
-  padding: 1rem 1.5rem;
-  margin-top: 1rem;
-  border-radius: 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.CadastrarChurchButton:hover {
-  filter: brightness(85%);
-}
-
-.EnterChurchButton {
-  background-color: white;
-  border: none;
-  width: 8rem;
-  height: 4rem;
-  padding: 1rem 1.5rem;
-  margin-top: 1rem;
-  border-radius: 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.EnterChurchButton:hover {
-  filter: brightness(85%);
-  font-weight: 900;
-  cursor: pointer;
-}
-
-#MainUserPage {
-  padding: 2rem;
-  width: 80%;
-  height: auto;
-  border-radius: 1rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  background-color: rgb(214, 233, 251);
-  border: 5px solid #0460a0;
-  margin: 0 auto;
-  margin-top: 2rem;
-}
-
 #MainChurchPage{
   padding: 2rem;
   width: 75%;
@@ -157,70 +75,10 @@
   margin-top: 2rem;
 }
 
-.eventContainer{
-  display: flex;
-  background-color: #e7edff;
-  margin: 10rem auto;
-  width: 70%;
-  height: auto;
-  border: 5px solid #0460a0;
-  border-radius: 20px;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-}
-
-#FirstSection {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
-}
-
-#FirstSection > div {
-  display: flex;
-  gap: 0.5rem;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-}
-
-.RowContainer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-direction: column;
-  gap: 1rem;
-  padding: 0.5rem 2rem;
-  flex-wrap: wrap;
-}
-
-
 #img-delete{
   display: grid;
   height: 1%;
   width: 6%;
-}
-
-#editprofile{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 0.5rem;
-  justify-content: center;
-  border-radius: 0.4rem;
-  cursor: pointer;
-  padding-block: 1rem; 
-  background-color: rgb(255, 255, 255); 
-  color: black; 
-  font-size: 1rem;
-  font-weight: 700;
-  font-family: 'Montserrat'; 
-  text-transform: uppercase;
-}
-
-#editprofile:hover{
-  filter: brightness(70%);
 }
 
 #btnDelete{
@@ -253,26 +111,4 @@
   font-weight: 900;
   margin-top: 1rem;
   color: #000;
-}
-
-#end-account{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 0.5rem;
-  justify-content: center;
-  border-radius: 0.4rem;
-  cursor: pointer;
-  padding-block: 1rem; 
-  background-color: rgb(255, 0, 0); 
-  color: rgb(255, 255, 255); 
-  font-size: 1rem;
-  font-weight: 700;
-  font-family: 'Montserrat'; 
-  text-transform: uppercase;
-  padding: 10px;
-}
-
-#end-account:hover{
-  filter: brightness(70%);
 }

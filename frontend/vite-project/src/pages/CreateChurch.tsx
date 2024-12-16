@@ -47,7 +47,7 @@ const MainCreateChurch = styled.main`
     button#return {
       top: 1rem;
       left: 1rem;
-      size: 60px; /* Ajuste no tamanho do ícone */
+      size: 60px;
     }
   }
 
@@ -55,7 +55,7 @@ const MainCreateChurch = styled.main`
     button#return {
       top: 1rem;
       left: 1rem;
-      size: 50px; /* Ajuste no tamanho do ícone */
+      size: 50px;
     }
   }
 `;

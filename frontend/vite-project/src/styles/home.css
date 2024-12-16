@@ -20,67 +20,10 @@ html {
     overflow-x: hidden;
 }
 
-.footer {
-  background-color: #0460a0;
-  color: white;
-  text-align: center;
-  padding: 1.56rem 0;
-  margin-top: 10.5rem;
-}
-
-.footer p {
-  margin: 0;
-  font-size: 1.2rem;
-  font-family: 'Montserrat';
-  cursor: not-allowed;
-  user-select: none;
-}
-
 a {
   color: white;
   outline: none;
   text-decoration: none;
-}
-
-#paragrafh-welcome {
-  padding-top: 2rem;
-  line-height: 2rem;
-  max-width: 50rem;
-  text-align: justify;
-  font-size: 1.5rem;
-}
-
-#btnLogged{
-  visibility: hidden;
-}
-
-#welcome-part2 {
-  font-size: 5vh;
-  padding-top: 3rem;
-}
-
-.containerHome {
-  display: flex;
-  padding-top: 10em;
-  height: auto;
-  padding-inline: 7em;
-  align-items: center;
-  background-color: #fff;
-  color: #0460a0;
-  justify-content: space-evenly;
-  min-height: 65vh;
-  margin-bottom: 2rem;
-  flex-wrap: wrap;
-}
-
-.img-wel {
-  display: grid;
-  -webkit-user-drag: none;
-  -moz-user-drag: none;
-  -o-user-drag: none;
-  user-select: none;
-  pointer-events: none;
-  margin-bottom: 0rem;
 }
 
 header {
@@ -149,30 +92,6 @@ header {
 button {
   border: none;
   padding: 10px 20px;
-}
-
-#btn-wel {
-  border-radius: 6px;
-  width: 211px;
-  cursor: pointer;
-  font-size: 22px;
-  font-weight: bold;
-  height: 50px;
-  background-color: #0460a0;
-  color: #fff;
-  border: none;
-  transition: background-color 0.3s ease;
-}
-
-#btn-wel:hover {
-  background-color: #054d85;
-}
-
-.text-wel {
-  -webkit-user-drag: none;
-  -moz-user-drag: none;
-  -o-user-drag: none;
-  user-select: none;
 }
 
 .userPhoto > img {

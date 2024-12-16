@@ -1,4 +1,4 @@
-import React, { FormEvent, useCallback, useState } from "react";
+import { FormEvent, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Header from "../components/Header";
 import { churchSelect } from "../redux/church/slice";
@@ -15,19 +15,11 @@ import { Modal } from "../components/Modal";
 import { UpdateUserForm } from "../components/Form/UpdateUserForm";
 import { UpdateChurchForm } from "../components/Form/UpdateChurchForm";
 import { SetDailyVerseForm } from "../components/Form/SetDailyVerseForm";
-import { BookOpenText, CalendarDays, Edit, Megaphone, MessageSquareText, Plus, Send } from "lucide-react";
+import { CalendarDays, Edit, Megaphone, MessageSquareText, Plus, Send } from "lucide-react";
 
-interface IIntegrants {
-  id: string;
-  name: string;
-  email: string;
-  photo: string;
-  role: string;
-}
 export const ChurchPage = () => {
   const {
     church_name,
-    church_code,
     church_photo,
     integrants,
     church_id,
@@ -40,7 +32,7 @@ export const ChurchPage = () => {
 
   const dispatch = useDispatch();
 
-  const { user_id, token } = useSelector(userSelect);
+  const { user_id } = useSelector(userSelect);
 
   const churchService = ChurchService();
 
@@ -50,27 +42,6 @@ export const ChurchPage = () => {
     await churchService.changeChurchService(church_id);
   };
 
-  const remove = async (user_id: number) => {
-    try {
-      const response = await fetch(
-        `${url}/integrant/${user_id}/church/${church_id}`,
-        {
-          method: "DELETE",
-          headers: {
-            "x-acess-token": token,
-          },
-        }
-      );
-
-      const data = await response.json();
-
-      alert(data.message);
-
-      getInfo();
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   const goToChat = () => {
     navigate("/church/chat");
@@ -121,45 +92,11 @@ export const ChurchPage = () => {
     }
   };
 
-  const editar = () => {
-    dispatch(ativar("Mudar Permissões"));
-  };
 
-  const [roleUpds, setRoleUpds] = useState("");
-  const [id, setId] = useState(0);
+  const [] = useState("");
+  const [] = useState(0);
 
-  const changePermission = async (e: FormEvent) => {
-    try {
-      e.preventDefault();
-
-      const res = await fetch(`${url}/integrantrole`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          church_id: church_id,
-          user_id: id,
-          role: roleUpds,
-        }),
-      });
-
-      const data = await res.json();
-
-      if (res.status == 200) {
-        dispatch(desativar());
-        apiService.fetchUserInfo();
-        churchService.changeChurchService(church_id);
-
-        getInfo();
-      } else {
-        alert(data.message);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  const [photoSrcs, setPhotoSrcs] = useState(integrants?.map(() => "") || []);
+  const [] = useState(integrants?.map(() => "") || []);
 
   const goToUpdateChurchForm = () => {
     dispatch(ativar("Update Church"));
@@ -173,9 +110,6 @@ export const ChurchPage = () => {
     navigate("/userevents")
   }
 
-  const goToBiblePage = () => {
-    navigate("/church/bible");
-  };
 
   const [dailyVerse, setDailyVerse] = useState("");
 
@@ -351,15 +285,6 @@ const ButtonContainer = styled.div`
   gap: 1rem;
   margin-top: 2rem;
   width: 100%;
-`;
-
-const PermitSubmit = styled.button`
-  padding: 0.6rem;
-`;
-
-const Select = styled.select`
-  outline: none;
-  padding: 0.5rem;
 `;
 
 const Form = styled.form`

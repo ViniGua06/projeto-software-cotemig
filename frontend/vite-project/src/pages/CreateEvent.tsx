@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Header from "../components/Header";
 import { CreateEventForm } from "../components/Form/CreateEventForm";
-import React, { useState } from "react";
+import { useState } from "react";
 
 export const CreateEvent = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

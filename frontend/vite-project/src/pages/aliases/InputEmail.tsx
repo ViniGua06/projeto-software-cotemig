@@ -1,6 +1,6 @@
 import Form from "../../components/Form/Form";
 import Header from "../../components/Header";
-import React, { useState } from "react";
+import { useState } from "react";
 
 const InputEmail = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

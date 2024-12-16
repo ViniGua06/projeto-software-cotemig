@@ -1,11 +1,7 @@
 import { useEffect } from "react";
 import styled, { keyframes } from "styled-components";
-
-// import { ativar, desativar } from "../redux/modal/slice";
-
 import { desativar, modalSelect } from "../redux/modal/slice";
 import { useDispatch, useSelector } from "react-redux";
-
 import { ButtonCloseSvg } from "../assets/ButtonCloseSvg";
 
 interface IModal {

@@ -1,8 +1,5 @@
 import Header from "../../components/Header";
-import React, { useState } from "react";
-
-import "../../styles/form.css";
-
+import { useState } from "react";
 import Forms from "../../components/Form/Form";
 
 const Contact = () => {

@@ -6,12 +6,9 @@ import { useSelector } from "react-redux";
 import { churchSelect } from "../../redux/church/slice";
 import { userSelect } from "../../redux/user/slice";
 import styled from "styled-components";
-import ApiService from "../../services/Api.service";
 import React from "react";
-import ChurchService from "../../services/Church.service";
 import Header from "../../components/Header";
 
-// Interface para as propriedades de MessageItem
 interface MessageItemProps {
   isCurrentUser: boolean;
 }
@@ -19,7 +16,6 @@ interface MessageItemProps {
 const defaultImage =
   "https://t4.ftcdn.net/jpg/05/89/93/27/360_F_589932782_vQAEAZhHnq1QCGu5ikwrYaQD0Mmurm0N.webp";
 
-// Componente principal
 export const Chat = () => {
   const { church_id } = useSelector(churchSelect);
   const { user_id, token, user_name } = useSelector(userSelect);
@@ -30,10 +26,6 @@ export const Chat = () => {
   const [mensagem, setMensagem] = useState("");
   const [mensagens, setMensagens] = useState<any[]>([]);
 
-  const service = ApiService();
-  const churchServices = ChurchService();
-
-  // Função para buscar mensagens
   const getMessages = async () => {
     try {
       const res = await fetch(`${url}/messages/${church_id}`, {
@@ -77,7 +69,7 @@ export const Chat = () => {
           text: mensagem,
           created_at: new Date(data).toLocaleString("pt-BR"),
           user_id,
-          photo: defaultImage, // Ajuste para imagem padrão
+          photo: defaultImage,
           name: user_name,
         },
       ]);
@@ -166,7 +158,6 @@ export const Chat = () => {
   );
 };
 
-// Estilização
 const Main = styled.main`
   width: 100%;
   height: 90vh;
