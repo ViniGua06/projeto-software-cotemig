@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -7,17 +8,24 @@
   font-family: "Josefin Sans", sans-serif;
 }
 
+html, body, #root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
 body {
   background-color: #fff;
   color: #333;
-  overflow-x: hidden;
 }
 
 html {
   scrollbar-color: #0460a0 transparent;
   scrollbar-width: auto;
   -webkit-font-smoothing: antialiased;
-    overflow-x: hidden;
 }
 
 a {

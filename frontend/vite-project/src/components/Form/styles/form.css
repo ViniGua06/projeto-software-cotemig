@@ -3,7 +3,7 @@
 .container {
   display: flex;
   align-items: center;
-  margin-top: -4rem;
+  margin-top: 4rem;
   flex-direction: column;
   text-align: center;
 }
@@ -79,6 +79,15 @@
 .formEmail button:hover,
 .formEmail input[type="submit"]:hover{
   filter: brightness(80%);
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 900;
+  color: #000000;
+  margin-bottom: 10px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  letter-spacing: 1px;
 }
 
 .sub_title {

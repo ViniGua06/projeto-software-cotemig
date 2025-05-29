@@ -12,13 +12,14 @@ import { ExpiredTokens } from "./entity/ExpiredToken";
 
 export const AppDataSource = new DataSource({
   type: "postgres",
-  host: "isabelle.db.elephantsql.com",
+  host: "ep-late-sound-a8ilrjdo-pooler.eastus2.azure.neon.tech",
   port: 5432,
-  username: "qcezcnow",
-  password: "sykwKydNWEQqducNboSpR4o-L9KqmvEO",
-  database: "qcezcnow",
-  synchronize: false,
-  logging: false,
+  username: "neondb_owner",
+  password: "npg_HtPmXnr7Ul2q",
+  database: "neondb",
+  ssl: true, // Importante para conexão com Neon!
+  synchronize: true,
+  logging: true,
   entities: [
     Church,
     User_Church,

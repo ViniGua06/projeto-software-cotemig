@@ -104,16 +104,18 @@ const LoggedBtn = styled.button`
 `;
 
 const Footer = styled.footer`
+  position: fixed;
+  bottom: 0;
+  width: 100%;
   background-color: #0460a0;
   color: white;
   text-align: center;
-  padding: 1.56rem 0;
-  margin-top: 10.5rem;
+  padding: 1rem 0;
   & p {
-  margin: 0;
-  font-size: 1.2rem;
-  font-family: 'Montserrat';
-  cursor: not-allowed;
-  user-select: none;
+    margin: 0;
+    font-size: 1.2rem;
+    font-family: 'Montserrat';
+    cursor: not-allowed;
+    user-select: none;
   }
 `;
