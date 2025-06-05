@@ -11,13 +11,8 @@ import { ChurchAccount } from "./entity/ChurchAccount";
 import { ExpiredTokens } from "./entity/ExpiredToken";
 
 export const AppDataSource = new DataSource({
-  type: "postgres",
-  host: "ep-late-sound-a8ilrjdo-pooler.eastus2.azure.neon.tech",
-  port: 5432,
-  username: "neondb_owner",
-  password: "npg_HtPmXnr7Ul2q",
-  database: "neondb",
-  ssl: true, // Importante para conexão com Neon!
+  type: "sqlite",
+  database: "./database.sqlite",
   synchronize: true,
   logging: true,
   entities: [
