@@ -25,7 +25,7 @@ export const ProphilePhoto = (props: IPfp) => {
 const Imagem = styled.img`
   border-radius: 50%;
   cursor: pointer;
-  width: 60px;
+  width: 100px;
   height: 100px;
   margin: 1rem 0 2rem 0;
 `;

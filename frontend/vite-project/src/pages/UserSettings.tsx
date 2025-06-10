@@ -91,7 +91,7 @@ const UserSettings = () => {
 const FormGroup = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: baseline;
+  align-items: center;
   margin: 10px;
 `;
 
